@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/pv-dashboard/static/css/main.9455043e.css",
-    "main.js": "/pv-dashboard/static/js/main.8cca8807.js",
+    "main.css": "/pv-dashboard/static/css/main.3809ba5d.css",
+    "main.js": "/pv-dashboard/static/js/main.f338de37.js",
     "static/js/453.f17e874e.chunk.js": "/pv-dashboard/static/js/453.f17e874e.chunk.js",
     "index.html": "/pv-dashboard/index.html",
-    "main.9455043e.css.map": "/pv-dashboard/static/css/main.9455043e.css.map",
-    "main.8cca8807.js.map": "/pv-dashboard/static/js/main.8cca8807.js.map",
+    "main.3809ba5d.css.map": "/pv-dashboard/static/css/main.3809ba5d.css.map",
+    "main.f338de37.js.map": "/pv-dashboard/static/js/main.f338de37.js.map",
     "453.f17e874e.chunk.js.map": "/pv-dashboard/static/js/453.f17e874e.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.9455043e.css",
-    "static/js/main.8cca8807.js"
+    "static/css/main.3809ba5d.css",
+    "static/js/main.f338de37.js"
   ]
 }
