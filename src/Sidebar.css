@@ -1,52 +1,34 @@
 /* Toggle Button */
 .sidebar-toggle {
   position: fixed;
-  top: 1rem;
-  left: 1rem;
+  bottom: 2rem;
+  right: 2rem;
   z-index: 1001;
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   border: none;
-  border-radius: 10px;
+  border-radius: 50%;
   cursor: pointer;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 5px;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.5);
   transition: all 0.3s;
 }
 
 .sidebar-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.6);
+  transform: scale(1.1);
+  box-shadow: 0 6px 25px rgba(102, 126, 234, 0.7);
 }
 
 .sidebar-toggle.open {
-  display: none; /* completely hides the toggle */
+  transform: rotate(90deg);
 }
 
-
-.hamburger-line {
-  width: 24px;
-  height: 3px;
-  background: white;
-  border-radius: 2px;
-  transition: all 0.3s;
-}
-
-.sidebar-toggle.open .hamburger-line:nth-child(1) {
-  transform: rotate(45deg) translate(6px, 6px);
-}
-
-.sidebar-toggle.open .hamburger-line:nth-child(2) {
-  opacity: 0;
-}
-
-.sidebar-toggle.open .hamburger-line:nth-child(3) {
-  transform: rotate(-45deg) translate(6px, -6px);
+.toggle-icon {
+  font-size: 1.8rem;
+  filter: brightness(0) invert(1);
 }
 
 /* Overlay */
@@ -70,20 +52,20 @@
 .sidebar {
   position: fixed;
   top: 0;
-  left: -280px;
-  width: 280px;
+  right: -320px;
+  width: 320px;
   height: 100vh;
   background: white;
-  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.1);
+  box-shadow: -2px 0 12px rgba(0, 0, 0, 0.15);
   z-index: 1000;
   display: flex;
   flex-direction: column;
-  transition: left 0.3s ease;
+  transition: right 0.3s ease;
   overflow-y: auto;
 }
 
 .sidebar.open {
-  left: 0;
+  right: 0;
 }
 
 /* Sidebar Header */
@@ -93,6 +75,7 @@
   justify-content: space-between;
   padding: 1.5rem;
   border-bottom: 1px solid #f0f0f0;
+  background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
 }
 
 .sidebar-logo {
@@ -106,12 +89,9 @@
 }
 
 .logo-text {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 700;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #333;
 }
 
 .sidebar-close {
@@ -122,9 +102,16 @@
   color: #999;
   padding: 0.5rem;
   transition: color 0.2s;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
 }
 
 .sidebar-close:hover {
+  background: #f0f0f0;
   color: #333;
 }
 
@@ -134,7 +121,7 @@
   align-items: center;
   gap: 1rem;
   padding: 1.5rem;
-  background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+  background: white;
   border-bottom: 1px solid #f0f0f0;
 }
 
@@ -177,54 +164,10 @@
   margin-bottom: 1.5rem;
 }
 
-.nav-section-title {
-  padding: 0.5rem 1.5rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  color: #999;
-  letter-spacing: 0.5px;
-}
-
-.nav-section-title.collapsible {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-  background: none;
-  border: none;
-  width: 100%;
-  text-align: left;
-  transition: color 0.2s;
-}
-
-.nav-section-title.collapsible:hover {
-  color: #667eea;
-}
-
-.collapse-icon {
-  font-size: 0.7rem;
-  transition: transform 0.3s;
-}
-
-.collapse-icon.open {
-  transform: rotate(180deg);
-}
-
 .nav-list {
   list-style: none;
   margin: 0;
   padding: 0;
-}
-
-.nav-list.secondary {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease;
-}
-
-.nav-list.secondary.open {
-  max-height: 300px;
 }
 
 .nav-item {
@@ -232,7 +175,7 @@
   align-items: center;
   gap: 1rem;
   width: 100%;
-  padding: 0.875rem 1.5rem;
+  padding: 1rem 1.5rem;
   background: none;
   border: none;
   border-left: 3px solid transparent;
@@ -268,8 +211,8 @@
 }
 
 .nav-icon {
-  font-size: 1.2rem;
-  width: 24px;
+  font-size: 1.3rem;
+  width: 28px;
   text-align: center;
 }
 
@@ -298,7 +241,7 @@
   align-items: center;
   gap: 1rem;
   width: 100%;
-  padding: 0.875rem 1.5rem;
+  padding: 1rem 1.5rem;
   background: #fee2e2;
   border: none;
   border-radius: 8px;
@@ -335,11 +278,18 @@
 /* Mobile adjustments */
 @media (max-width: 640px) {
   .sidebar {
-    width: 260px;
-    left: -260px;
+    width: 280px;
+    right: -280px;
   }
-
-  .sidebar-toggle.open {
-    left: 250px;
+  
+  .sidebar-toggle {
+    width: 55px;
+    height: 55px;
+    bottom: 1.5rem;
+    right: 1.5rem;
+  }
+  
+  .toggle-icon {
+    font-size: 1.6rem;
   }
 }

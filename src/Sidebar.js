@@ -3,25 +3,16 @@ import './Sidebar.css';
 
 function Sidebar({ user, currentPage, onPageChange, onLogout }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [isSecondaryOpen, setIsSecondaryOpen] = useState(false);
 
-  // Main navigation items (always visible)
-  const mainItems = [
-    { id: 'dashboard', label: 'Dashboard', icon: '📊' },
-    { id: 'analytics', label: 'Analytics', icon: '📈' },
-    { id: 'history', label: 'History', icon: '📅' },
-    { id: 'alerts', label: 'Alerts', icon: '🔔' },
-  ];
-
-  // Secondary items (collapsible section)
-  const secondaryItems = [
+  // Only secondary items in sidebar
+  const sidebarItems = [
     { id: 'settings', label: 'Settings', icon: '⚙️', roles: ['admin'] },
     { id: 'users', label: 'Users', icon: '👥', roles: ['admin'] },
     { id: 'stations', label: 'Other Stations', icon: '🏢', comingSoon: true },
   ];
 
-  // Filter secondary items based on user role
-  const filteredSecondaryItems = secondaryItems.filter(item => 
+  // Filter items based on user role
+  const filteredItems = sidebarItems.filter(item => 
     !item.roles || item.roles.includes(user.role)
   );
 
@@ -38,6 +29,11 @@ function Sidebar({ user, currentPage, onPageChange, onLogout }) {
     setIsOpen(false);
   };
 
+  // Don't show sidebar if no items to display
+  if (filteredItems.length === 0) {
+    return null;
+  }
+
   return (
     <>
       {/* Toggle Button - Always visible */}
@@ -45,10 +41,9 @@ function Sidebar({ user, currentPage, onPageChange, onLogout }) {
         className={`sidebar-toggle ${isOpen ? 'open' : ''}`}
         onClick={toggleSidebar}
         aria-label="Toggle menu"
+        title="More options"
       >
-        <span className="hamburger-line"></span>
-        <span className="hamburger-line"></span>
-        <span className="hamburger-line"></span>
+        <span className="toggle-icon">⚙️</span>
       </button>
 
       {/* Overlay - Click to close */}
@@ -60,7 +55,7 @@ function Sidebar({ user, currentPage, onPageChange, onLogout }) {
         <div className="sidebar-header">
           <div className="sidebar-logo">
             <span className="logo-icon">⚡</span>
-            <span className="logo-text">PV Monitor</span>
+            <span className="logo-text">More Options</span>
           </div>
           <button className="sidebar-close" onClick={closeSidebar}>
             ✕
@@ -78,57 +73,27 @@ function Sidebar({ user, currentPage, onPageChange, onLogout }) {
           </div>
         </div>
 
-        {/* Main Navigation */}
+        {/* Navigation */}
         <nav className="sidebar-nav">
           <div className="nav-section">
-            <div className="nav-section-title">Main</div>
             <ul className="nav-list">
-              {mainItems.map(item => (
+              {filteredItems.map(item => (
                 <li key={item.id}>
                   <button
-                    className={`nav-item ${currentPage === item.id ? 'active' : ''}`}
-                    onClick={() => handlePageChange(item.id)}
+                    className={`nav-item ${currentPage === item.id ? 'active' : ''} ${item.comingSoon ? 'coming-soon' : ''}`}
+                    onClick={() => !item.comingSoon && handlePageChange(item.id)}
+                    disabled={item.comingSoon}
                   >
                     <span className="nav-icon">{item.icon}</span>
                     <span className="nav-label">{item.label}</span>
+                    {item.comingSoon && (
+                      <span className="coming-soon-badge">Soon</span>
+                    )}
                   </button>
                 </li>
               ))}
             </ul>
           </div>
-
-          {/* Secondary Section (Collapsible) */}
-          {filteredSecondaryItems.length > 0 && (
-            <div className="nav-section">
-              <button 
-                className="nav-section-title collapsible"
-                onClick={() => setIsSecondaryOpen(!isSecondaryOpen)}
-              >
-                <span>More</span>
-                <span className={`collapse-icon ${isSecondaryOpen ? 'open' : ''}`}>
-                  ▼
-                </span>
-              </button>
-              
-              <ul className={`nav-list secondary ${isSecondaryOpen ? 'open' : ''}`}>
-                {filteredSecondaryItems.map(item => (
-                  <li key={item.id}>
-                    <button
-                      className={`nav-item ${currentPage === item.id ? 'active' : ''} ${item.comingSoon ? 'coming-soon' : ''}`}
-                      onClick={() => !item.comingSoon && handlePageChange(item.id)}
-                      disabled={item.comingSoon}
-                    >
-                      <span className="nav-icon">{item.icon}</span>
-                      <span className="nav-label">{item.label}</span>
-                      {item.comingSoon && (
-                        <span className="coming-soon-badge">Soon</span>
-                      )}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
         </nav>
 
         {/* Sidebar Footer - Logout */}

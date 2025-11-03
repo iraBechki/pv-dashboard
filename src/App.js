@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './App.css';
 import Login from './Login';
+import Navigation from './Navigation';
 import Sidebar from './Sidebar';
 import {
   DashboardPage,
@@ -52,6 +53,12 @@ function App() {
 
   return (
     <div className="App">
+      <Header user={user} />
+      <Navigation 
+        user={user}
+        currentPage={currentPage}
+        onPageChange={setCurrentPage}
+      />
       <Sidebar 
         user={user}
         currentPage={currentPage}
@@ -59,7 +66,6 @@ function App() {
         onLogout={handleLogout}
       />
       <main className="main-layout">
-        <Header currentPage={currentPage} />
         <div className="page-container">
           {renderPage()}
         </div>
@@ -68,25 +74,20 @@ function App() {
   );
 }
 
-// Simplified Header (no user dropdown needed, it's in sidebar now)
-function Header({ currentPage }) {
-  const getPageTitle = () => {
-    switch(currentPage) {
-      case 'dashboard': return '📊 Dashboard';
-      case 'analytics': return '📈 Analytics';
-      case 'history': return '📅 History';
-      case 'alerts': return '🔔 Alerts';
-      case 'settings': return '⚙️ Settings';
-      case 'users': return '👥 Users';
-      default: return '📊 Dashboard';
-    }
-  };
-
+// Header Component
+function Header({ user }) {
   return (
     <header className="main-header">
-      <h1 className="page-title-header">{getPageTitle()}</h1>
-      <div className="header-info">
+      <div className="header-left">
+        <span className="logo-icon">⚡</span>
+        <h1 className="app-title">PV Station Monitor</h1>
+      </div>
+      <div className="header-right">
         <span className="datetime">Sunday, Nov 03, 2025 - 14:30</span>
+        <div className="user-badge">
+          <span className="user-icon">{user.role === 'admin' ? '👤' : '👨'}</span>
+          <span className="user-name">{user.name}</span>
+        </div>
       </div>
     </header>
   );
