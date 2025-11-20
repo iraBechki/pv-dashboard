@@ -1,29 +1,55 @@
-import { useState } from 'react';
-import './App.css';
-import Login from './Login';
-import Navigation from './Navigation';
-import Sidebar from './Sidebar';
+import { useState, useEffect } from "react";
+import "./App.css";
+import Login from "./Login";
+import Navigation from "./Navigation";
+import Sidebar from "./Sidebar";
 import {
   DashboardPage,
   AnalyticsPage,
   HistoryPage,
   AlertsPage,
   SettingsPage,
-  UsersPage
-} from './Pages';
+  UsersPage,
+} from "./Pages";
+import PropTypes from "prop-types";
 
 function App() {
-  const [user, setUser] = useState(null);
-  const [currentPage, setCurrentPage] = useState('dashboard');
+  // Restore user from localStorage on init
+  const [user, setUser] = useState(() => {
+    try {
+      const raw = localStorage.getItem("pv_user");
+      return raw ? JSON.parse(raw) : null;
+    } catch (e) {
+      console.warn("Failed to read pv_user from localStorage", e);
+      return null;
+    }
+  });
+
+  const [currentPage, setCurrentPage] = useState("dashboard");
+
+  // Persist user to localStorage whenever it changes
+  useEffect(() => {
+    try {
+      if (user) {
+        localStorage.setItem("pv_user", JSON.stringify(user));
+      } else {
+        localStorage.removeItem("pv_user");
+      }
+    } catch (e) {
+      console.warn("Failed to write pv_user to localStorage", e);
+    }
+  }, [user]);
 
   const handleLogin = (userData) => {
     setUser(userData);
-    setCurrentPage('dashboard');
+    setCurrentPage("dashboard");
+    // persistence handled by effect
   };
 
   const handleLogout = () => {
     setUser(null);
-    setCurrentPage('dashboard');
+    setCurrentPage("dashboard");
+    // persistence handled by effect
   };
 
   // If not logged in, show login page
@@ -33,18 +59,18 @@ function App() {
 
   // Render the current page
   const renderPage = () => {
-    switch(currentPage) {
-      case 'dashboard':
+    switch (currentPage) {
+      case "dashboard":
         return <DashboardPage />;
-      case 'analytics':
+      case "analytics":
         return <AnalyticsPage />;
-      case 'history':
+      case "history":
         return <HistoryPage />;
-      case 'alerts':
+      case "alerts":
         return <AlertsPage />;
-      case 'settings':
+      case "settings":
         return <SettingsPage />;
-      case 'users':
+      case "users":
         return <UsersPage />;
       default:
         return <DashboardPage />;
@@ -54,43 +80,71 @@ function App() {
   return (
     <div className="App">
       <Header user={user} />
-      <Navigation 
+      <Navigation
         user={user}
         currentPage={currentPage}
         onPageChange={setCurrentPage}
       />
-      <Sidebar 
+      <Sidebar
         user={user}
         currentPage={currentPage}
         onPageChange={setCurrentPage}
         onLogout={handleLogout}
       />
       <main className="main-layout">
-        <div className="page-container">
-          {renderPage()}
-        </div>
+        <div className="page-container">{renderPage()}</div>
       </main>
     </div>
   );
 }
 
-// Header Component
+// Header Component (updated to show live time)
 function Header({ user }) {
+  const [now, setNow] = useState(new Date());
+
+  useEffect(() => {
+    const tick = () => setNow(new Date());
+    // update immediately and every minute
+    tick();
+    const interval = setInterval(tick, 60_000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const dateOptions = {
+    weekday: "long",
+    month: "short",
+    day: "2-digit",
+    year: "numeric",
+  };
+  const timeOptions = { hour: "2-digit", minute: "2-digit", hour12: false };
+  const dateString = now.toLocaleDateString(undefined, dateOptions);
+  const timeString = now.toLocaleTimeString(undefined, timeOptions);
+  const datetime = `${dateString} - ${timeString}`;
+
   return (
     <header className="main-header">
       <div className="header-left">
         <span className="logo-icon">⚡</span>
-        <h1 className="app-title">PV Station Monitor</h1>
+        <h1 className="app-title">SensaGrid</h1>
       </div>
       <div className="header-right">
-        <span className="datetime">Sunday, Nov 03, 2025 - 14:30</span>
+        <span className="datetime">{datetime}</span>
         <div className="user-badge">
-          <span className="user-icon">{user.role === 'admin' ? '👤' : '👨'}</span>
+          <span className="user-icon">
+            {user.role === "admin" ? "👤" : "👨"}
+          </span>
           <span className="user-name">{user.name}</span>
         </div>
       </div>
     </header>
   );
 }
+
+Header.propTypes = {
+  user: PropTypes.shape({
+    name: PropTypes.string,
+    role: PropTypes.string,
+  }).isRequired,
+};
 
 export default App;

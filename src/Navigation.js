@@ -1,20 +1,21 @@
-import './Navigation.css';
+import "./Navigation.css";
+import PropTypes from "prop-types";
 
-function Navigation({ user, currentPage, onPageChange }) {
+function Navigation({ currentPage, onPageChange }) {
   const menuItems = [
-    { id: 'dashboard', label: 'Dashboard', icon: '📊' },
-    { id: 'analytics', label: 'Analytics', icon: '📈' },
-    { id: 'history', label: 'History', icon: '📅' },
-    { id: 'alerts', label: 'Alerts', icon: '🔔' },
+    { id: "dashboard", label: "Dashboard", icon: "📊" },
+    { id: "analytics", label: "Analytics", icon: "📈" },
+    { id: "history", label: "History", icon: "📅" },
+    { id: "alerts", label: "Alerts", icon: "🔔" },
   ];
 
   return (
     <nav className="navigation">
       <ul className="nav-list">
-        {menuItems.map(item => (
+        {menuItems.map((item) => (
           <li key={item.id}>
             <button
-              className={`nav-item ${currentPage === item.id ? 'active' : ''}`}
+              className={`nav-item ${currentPage === item.id ? "active" : ""}`}
               onClick={() => onPageChange(item.id)}
             >
               <span className="nav-icon">{item.icon}</span>
@@ -26,5 +27,10 @@ function Navigation({ user, currentPage, onPageChange }) {
     </nav>
   );
 }
+
+Navigation.propTypes = {
+  currentPage: PropTypes.string.isRequired,
+  onPageChange: PropTypes.func.isRequired,
+};
 
 export default Navigation;

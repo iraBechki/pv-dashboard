@@ -21,7 +21,7 @@
   background: white;
   padding: 2rem;
   border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .placeholder-card.full-width {
@@ -50,7 +50,7 @@
   background: white;
   padding: 1.5rem;
   border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   display: flex;
   gap: 1rem;
   border-left: 4px solid;
@@ -98,7 +98,7 @@
   background: white;
   padding: 2rem;
   border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   text-align: center;
 }
 
@@ -151,7 +151,7 @@
 .users-table {
   background: white;
   border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   overflow: hidden;
 }
 
@@ -225,6 +225,64 @@ td {
   background: #764ba2;
 }
 
+/* clickable card affordance */
+.component-card.clickable {
+  cursor: pointer;
+}
+.component-card.clickable:focus {
+  outline: 3px solid rgba(11, 108, 255, 0.14);
+  outline-offset: 2px;
+}
+
+/* detail overlay / modal */
+.detail-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 1rem;
+}
+.detail-modal {
+  background: #fff;
+  border-radius: 10px;
+  max-width: 520px;
+  width: 100%;
+  box-shadow: 0 12px 36px rgba(8, 24, 48, 0.28);
+  padding: 1rem;
+}
+.detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 0.5rem;
+}
+.detail-header h4 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+.detail-close {
+  background: transparent;
+  border: none;
+  font-size: 1.05rem;
+  cursor: pointer;
+}
+.detail-body p {
+  margin: 0;
+  color: #333;
+  line-height: 1.5;
+}
+
+/* small animation for arrow-glow already present; ensure modal on top on mobile */
+@media (max-width: 600px) {
+  .detail-modal {
+    padding: 0.75rem;
+  }
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .page-content {
@@ -239,7 +297,219 @@ td {
     font-size: 0.85rem;
   }
 
-  th, td {
+  th,
+  td {
     padding: 0.75rem 0.5rem;
+  }
+}
+
+/* Station Overview - organized grid */
+.station-overview {
+  margin-top: 1rem;
+  /* make overall panel white with a subtle border */
+  background: #ffffff;
+  border: 1.5px solid rgba(11, 24, 40, 0.06);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 6px 18px rgba(11, 24, 40, 0.03); /* slightly lighter shadow */
+}
+.station-overview h3 {
+  margin: 0 0 0.75rem 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+/* Grid layout: Grid | arrow | Center stack | arrow | Power */
+.station-grid {
+  display: grid;
+  grid-template-columns: minmax(160px, 1fr) 36px minmax(220px, 360px) 36px 160px;
+  gap: 12px;
+  align-items: center;
+  justify-items: center;
+}
+
+/* Flow column (arrow) */
+.flow-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+.flow-col .arrow-icon {
+  font-size: 1.6rem;
+  color: #9aa4b2;
+  transition:
+    color 220ms ease,
+    transform 220ms ease,
+    text-shadow 220ms ease;
+}
+.flow-col .flow-out {
+  color: #1e88e5;
+  transform: translateX(2px);
+}
+.flow-col .flow-in {
+  color: #f6a623;
+  transform: translateX(-2px);
+}
+.flow-col .flow-neutral {
+  color: #9aa4b2;
+}
+
+/* Center stack: vertical column for solar, inverter, storage */
+.center-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: stretch;
+  width: 100%;
+  max-width: 360px;
+}
+
+/* Component card base (keeps consistent with earlier styles) */
+/* -- UPDATED: make all system-overview cards the same size and vertically centered content -- */
+.component-card {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 0.9rem;
+  box-shadow: 0 6px 12px rgba(11, 24, 40, 0.03);
+  text-align: center;
+  transition:
+    transform 150ms ease,
+    box-shadow 150ms ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* center content vertically */
+  align-items: center;
+  height: 120px; /* fixed height for uniform size */
+  min-height: 120px;
+  width: 100%;
+  box-sizing: border-box;
+
+  /* thicker subtle border so cards are visually defined on white background */
+  border: 1.5px solid rgba(11, 24, 40, 0.08);
+}
+.component-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Specific cards sizing */
+.grid-card {
+  min-width: 140px;
+}
+.power-card {
+  min-width: 140px;
+  max-width: 180px;
+}
+.solar-card {
+  min-height: 60px;
+}
+.inverter-card {
+  min-height: 64px;
+}
+.storage-card {
+  min-height: 76px;
+}
+
+/* Status colors (inverter) */
+.status-green {
+  border: 1px solid rgba(22, 176, 81, 0.12);
+}
+.status-yellow {
+  border: 1px solid rgba(255, 198, 0, 0.12);
+}
+.status-red {
+  border: 1px solid rgba(211, 47, 47, 0.12);
+}
+
+/* Storage bar */
+.storage-bar {
+  height: 8px;
+  background: #f0f4ff;
+  border-radius: 6px;
+  margin-top: 8px;
+  overflow: hidden;
+}
+.storage-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #74c0fc, #1e88e5);
+  transition: width 600ms ease;
+}
+
+/* Power card styling */
+.power-card .component-value {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #d23f3f;
+}
+
+/* Make arrow color reflect flow (apply classes dynamically) */
+.arrow-icon.flow-out {
+  color: #1e88e5;
+  text-shadow: 0 0 12px rgba(30, 136, 229, 0.12);
+}
+.arrow-icon.flow-in {
+  color: #f6a623;
+  text-shadow: 0 0 12px rgba(246, 166, 35, 0.12);
+}
+
+/* vertical arrows between stacked center components (solar -> inverter -> storage) */
+.center-stack .vertical-arrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 22px;
+  margin: 0; /* small gap already handled by center-stack gap */
+}
+.arrow-vert-icon {
+  font-size: 1.25rem;
+  color: #9aa4b2;
+  transition:
+    color 220ms ease,
+    transform 220ms ease,
+    text-shadow 220ms ease;
+  line-height: 1;
+}
+.arrow-vert-icon.flow-out {
+  color: #1e88e5; /* blue when energy flows downward */
+  transform: translateY(2px);
+  text-shadow: 0 0 8px rgba(30, 136, 229, 0.12);
+}
+.arrow-vert-icon.flow-in {
+  color: #f6a623; /* orange if you want reverse flow */
+  transform: translateY(-2px);
+  text-shadow: 0 0 8px rgba(246, 166, 35, 0.12);
+}
+.vertical-arrow.arrow-glow .arrow-vert-icon {
+  transform: scale(1.08);
+}
+
+/* ensure center-stack gap isn't too large when arrows inserted */
+.center-stack {
+  gap: 8px;
+}
+
+/* keep responsive behavior */
+@media (max-width: 920px) {
+  .station-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    justify-items: stretch;
+  }
+  .flow-col {
+    justify-content: flex-start;
+    padding-left: 8px;
+  }
+  .center-stack {
+    max-width: none;
+  }
+  .grid-card,
+  .power-card {
+    width: 100%;
+  }
+  .center-stack .vertical-arrow {
+    height: 18px;
+  }
+  .arrow-vert-icon {
+    font-size: 1.1rem;
   }
 }

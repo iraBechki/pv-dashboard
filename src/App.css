@@ -5,7 +5,8 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif;
   background: #f5f7fa;
 }
 
@@ -21,7 +22,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .header-left {
@@ -54,9 +55,10 @@ body {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  background: rgba(255,255,255,0.2);
+  background: rgba(255, 255, 255, 0.2);
   padding: 0.5rem 1rem;
   border-radius: 20px;
+  margin-right: 50px; /* 👈 move left; increase negative value if needed */
 }
 
 .user-icon {
@@ -80,9 +82,9 @@ body {
 /* Metrics Grid */
 .metrics-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(5, 1fr);
   gap: 1.5rem;
-  padding: 2rem;
+  padding: 1.5rem;
   max-width: 1400px;
   margin: 0 auto;
 }
@@ -91,14 +93,16 @@ body {
   background: white;
   padding: 1.5rem;
   border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   position: relative;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
 }
 
 .metric-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
 .metric-card h3 {
@@ -164,7 +168,7 @@ body {
   background: white;
   padding: 1.5rem;
   border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .chart-container h3,
@@ -225,18 +229,18 @@ body {
   .main-content {
     grid-template-columns: 1fr;
   }
-  
+
   .main-header {
     flex-direction: column;
     gap: 1rem;
     text-align: center;
   }
-  
+
   .header-right {
     flex-direction: column;
     gap: 0.5rem;
   }
-  
+
   .metrics-grid {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     padding: 1rem;
@@ -247,11 +251,11 @@ body {
   .metrics-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .app-title {
     font-size: 1.2rem;
   }
-  
+
   .main-header {
     padding: 1rem;
   }

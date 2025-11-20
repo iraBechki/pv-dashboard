@@ -1,38 +1,39 @@
-import { useState } from 'react';
-import './Login.css';
+import { useState } from "react";
+import "./Login.css";
+import PropTypes from "prop-types";
 
 function Login({ onLogin }) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setError('');
+    setError("");
 
     // Simple validation
     if (!email || !password) {
-      setError('Please fill in all fields');
+      setError("Please fill in all fields");
       return;
     }
 
     // Demo authentication (we'll replace this with Supabase later)
-    if (email === 'admin@pv.com' && password === 'admin123') {
-      onLogin({ email, role: 'admin', name: 'Admin User' });
-    } else if (email === 'user@pv.com' && password === 'user123') {
-      onLogin({ email, role: 'user', name: 'Regular User' });
+    if (email === "admin@pv.com" && password === "admin123") {
+      onLogin({ email, role: "admin", name: "Admin User" });
+    } else if (email === "user@pv.com" && password === "user123") {
+      onLogin({ email, role: "user", name: "Regular User" });
     } else {
-      setError('Invalid email or password');
+      setError("Invalid email or password");
     }
   };
 
   const handleDemoLogin = (role) => {
-    if (role === 'admin') {
-      setEmail('admin@pv.com');
-      setPassword('admin123');
+    if (role === "admin") {
+      setEmail("admin@pv.com");
+      setPassword("admin123");
     } else {
-      setEmail('user@pv.com');
-      setPassword('user123');
+      setEmail("user@pv.com");
+      setPassword("user123");
     }
   };
 
@@ -47,7 +48,7 @@ function Login({ onLogin }) {
 
         <form onSubmit={handleSubmit} className="login-form">
           {error && <div className="error-message">{error}</div>}
-          
+
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
@@ -80,14 +81,14 @@ function Login({ onLogin }) {
         <div className="demo-accounts">
           <p className="demo-title">Demo Accounts (Click to fill):</p>
           <div className="demo-buttons">
-            <button 
-              onClick={() => handleDemoLogin('admin')} 
+            <button
+              onClick={() => handleDemoLogin("admin")}
               className="demo-btn admin"
             >
               👤 Admin Demo
             </button>
-            <button 
-              onClick={() => handleDemoLogin('user')} 
+            <button
+              onClick={() => handleDemoLogin("user")}
               className="demo-btn user"
             >
               👤 User Demo
@@ -95,7 +96,8 @@ function Login({ onLogin }) {
           </div>
           <div className="demo-info">
             <small>
-              <strong>Admin:</strong> admin@pv.com / admin123<br />
+              <strong>Admin:</strong> admin@pv.com / admin123
+              <br />
               <strong>User:</strong> user@pv.com / user123
             </small>
           </div>
@@ -108,5 +110,10 @@ function Login({ onLogin }) {
     </div>
   );
 }
+
+// add prop types
+Login.propTypes = {
+  onLogin: PropTypes.func.isRequired,
+};
 
 export default Login;
