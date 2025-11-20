@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "./Pages.css";
+import { ConfigDialog } from "./ConfigDialog";
 
 // Dashboard Page
 export function DashboardPage() {
@@ -118,6 +119,8 @@ export function AlertsPage() {
 
 // Settings Page (Admin only)
 export function SettingsPage() {
+  const [isConfigDialogOpen, setIsConfigDialogOpen] = useState(false);
+
   return (
     <div className="page-content">
       <h2 className="page-title">⚙️ Settings</h2>
@@ -125,7 +128,7 @@ export function SettingsPage() {
         <div className="settings-card">
           <h3>System Configuration</h3>
           <p>Configure system parameters and thresholds</p>
-          <button className="settings-btn">Configure</button>
+          <button className="settings-btn" onClick={() => setIsConfigDialogOpen(true)}>Configure</button>
         </div>
         <div className="settings-card">
           <h3>Alert Preferences</h3>
@@ -143,6 +146,11 @@ export function SettingsPage() {
           <button className="settings-btn">View Info</button>
         </div>
       </div>
+      
+      <ConfigDialog 
+        isOpen={isConfigDialogOpen} 
+        onClose={() => setIsConfigDialogOpen(false)} 
+      />
     </div>
   );
 }
