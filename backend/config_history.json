@@ -1,0 +1,1948 @@
+[
+  {
+    "timestamp": "2025-11-23T00:38:34.392384",
+    "config": {
+      "stationId": "PV-001",
+      "stationName": "",
+      "description": "",
+      "installationDate": "",
+      "siteName": "",
+      "address": "",
+      "latitude": "",
+      "longitude": "",
+      "elevation": "",
+      "operatorName": "",
+      "organization": "",
+      "contactEmail": "",
+      "phone": "",
+      "systemType": "Grid-tied",
+      "totalCapacity": "",
+      "commissioningDate": "",
+      "numArrays": 1,
+      "arrays": [
+        {
+          "id": 1,
+          "tilt": "",
+          "azimuth": "",
+          "mounting": "Fixed"
+        }
+      ],
+      "totalStrings": "",
+      "stringsPerArray": "",
+      "modulesPerString": "",
+      "stringVoltage": "",
+      "stringCurrent": "",
+      "combinerBox": "",
+      "moduleManufacturer": "",
+      "moduleModel": "",
+      "moduleType": "Monocrystalline",
+      "ratedPower": "",
+      "voc": "",
+      "isc": "",
+      "vmp": "",
+      "imp": "",
+      "tempCoeff": "",
+      "totalModules": "",
+      "inverterManufacturer": "",
+      "inverterModel": "",
+      "inverterPower": "",
+      "maxDcVoltage": "",
+      "maxDcCurrent": "",
+      "acOutput": "",
+      "mpptRange": "",
+      "numMppt": ""
+    }
+  },
+  {
+    "timestamp": "2025-11-23T00:39:46.511188",
+    "config": {
+      "stationId": "PV-001",
+      "stationName": "test1",
+      "description": "",
+      "installationDate": "2025-06-20",
+      "siteName": "",
+      "address": "",
+      "latitude": "",
+      "longitude": "",
+      "elevation": "",
+      "operatorName": "",
+      "organization": "",
+      "contactEmail": "",
+      "phone": "",
+      "systemType": "Off-grid",
+      "totalCapacity": "5",
+      "commissioningDate": "",
+      "numArrays": 1,
+      "arrays": [
+        {
+          "id": 1,
+          "tilt": "",
+          "azimuth": "",
+          "mounting": "Fixed"
+        }
+      ],
+      "totalStrings": "",
+      "stringsPerArray": "",
+      "modulesPerString": "",
+      "stringVoltage": "",
+      "stringCurrent": "",
+      "combinerBox": "",
+      "moduleManufacturer": "",
+      "moduleModel": "",
+      "moduleType": "Monocrystalline",
+      "ratedPower": "",
+      "voc": "",
+      "isc": "",
+      "vmp": "",
+      "imp": "",
+      "tempCoeff": "",
+      "totalModules": "",
+      "inverterManufacturer": "",
+      "inverterModel": "",
+      "inverterPower": "",
+      "maxDcVoltage": "",
+      "maxDcCurrent": "",
+      "acOutput": "",
+      "mpptRange": "",
+      "numMppt": ""
+    }
+  },
+  {
+    "timestamp": "2025-11-23T00:41:56.347477",
+    "config": {
+      "mbList": [
+        {
+          "id": "MB-01",
+          "status": "online",
+          "assignment": null,
+          "signal": 100
+        },
+        {
+          "id": "MB-02",
+          "status": "online",
+          "assignment": "String 1 Current",
+          "signal": 95
+        },
+        {
+          "id": "MB-03",
+          "status": "weak",
+          "assignment": "Irradiance",
+          "signal": 45
+        },
+        {
+          "id": "MB-04",
+          "status": "offline",
+          "assignment": "Temperature",
+          "signal": 0
+        },
+        {
+          "id": "MB-05",
+          "status": "online",
+          "assignment": null,
+          "signal": 88
+        }
+      ],
+      "monitoringPoints": [
+        {
+          "id": "point-1",
+          "name": "String 1 Current",
+          "mbId": "MB-02",
+          "type": "DC Current",
+          "location": "Array 1 - String 1",
+          "expectedRange": {
+            "min": 0,
+            "max": 10
+          },
+          "units": "A",
+          "decimals": 2,
+          "alarms": {
+            "criticalHigh": 12,
+            "warningHigh": 10,
+            "warningLow": 0.5,
+            "criticalLow": 0
+          },
+          "samplingRate": 1000
+        },
+        {
+          "id": "point-2",
+          "name": "String 2 Current",
+          "mbId": null,
+          "type": "DC Current",
+          "location": "Array 1 - String 2",
+          "expectedRange": {
+            "min": 0,
+            "max": 10
+          },
+          "units": "A",
+          "decimals": 2,
+          "alarms": {
+            "criticalHigh": 12,
+            "warningHigh": 10,
+            "warningLow": 0.5,
+            "criticalLow": 0
+          },
+          "samplingRate": 1000
+        },
+        {
+          "id": "point-3",
+          "name": "Irradiance Sensor",
+          "mbId": "MB-03",
+          "type": "Irradiance",
+          "location": "Array 1 Center",
+          "expectedRange": {
+            "min": 0,
+            "max": 1200
+          },
+          "units": "W/m\u00b2",
+          "decimals": 1,
+          "alarms": {
+            "criticalHigh": 1500,
+            "warningHigh": 1200,
+            "warningLow": 50,
+            "criticalLow": 0
+          },
+          "samplingRate": 5000
+        }
+      ],
+      "measurementTypes": {
+        "electrical": [
+          "DC Voltage",
+          "DC Current",
+          "AC Voltage",
+          "AC Current",
+          "AC Power",
+          "Energy",
+          "Power Factor"
+        ],
+        "environmental": [
+          "Irradiance",
+          "Module Temperature",
+          "Ambient Temperature",
+          "Humidity",
+          "Wind Speed",
+          "Rainfall"
+        ],
+        "performance": [
+          "Performance Ratio",
+          "Efficiency",
+          "Soiling Loss"
+        ],
+        "custom": []
+      }
+    }
+  },
+  {
+    "timestamp": "2025-11-23T00:42:24.431095",
+    "config": {
+      "mbList": [
+        {
+          "id": "MB-01",
+          "status": "online",
+          "assignment": null,
+          "signal": 100
+        },
+        {
+          "id": "MB-02",
+          "status": "online",
+          "assignment": "String 2 Current",
+          "signal": 95
+        },
+        {
+          "id": "MB-03",
+          "status": "weak",
+          "assignment": "String 2 Current",
+          "signal": 45
+        },
+        {
+          "id": "MB-04",
+          "status": "offline",
+          "assignment": "Temperature",
+          "signal": 0
+        },
+        {
+          "id": "MB-05",
+          "status": "online",
+          "assignment": null,
+          "signal": 88
+        }
+      ],
+      "monitoringPoints": [
+        {
+          "id": "point-1",
+          "name": "String 1 Current",
+          "mbId": "MB-02",
+          "type": "DC Current",
+          "location": "Array 1 - String 1",
+          "expectedRange": {
+            "min": 0,
+            "max": 10
+          },
+          "units": "A",
+          "decimals": 2,
+          "alarms": {
+            "criticalHigh": 12,
+            "warningHigh": 10,
+            "warningLow": 0.5,
+            "criticalLow": 0
+          },
+          "samplingRate": 1000
+        },
+        {
+          "id": "point-2",
+          "name": "String 2 Current",
+          "mbId": "MB-03",
+          "type": "DC Current",
+          "location": "Array 1 - String 2",
+          "expectedRange": {
+            "min": 0,
+            "max": 10
+          },
+          "units": "A",
+          "decimals": 2,
+          "alarms": {
+            "criticalHigh": 12,
+            "warningHigh": 10,
+            "warningLow": 0.5,
+            "criticalLow": 0
+          },
+          "samplingRate": 1000
+        },
+        {
+          "id": "point-3",
+          "name": "Irradiance Sensor",
+          "mbId": "MB-03",
+          "type": "Irradiance",
+          "location": "Array 1 Center",
+          "expectedRange": {
+            "min": 0,
+            "max": 1200
+          },
+          "units": "W/m\u00b2",
+          "decimals": 1,
+          "alarms": {
+            "criticalHigh": 1500,
+            "warningHigh": 1200,
+            "warningLow": 50,
+            "criticalLow": 0
+          },
+          "samplingRate": 5000
+        }
+      ],
+      "measurementTypes": {
+        "electrical": [
+          "DC Voltage",
+          "DC Current",
+          "AC Voltage",
+          "AC Current",
+          "AC Power",
+          "Energy",
+          "Power Factor"
+        ],
+        "environmental": [
+          "Irradiance",
+          "Module Temperature",
+          "Ambient Temperature",
+          "Humidity",
+          "Wind Speed",
+          "Rainfall"
+        ],
+        "performance": [
+          "Performance Ratio",
+          "Efficiency",
+          "Soiling Loss"
+        ],
+        "custom": []
+      }
+    }
+  },
+  {
+    "timestamp": "2025-11-23T00:42:31.340508",
+    "config": {
+      "stationId": "PV-001",
+      "stationName": "test1",
+      "description": "",
+      "installationDate": "2025-06-20",
+      "siteName": "",
+      "address": "",
+      "latitude": "",
+      "longitude": "",
+      "elevation": "",
+      "operatorName": "",
+      "organization": "",
+      "contactEmail": "",
+      "phone": "",
+      "systemType": "Off-grid",
+      "totalCapacity": "5",
+      "commissioningDate": "",
+      "numArrays": 1,
+      "arrays": [
+        {
+          "id": 1,
+          "tilt": "",
+          "azimuth": "",
+          "mounting": "Fixed"
+        }
+      ],
+      "totalStrings": "",
+      "stringsPerArray": "",
+      "modulesPerString": "",
+      "stringVoltage": "",
+      "stringCurrent": "",
+      "combinerBox": "",
+      "moduleManufacturer": "",
+      "moduleModel": "",
+      "moduleType": "Monocrystalline",
+      "ratedPower": "",
+      "voc": "",
+      "isc": "",
+      "vmp": "",
+      "imp": "",
+      "tempCoeff": "",
+      "totalModules": "",
+      "inverterManufacturer": "",
+      "inverterModel": "",
+      "inverterPower": "",
+      "maxDcVoltage": "",
+      "maxDcCurrent": "",
+      "acOutput": "",
+      "mpptRange": "",
+      "numMppt": ""
+    }
+  },
+  {
+    "timestamp": "2025-11-23T00:42:42.476985",
+    "config": {
+      "mbList": [
+        {
+          "id": "MB-01",
+          "status": "online",
+          "assignment": null,
+          "signal": 100
+        },
+        {
+          "id": "MB-02",
+          "status": "online",
+          "assignment": "String 1 Current",
+          "signal": 95
+        },
+        {
+          "id": "MB-03",
+          "status": "weak",
+          "assignment": "Irradiance",
+          "signal": 45
+        },
+        {
+          "id": "MB-04",
+          "status": "offline",
+          "assignment": "Temperature",
+          "signal": 0
+        },
+        {
+          "id": "MB-05",
+          "status": "online",
+          "assignment": null,
+          "signal": 88
+        }
+      ],
+      "monitoringPoints": [
+        {
+          "id": "point-1",
+          "name": "String 1 Current",
+          "mbId": "MB-02",
+          "type": "DC Current",
+          "location": "Array 1 - String 1",
+          "expectedRange": {
+            "min": 0,
+            "max": 10
+          },
+          "units": "A",
+          "decimals": 2,
+          "alarms": {
+            "criticalHigh": 12,
+            "warningHigh": 10,
+            "warningLow": 0.5,
+            "criticalLow": 0
+          },
+          "samplingRate": 1000
+        },
+        {
+          "id": "point-2",
+          "name": "String 2 Current",
+          "mbId": null,
+          "type": "DC Current",
+          "location": "Array 1 - String 2",
+          "expectedRange": {
+            "min": 0,
+            "max": 10
+          },
+          "units": "A",
+          "decimals": 2,
+          "alarms": {
+            "criticalHigh": 12,
+            "warningHigh": 10,
+            "warningLow": 0.5,
+            "criticalLow": 0
+          },
+          "samplingRate": 1000
+        },
+        {
+          "id": "point-3",
+          "name": "Irradiance Sensor",
+          "mbId": "MB-03",
+          "type": "Irradiance",
+          "location": "Array 1 Center",
+          "expectedRange": {
+            "min": 0,
+            "max": 1200
+          },
+          "units": "W/m\u00b2",
+          "decimals": 1,
+          "alarms": {
+            "criticalHigh": 1500,
+            "warningHigh": 1200,
+            "warningLow": 50,
+            "criticalLow": 0
+          },
+          "samplingRate": 5000
+        }
+      ],
+      "measurementTypes": {
+        "electrical": [
+          "DC Voltage",
+          "DC Current",
+          "AC Voltage",
+          "AC Current",
+          "AC Power",
+          "Energy",
+          "Power Factor"
+        ],
+        "environmental": [
+          "Irradiance",
+          "Module Temperature",
+          "Ambient Temperature",
+          "Humidity",
+          "Wind Speed",
+          "Rainfall"
+        ],
+        "performance": [
+          "Performance Ratio",
+          "Efficiency",
+          "Soiling Loss"
+        ],
+        "custom": []
+      }
+    }
+  },
+  {
+    "timestamp": "2025-11-23T00:42:45.607224",
+    "config": {
+      "mbList": [
+        {
+          "id": "MB-01",
+          "status": "online",
+          "assignment": null,
+          "signal": 100
+        },
+        {
+          "id": "MB-02",
+          "status": "online",
+          "assignment": "String 1 Current",
+          "signal": 95
+        },
+        {
+          "id": "MB-03",
+          "status": "weak",
+          "assignment": "Irradiance",
+          "signal": 45
+        },
+        {
+          "id": "MB-04",
+          "status": "offline",
+          "assignment": "Temperature",
+          "signal": 0
+        },
+        {
+          "id": "MB-05",
+          "status": "online",
+          "assignment": null,
+          "signal": 88
+        }
+      ],
+      "monitoringPoints": [
+        {
+          "id": "point-1",
+          "name": "String 1 Current",
+          "mbId": "MB-02",
+          "type": "DC Current",
+          "location": "Array 1 - String 1",
+          "expectedRange": {
+            "min": 0,
+            "max": 10
+          },
+          "units": "A",
+          "decimals": 2,
+          "alarms": {
+            "criticalHigh": 12,
+            "warningHigh": 10,
+            "warningLow": 0.5,
+            "criticalLow": 0
+          },
+          "samplingRate": 1000
+        },
+        {
+          "id": "point-2",
+          "name": "String 2 Current",
+          "mbId": null,
+          "type": "DC Current",
+          "location": "Array 1 - String 2",
+          "expectedRange": {
+            "min": 0,
+            "max": 10
+          },
+          "units": "A",
+          "decimals": 2,
+          "alarms": {
+            "criticalHigh": 12,
+            "warningHigh": 10,
+            "warningLow": 0.5,
+            "criticalLow": 0
+          },
+          "samplingRate": 1000
+        },
+        {
+          "id": "point-3",
+          "name": "Irradiance Sensor",
+          "mbId": "MB-03",
+          "type": "Irradiance",
+          "location": "Array 1 Center",
+          "expectedRange": {
+            "min": 0,
+            "max": 1200
+          },
+          "units": "W/m\u00b2",
+          "decimals": 1,
+          "alarms": {
+            "criticalHigh": 1500,
+            "warningHigh": 1200,
+            "warningLow": 50,
+            "criticalLow": 0
+          },
+          "samplingRate": 5000
+        }
+      ],
+      "measurementTypes": {
+        "electrical": [
+          "DC Voltage",
+          "DC Current",
+          "AC Voltage",
+          "AC Current",
+          "AC Power",
+          "Energy",
+          "Power Factor"
+        ],
+        "environmental": [
+          "Irradiance",
+          "Module Temperature",
+          "Ambient Temperature",
+          "Humidity",
+          "Wind Speed",
+          "Rainfall"
+        ],
+        "performance": [
+          "Performance Ratio",
+          "Efficiency",
+          "Soiling Loss"
+        ],
+        "custom": []
+      }
+    }
+  },
+  {
+    "timestamp": "2025-11-23T00:43:05.287480",
+    "config": {
+      "mbList": [
+        {
+          "id": "MB-01",
+          "status": "online",
+          "assignment": null,
+          "signal": 100
+        },
+        {
+          "id": "MB-02",
+          "status": "online",
+          "assignment": "String 2 Current",
+          "signal": 95
+        },
+        {
+          "id": "MB-03",
+          "status": "weak",
+          "assignment": "Irradiance",
+          "signal": 45
+        },
+        {
+          "id": "MB-04",
+          "status": "offline",
+          "assignment": "Temperature",
+          "signal": 0
+        },
+        {
+          "id": "MB-05",
+          "status": "online",
+          "assignment": null,
+          "signal": 88
+        }
+      ],
+      "monitoringPoints": [
+        {
+          "id": "point-1",
+          "name": "String 1 Current",
+          "mbId": "MB-02",
+          "type": "DC Current",
+          "location": "Array 1 - String 1",
+          "expectedRange": {
+            "min": 0,
+            "max": 10
+          },
+          "units": "A",
+          "decimals": 2,
+          "alarms": {
+            "criticalHigh": 12,
+            "warningHigh": 10,
+            "warningLow": 0.5,
+            "criticalLow": 0
+          },
+          "samplingRate": 1000
+        },
+        {
+          "id": "point-2",
+          "name": "String 2 Current",
+          "mbId": "MB-02",
+          "type": "DC Current",
+          "location": "Array 1 - String 2",
+          "expectedRange": {
+            "min": 0,
+            "max": 10
+          },
+          "units": "A",
+          "decimals": 2,
+          "alarms": {
+            "criticalHigh": 12,
+            "warningHigh": 10,
+            "warningLow": 0.5,
+            "criticalLow": 0
+          },
+          "samplingRate": 1000
+        },
+        {
+          "id": "point-3",
+          "name": "Irradiance Sensor",
+          "mbId": "MB-03",
+          "type": "Irradiance",
+          "location": "Array 1 Center",
+          "expectedRange": {
+            "min": 0,
+            "max": 1200
+          },
+          "units": "W/m\u00b2",
+          "decimals": 1,
+          "alarms": {
+            "criticalHigh": 1500,
+            "warningHigh": 1200,
+            "warningLow": 50,
+            "criticalLow": 0
+          },
+          "samplingRate": 5000
+        }
+      ],
+      "measurementTypes": {
+        "electrical": [
+          "DC Voltage",
+          "DC Current",
+          "AC Voltage",
+          "AC Current",
+          "AC Power",
+          "Energy",
+          "Power Factor"
+        ],
+        "environmental": [
+          "Irradiance",
+          "Module Temperature",
+          "Ambient Temperature",
+          "Humidity",
+          "Wind Speed",
+          "Rainfall"
+        ],
+        "performance": [
+          "Performance Ratio",
+          "Efficiency",
+          "Soiling Loss"
+        ],
+        "custom": []
+      }
+    }
+  },
+  {
+    "timestamp": "2025-11-23T00:43:07.004016",
+    "config": {
+      "stationId": "PV-001",
+      "stationName": "",
+      "description": "",
+      "installationDate": "",
+      "siteName": "",
+      "address": "",
+      "latitude": "",
+      "longitude": "",
+      "elevation": "",
+      "operatorName": "",
+      "organization": "",
+      "contactEmail": "",
+      "phone": "",
+      "systemType": "Grid-tied",
+      "totalCapacity": "",
+      "commissioningDate": "",
+      "numArrays": 1,
+      "arrays": [
+        {
+          "id": 1,
+          "tilt": "",
+          "azimuth": "",
+          "mounting": "Fixed"
+        }
+      ],
+      "totalStrings": "",
+      "stringsPerArray": "",
+      "modulesPerString": "",
+      "stringVoltage": "",
+      "stringCurrent": "",
+      "combinerBox": "",
+      "moduleManufacturer": "",
+      "moduleModel": "",
+      "moduleType": "Monocrystalline",
+      "ratedPower": "",
+      "voc": "",
+      "isc": "",
+      "vmp": "",
+      "imp": "",
+      "tempCoeff": "",
+      "totalModules": "",
+      "inverterManufacturer": "",
+      "inverterModel": "",
+      "inverterPower": "",
+      "maxDcVoltage": "",
+      "maxDcCurrent": "",
+      "acOutput": "",
+      "mpptRange": "",
+      "numMppt": ""
+    }
+  },
+  {
+    "timestamp": "2025-11-23T01:07:49.655720",
+    "config": {
+      "mbList": [
+        {
+          "id": "MB-01",
+          "status": "online",
+          "assignment": null,
+          "signal": 100
+        },
+        {
+          "id": "MB-02",
+          "status": "online",
+          "assignment": "String 1 Current",
+          "signal": 95
+        },
+        {
+          "id": "MB-03",
+          "status": "weak",
+          "assignment": "Irradiance",
+          "signal": 45
+        },
+        {
+          "id": "MB-04",
+          "status": "offline",
+          "assignment": "Temperature",
+          "signal": 0
+        },
+        {
+          "id": "MB-05",
+          "status": "online",
+          "assignment": null,
+          "signal": 88
+        }
+      ],
+      "monitoringPoints": [
+        {
+          "id": "point-1",
+          "name": "String 1 Current",
+          "mbId": "MB-02",
+          "type": "DC Current",
+          "location": "Array 1 - String 1",
+          "expectedRange": {
+            "min": 0,
+            "max": 10
+          },
+          "units": "A",
+          "decimals": 2,
+          "alarms": {
+            "criticalHigh": 12,
+            "warningHigh": 10,
+            "warningLow": 0.5,
+            "criticalLow": 0
+          },
+          "samplingRate": 1000
+        },
+        {
+          "id": "point-2",
+          "name": "String 2 Current",
+          "mbId": null,
+          "type": "DC Current",
+          "location": "Array 1 - String 2",
+          "expectedRange": {
+            "min": 0,
+            "max": 10
+          },
+          "units": "A",
+          "decimals": 2,
+          "alarms": {
+            "criticalHigh": 12,
+            "warningHigh": 10,
+            "warningLow": 0.5,
+            "criticalLow": 0
+          },
+          "samplingRate": 1000
+        },
+        {
+          "id": "point-3",
+          "name": "Irradiance Sensor",
+          "mbId": "MB-03",
+          "type": "Irradiance",
+          "location": "Array 1 Center",
+          "expectedRange": {
+            "min": 0,
+            "max": 1200
+          },
+          "units": "W/m\u00b2",
+          "decimals": 1,
+          "alarms": {
+            "criticalHigh": 1500,
+            "warningHigh": 1200,
+            "warningLow": 50,
+            "criticalLow": 0
+          },
+          "samplingRate": 5000
+        }
+      ],
+      "measurementTypes": {
+        "electrical": [
+          "DC Voltage",
+          "DC Current",
+          "AC Voltage",
+          "AC Current",
+          "AC Power",
+          "Energy",
+          "Power Factor"
+        ],
+        "environmental": [
+          "Irradiance",
+          "Module Temperature",
+          "Ambient Temperature",
+          "Humidity",
+          "Wind Speed",
+          "Rainfall"
+        ],
+        "performance": [
+          "Performance Ratio",
+          "Efficiency",
+          "Soiling Loss"
+        ],
+        "custom": []
+      }
+    }
+  },
+  {
+    "timestamp": "2025-11-23T01:08:10.292364",
+    "config": {
+      "mbList": [
+        {
+          "id": "MB-01",
+          "status": "online",
+          "assignment": null,
+          "signal": 100
+        },
+        {
+          "id": "MB-02",
+          "status": "online",
+          "assignment": "String 1 Current",
+          "signal": 95
+        },
+        {
+          "id": "MB-03",
+          "status": "weak",
+          "assignment": "Irradiance",
+          "signal": 45
+        },
+        {
+          "id": "MB-04",
+          "status": "offline",
+          "assignment": "Temperature",
+          "signal": 0
+        },
+        {
+          "id": "MB-05",
+          "status": "online",
+          "assignment": null,
+          "signal": 88
+        }
+      ],
+      "monitoringPoints": [
+        {
+          "id": "point-1",
+          "name": "String 1 Current",
+          "mbId": "MB-02",
+          "type": "DC Current",
+          "location": "Array 1 - String 1",
+          "expectedRange": {
+            "min": 0,
+            "max": 10
+          },
+          "units": "A",
+          "decimals": 2,
+          "alarms": {
+            "criticalHigh": 12,
+            "warningHigh": 10,
+            "warningLow": 0.5,
+            "criticalLow": 0
+          },
+          "samplingRate": 1000
+        },
+        {
+          "id": "point-2",
+          "name": "String 2 Current",
+          "mbId": null,
+          "type": "DC Current",
+          "location": "Array 1 - String 2",
+          "expectedRange": {
+            "min": 0,
+            "max": 10
+          },
+          "units": "A",
+          "decimals": 2,
+          "alarms": {
+            "criticalHigh": 12,
+            "warningHigh": 10,
+            "warningLow": 0.5,
+            "criticalLow": 0
+          },
+          "samplingRate": 1000
+        },
+        {
+          "id": "point-3",
+          "name": "Irradiance Sensor",
+          "mbId": "MB-03",
+          "type": "Irradiance",
+          "location": "Array 1 Center",
+          "expectedRange": {
+            "min": 0,
+            "max": 1200
+          },
+          "units": "W/m\u00b2",
+          "decimals": 1,
+          "alarms": {
+            "criticalHigh": 1500,
+            "warningHigh": 1200,
+            "warningLow": 50,
+            "criticalLow": 0
+          },
+          "samplingRate": 5000
+        }
+      ],
+      "measurementTypes": {
+        "electrical": [
+          "DC Voltage",
+          "DC Current",
+          "AC Voltage",
+          "AC Current",
+          "AC Power",
+          "Energy",
+          "Power Factor"
+        ],
+        "environmental": [
+          "Irradiance",
+          "Module Temperature",
+          "Ambient Temperature",
+          "Humidity",
+          "Wind Speed",
+          "Rainfall"
+        ],
+        "performance": [
+          "Performance Ratio",
+          "Efficiency",
+          "Soiling Loss"
+        ],
+        "custom": []
+      }
+    }
+  },
+  {
+    "timestamp": "2025-11-23T01:08:24.281396",
+    "config": {
+      "stationId": "PV-001",
+      "stationName": "",
+      "description": "",
+      "installationDate": "",
+      "siteName": "",
+      "address": "",
+      "latitude": "",
+      "longitude": "",
+      "elevation": "",
+      "operatorName": "",
+      "organization": "",
+      "contactEmail": "",
+      "phone": "",
+      "systemType": "Grid-tied",
+      "totalCapacity": "",
+      "commissioningDate": "",
+      "numArrays": 1,
+      "arrays": [
+        {
+          "id": 1,
+          "tilt": "",
+          "azimuth": "",
+          "mounting": "Fixed"
+        }
+      ],
+      "totalStrings": "",
+      "stringsPerArray": "",
+      "modulesPerString": "",
+      "stringVoltage": "",
+      "stringCurrent": "",
+      "combinerBox": "",
+      "moduleManufacturer": "",
+      "moduleModel": "",
+      "moduleType": "Monocrystalline",
+      "ratedPower": "",
+      "voc": "",
+      "isc": "",
+      "vmp": "",
+      "imp": "",
+      "tempCoeff": "",
+      "totalModules": "",
+      "inverterManufacturer": "",
+      "inverterModel": "",
+      "inverterPower": "",
+      "maxDcVoltage": "",
+      "maxDcCurrent": "",
+      "acOutput": "",
+      "mpptRange": "",
+      "numMppt": ""
+    }
+  },
+  {
+    "timestamp": "2025-11-23T01:36:09.823799",
+    "config": {
+      "stationId": "PV-001",
+      "stationName": "",
+      "description": "",
+      "installationDate": "",
+      "siteName": "",
+      "address": "",
+      "latitude": "",
+      "longitude": "",
+      "elevation": "",
+      "operatorName": "",
+      "organization": "",
+      "contactEmail": "",
+      "phone": "",
+      "systemType": "Grid-tied",
+      "totalCapacity": "",
+      "commissioningDate": "",
+      "numArrays": 2,
+      "arrays": [
+        {
+          "id": 1,
+          "tilt": "",
+          "azimuth": "",
+          "mounting": "Fixed"
+        },
+        {
+          "id": 2,
+          "tilt": "",
+          "azimuth": "",
+          "mounting": "Fixed"
+        }
+      ],
+      "totalStrings": "",
+      "stringsPerArray": "",
+      "modulesPerString": "",
+      "stringVoltage": "",
+      "stringCurrent": "",
+      "combinerBox": "",
+      "moduleManufacturer": "",
+      "moduleModel": "",
+      "moduleType": "Monocrystalline",
+      "ratedPower": "",
+      "voc": "",
+      "isc": "",
+      "vmp": "",
+      "imp": "",
+      "tempCoeff": "",
+      "totalModules": "",
+      "inverterManufacturer": "",
+      "inverterModel": "",
+      "inverterPower": "",
+      "maxDcVoltage": "",
+      "maxDcCurrent": "",
+      "acOutput": "",
+      "mpptRange": "",
+      "numMppt": ""
+    }
+  },
+  {
+    "timestamp": "2025-11-24T14:10:16.503207",
+    "config": {
+      "stationId": "PV-001",
+      "stationName": "",
+      "description": "",
+      "installationDate": "",
+      "siteName": "",
+      "address": "",
+      "latitude": "",
+      "longitude": "",
+      "elevation": "",
+      "operatorName": "",
+      "organization": "",
+      "contactEmail": "",
+      "phone": "",
+      "systemType": "Grid-tied",
+      "totalCapacity": "",
+      "commissioningDate": "",
+      "numArrays": 2,
+      "arrays": [
+        {
+          "id": 1,
+          "tilt": "",
+          "azimuth": "",
+          "mounting": "Fixed"
+        },
+        {
+          "id": 2,
+          "tilt": "",
+          "azimuth": "",
+          "mounting": "Fixed"
+        }
+      ],
+      "totalStrings": "",
+      "stringsPerArray": "2",
+      "modulesPerString": "",
+      "stringVoltage": "",
+      "stringCurrent": "",
+      "combinerBox": "",
+      "moduleManufacturer": "",
+      "moduleModel": "",
+      "moduleType": "Monocrystalline",
+      "ratedPower": "",
+      "voc": "",
+      "isc": "",
+      "vmp": "",
+      "imp": "",
+      "tempCoeff": "",
+      "totalModules": "",
+      "inverterManufacturer": "",
+      "inverterModel": "",
+      "inverterPower": "",
+      "maxDcVoltage": "",
+      "maxDcCurrent": "",
+      "acOutput": "",
+      "mpptRange": "",
+      "numMppt": ""
+    }
+  },
+  {
+    "timestamp": "2025-11-24T14:13:20.082750",
+    "config": {
+      "assignments": {},
+      "mbInventory": []
+    }
+  },
+  {
+    "timestamp": "2025-11-24T14:27:09.450955",
+    "config": {
+      "stationId": "PV-001",
+      "stationName": "",
+      "description": "",
+      "installationDate": "",
+      "siteName": "",
+      "address": "",
+      "latitude": "",
+      "longitude": "",
+      "elevation": "",
+      "operatorName": "",
+      "organization": "",
+      "contactEmail": "",
+      "phone": "",
+      "systemType": "Grid-tied",
+      "totalCapacity": "6",
+      "commissioningDate": "",
+      "numArrays": 1,
+      "arrays": [
+        {
+          "id": 2,
+          "tilt": "15",
+          "azimuth": "0",
+          "mounting": "Fixed"
+        }
+      ],
+      "totalStrings": "1",
+      "stringsPerArray": "1",
+      "modulesPerString": "5",
+      "stringVoltage": "250",
+      "stringCurrent": "13",
+      "combinerBox": "",
+      "moduleManufacturer": "",
+      "moduleModel": "",
+      "moduleType": "Monocrystalline",
+      "ratedPower": "450",
+      "voc": "39",
+      "isc": "13",
+      "vmp": "36",
+      "imp": "12",
+      "tempCoeff": "",
+      "totalModules": "",
+      "inverterManufacturer": "",
+      "inverterModel": "",
+      "inverterPower": "6",
+      "maxDcVoltage": "450",
+      "maxDcCurrent": "75",
+      "acOutput": "1-phase 230V",
+      "mpptRange": "120-450",
+      "numMppt": "2",
+      "assignments": {
+        "arr-1-str-1": "MB-01",
+        "arr-1-str-2": "MB-02"
+      },
+      "sensors": [],
+      "mbInventory": [
+        {
+          "id": "MB-01",
+          "type": "DC Current",
+          "status": "online",
+          "signal": 100
+        },
+        {
+          "id": "MB-02",
+          "type": "DC Voltage",
+          "status": "online",
+          "signal": 95
+        },
+        {
+          "id": "MB-03",
+          "type": "Irradiance",
+          "status": "weak",
+          "signal": 45
+        },
+        {
+          "id": "MB-04",
+          "type": "Temperature",
+          "status": "offline",
+          "signal": 0
+        },
+        {
+          "id": "MB-05",
+          "type": "AC Current",
+          "status": "online",
+          "signal": 88
+        },
+        {
+          "id": "MB-06",
+          "type": "DC Current",
+          "status": "online",
+          "signal": 92
+        },
+        {
+          "id": "MB-07",
+          "type": "DC Voltage",
+          "status": "online",
+          "signal": 96
+        }
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-11-24T14:51:38.906405",
+    "config": {
+      "stationId": "PV-001",
+      "stationName": "",
+      "description": "",
+      "installationDate": "",
+      "siteName": "",
+      "address": "",
+      "latitude": "",
+      "longitude": "",
+      "elevation": "",
+      "operatorName": "",
+      "organization": "",
+      "contactEmail": "",
+      "phone": "",
+      "systemType": "Grid-tied",
+      "totalCapacity": "",
+      "commissioningDate": "",
+      "numArrays": 1,
+      "arrays": [
+        {
+          "id": 1,
+          "tilt": "",
+          "azimuth": "",
+          "mounting": "Fixed"
+        }
+      ],
+      "totalStrings": "",
+      "stringsPerArray": "",
+      "modulesPerString": "",
+      "stringVoltage": "",
+      "stringCurrent": "",
+      "combinerBox": "",
+      "moduleManufacturer": "",
+      "moduleModel": "",
+      "moduleType": "Monocrystalline",
+      "ratedPower": "",
+      "voc": "",
+      "isc": "",
+      "vmp": "",
+      "imp": "",
+      "tempCoeff": "",
+      "totalModules": "",
+      "inverterManufacturer": "",
+      "inverterModel": "",
+      "inverterPower": "",
+      "maxDcVoltage": "",
+      "maxDcCurrent": "",
+      "acOutput": "",
+      "mpptRange": "",
+      "numMppt": "",
+      "assignments": {
+        "arr-1-str-1": [
+          "MB-01",
+          "MB-02"
+        ],
+        "sens-1763992258816": [
+          "MB-05"
+        ]
+      },
+      "sensors": [
+        {
+          "id": "sens-1763992258816",
+          "name": "battery",
+          "arrayId": 1,
+          "type": "Irradiance"
+        }
+      ],
+      "mbInventory": [
+        {
+          "id": "MB-01",
+          "type": "DC Current",
+          "status": "online",
+          "signal": 100
+        },
+        {
+          "id": "MB-02",
+          "type": "DC Voltage",
+          "status": "online",
+          "signal": 95
+        },
+        {
+          "id": "MB-03",
+          "type": "Irradiance",
+          "status": "weak",
+          "signal": 45
+        },
+        {
+          "id": "MB-04",
+          "type": "Temperature",
+          "status": "offline",
+          "signal": 0
+        },
+        {
+          "id": "MB-05",
+          "type": "AC Current",
+          "status": "online",
+          "signal": 88
+        },
+        {
+          "id": "MB-06",
+          "type": "DC Current",
+          "status": "online",
+          "signal": 92
+        },
+        {
+          "id": "MB-07",
+          "type": "DC Voltage",
+          "status": "online",
+          "signal": 96
+        }
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-11-24T16:34:32.630921",
+    "config": {
+      "stationId": "PV-001",
+      "stationName": "",
+      "description": "",
+      "installationDate": "",
+      "siteName": "",
+      "address": "",
+      "latitude": "",
+      "longitude": "",
+      "elevation": "",
+      "operatorName": "",
+      "organization": "",
+      "contactEmail": "",
+      "phone": "",
+      "systemType": "Grid-tied",
+      "totalCapacity": "",
+      "commissioningDate": "",
+      "numArrays": 1,
+      "arrays": [
+        {
+          "id": 1,
+          "tilt": "",
+          "azimuth": "",
+          "mounting": "Fixed"
+        }
+      ],
+      "totalStrings": "",
+      "stringsPerArray": "",
+      "modulesPerString": "",
+      "stringVoltage": "",
+      "stringCurrent": "",
+      "combinerBox": "",
+      "moduleManufacturer": "",
+      "moduleModel": "",
+      "moduleType": "Monocrystalline",
+      "ratedPower": "",
+      "voc": "",
+      "isc": "",
+      "vmp": "",
+      "imp": "",
+      "tempCoeff": "",
+      "totalModules": "",
+      "inverterManufacturer": "",
+      "inverterModel": "",
+      "inverterPower": "",
+      "maxDcVoltage": "",
+      "maxDcCurrent": "",
+      "acOutput": "",
+      "mpptRange": "",
+      "numMppt": "",
+      "assignments": {},
+      "sensors": [
+        {
+          "id": "sens-1763998443264",
+          "name": "New Sensor",
+          "arrayId": 1,
+          "type": "Irradiance"
+        }
+      ],
+      "mbInventory": []
+    }
+  },
+  {
+    "timestamp": "2025-11-24T16:41:59.945579",
+    "config": {
+      "stationId": "PV-001",
+      "stationName": "",
+      "description": "",
+      "installationDate": "",
+      "siteName": "",
+      "address": "",
+      "latitude": "",
+      "longitude": "",
+      "elevation": "",
+      "operatorName": "",
+      "organization": "",
+      "contactEmail": "",
+      "phone": "",
+      "systemType": "Grid-tied",
+      "totalCapacity": "",
+      "commissioningDate": "",
+      "numArrays": 1,
+      "arrays": [
+        {
+          "id": 1,
+          "tilt": "",
+          "azimuth": "",
+          "mounting": "Fixed"
+        }
+      ],
+      "totalStrings": "",
+      "stringsPerArray": "",
+      "modulesPerString": "",
+      "stringVoltage": "",
+      "stringCurrent": "",
+      "combinerBox": "",
+      "moduleManufacturer": "",
+      "moduleModel": "",
+      "moduleType": "Monocrystalline",
+      "ratedPower": "",
+      "voc": "",
+      "isc": "",
+      "vmp": "",
+      "imp": "",
+      "tempCoeff": "",
+      "totalModules": "",
+      "inverterManufacturer": "",
+      "inverterModel": "",
+      "inverterPower": "",
+      "maxDcVoltage": "",
+      "maxDcCurrent": "",
+      "acOutput": "",
+      "mpptRange": "",
+      "numMppt": "",
+      "assignments": {},
+      "sensors": [],
+      "mbInventory": []
+    }
+  },
+  {
+    "timestamp": "2025-11-24T16:52:22.238095",
+    "config": {
+      "stationId": "PV-001",
+      "stationName": "",
+      "description": "",
+      "installationDate": "",
+      "siteName": "",
+      "address": "",
+      "latitude": "",
+      "longitude": "",
+      "elevation": "",
+      "operatorName": "",
+      "organization": "",
+      "contactEmail": "",
+      "phone": "",
+      "systemType": "Grid-tied",
+      "totalCapacity": "",
+      "commissioningDate": "",
+      "numArrays": 1,
+      "arrays": [
+        {
+          "id": 1,
+          "tilt": "",
+          "azimuth": "",
+          "mounting": "Fixed"
+        }
+      ],
+      "totalStrings": "",
+      "stringsPerArray": "",
+      "modulesPerString": "",
+      "stringVoltage": "",
+      "stringCurrent": "",
+      "combinerBox": "",
+      "moduleManufacturer": "",
+      "moduleModel": "",
+      "moduleType": "Monocrystalline",
+      "ratedPower": "",
+      "voc": "",
+      "isc": "",
+      "vmp": "",
+      "imp": "",
+      "tempCoeff": "",
+      "totalModules": "",
+      "inverterManufacturer": "",
+      "inverterModel": "",
+      "inverterPower": "",
+      "maxDcVoltage": "",
+      "maxDcCurrent": "",
+      "acOutput": "",
+      "mpptRange": "",
+      "numMppt": "",
+      "assignments": {},
+      "sensors": [],
+      "mbInventory": []
+    }
+  },
+  {
+    "timestamp": "2025-11-24T16:55:41.279873",
+    "config": {
+      "stationId": "PV-001",
+      "stationName": "",
+      "description": "",
+      "installationDate": "",
+      "siteName": "",
+      "address": "",
+      "latitude": "",
+      "longitude": "",
+      "elevation": "",
+      "operatorName": "",
+      "organization": "",
+      "contactEmail": "",
+      "phone": "",
+      "systemType": "Grid-tied",
+      "totalCapacity": "",
+      "commissioningDate": "",
+      "numArrays": 1,
+      "arrays": [
+        {
+          "id": 1,
+          "tilt": "",
+          "azimuth": "",
+          "mounting": "Fixed"
+        }
+      ],
+      "totalStrings": "",
+      "stringsPerArray": "",
+      "modulesPerString": "",
+      "stringVoltage": "",
+      "stringCurrent": "",
+      "combinerBox": "",
+      "moduleManufacturer": "",
+      "moduleModel": "",
+      "moduleType": "Monocrystalline",
+      "ratedPower": "",
+      "voc": "",
+      "isc": "",
+      "vmp": "",
+      "imp": "",
+      "tempCoeff": "",
+      "totalModules": "",
+      "inverterManufacturer": "",
+      "inverterModel": "",
+      "inverterPower": "",
+      "maxDcVoltage": "",
+      "maxDcCurrent": "",
+      "acOutput": "",
+      "mpptRange": "",
+      "numMppt": "",
+      "assignments": {},
+      "sensors": [],
+      "mbInventory": []
+    }
+  },
+  {
+    "timestamp": "2025-11-24T16:55:45.977015",
+    "config": {
+      "stationId": "PV-001",
+      "stationName": "",
+      "description": "",
+      "installationDate": "",
+      "siteName": "",
+      "address": "",
+      "latitude": "",
+      "longitude": "",
+      "elevation": "",
+      "operatorName": "",
+      "organization": "",
+      "contactEmail": "",
+      "phone": "",
+      "systemType": "Grid-tied",
+      "totalCapacity": "",
+      "commissioningDate": "",
+      "numArrays": 1,
+      "arrays": [
+        {
+          "id": 1,
+          "tilt": "",
+          "azimuth": "",
+          "mounting": "Fixed"
+        }
+      ],
+      "totalStrings": "",
+      "stringsPerArray": "",
+      "modulesPerString": "",
+      "stringVoltage": "",
+      "stringCurrent": "",
+      "combinerBox": "",
+      "moduleManufacturer": "",
+      "moduleModel": "",
+      "moduleType": "Monocrystalline",
+      "ratedPower": "",
+      "voc": "",
+      "isc": "",
+      "vmp": "",
+      "imp": "",
+      "tempCoeff": "",
+      "totalModules": "",
+      "inverterManufacturer": "",
+      "inverterModel": "",
+      "inverterPower": "",
+      "maxDcVoltage": "",
+      "maxDcCurrent": "",
+      "acOutput": "",
+      "mpptRange": "",
+      "numMppt": "",
+      "assignments": {},
+      "sensors": [],
+      "mbInventory": []
+    }
+  },
+  {
+    "timestamp": "2025-11-24T17:34:15.928610",
+    "config": {
+      "stationId": "PV-001",
+      "stationName": "",
+      "description": "",
+      "installationDate": "",
+      "siteName": "",
+      "address": "",
+      "latitude": "",
+      "longitude": "",
+      "elevation": "",
+      "operatorName": "",
+      "organization": "",
+      "contactEmail": "",
+      "phone": "",
+      "systemType": "Grid-tied",
+      "totalCapacity": "5",
+      "commissioningDate": "",
+      "numArrays": 1,
+      "arrays": [
+        {
+          "id": 1,
+          "tilt": "15",
+          "azimuth": "0",
+          "mounting": "Fixed"
+        }
+      ],
+      "totalStrings": "1",
+      "stringsPerArray": "1",
+      "modulesPerString": "5",
+      "stringVoltage": "250",
+      "stringCurrent": "13",
+      "combinerBox": "",
+      "moduleManufacturer": "",
+      "moduleModel": "",
+      "moduleType": "Monocrystalline",
+      "ratedPower": "450",
+      "voc": "39",
+      "isc": "13.9",
+      "vmp": "36",
+      "imp": "13",
+      "tempCoeff": "",
+      "totalModules": "",
+      "inverterManufacturer": "",
+      "inverterModel": "",
+      "inverterPower": "6",
+      "maxDcVoltage": "450",
+      "maxDcCurrent": "80",
+      "acOutput": "",
+      "mpptRange": "",
+      "numMppt": "",
+      "assignments": {},
+      "sensors": [],
+      "mbInventory": []
+    }
+  },
+  {
+    "timestamp": "2025-11-24T17:49:17.624683",
+    "config": {
+      "stationId": "PV-001",
+      "stationName": "",
+      "description": "",
+      "installationDate": "",
+      "siteName": "",
+      "address": "",
+      "latitude": "",
+      "longitude": "",
+      "elevation": "",
+      "operatorName": "",
+      "organization": "",
+      "contactEmail": "",
+      "phone": "",
+      "systemType": "Grid-tied",
+      "totalCapacity": "22",
+      "commissioningDate": "",
+      "numArrays": 1,
+      "arrays": [
+        {
+          "id": 1,
+          "tilt": "15",
+          "azimuth": "0",
+          "mounting": "Fixed"
+        }
+      ],
+      "totalStrings": "1",
+      "stringsPerArray": "1",
+      "modulesPerString": "5",
+      "stringVoltage": "250",
+      "stringCurrent": "13",
+      "combinerBox": "",
+      "moduleManufacturer": "",
+      "moduleModel": "",
+      "moduleType": "Monocrystalline",
+      "ratedPower": "450",
+      "voc": "39",
+      "isc": "13.9",
+      "vmp": "36",
+      "imp": "13",
+      "tempCoeff": "",
+      "totalModules": "",
+      "inverterManufacturer": "",
+      "inverterModel": "",
+      "inverterPower": "6",
+      "maxDcVoltage": "450",
+      "maxDcCurrent": "80",
+      "acOutput": "",
+      "mpptRange": "",
+      "numMppt": "",
+      "assignments": {},
+      "sensors": [],
+      "mbInventory": []
+    }
+  },
+  {
+    "timestamp": "2025-11-24T17:53:08.918850",
+    "config": {
+      "stationId": "PV-001",
+      "stationName": "",
+      "description": "",
+      "installationDate": "",
+      "siteName": "",
+      "address": "",
+      "latitude": "",
+      "longitude": "",
+      "elevation": "",
+      "operatorName": "",
+      "organization": "",
+      "contactEmail": "",
+      "phone": "",
+      "systemType": "Grid-tied",
+      "totalCapacity": "33",
+      "commissioningDate": "",
+      "numArrays": 1,
+      "arrays": [
+        {
+          "id": 1,
+          "tilt": "15",
+          "azimuth": "0",
+          "mounting": "Fixed"
+        }
+      ],
+      "totalStrings": "1",
+      "stringsPerArray": "1",
+      "modulesPerString": "5",
+      "stringVoltage": "250",
+      "stringCurrent": "13",
+      "combinerBox": "",
+      "moduleManufacturer": "",
+      "moduleModel": "",
+      "moduleType": "Monocrystalline",
+      "ratedPower": "450",
+      "voc": "39",
+      "isc": "13.9",
+      "vmp": "36",
+      "imp": "13",
+      "tempCoeff": "",
+      "totalModules": "",
+      "inverterManufacturer": "",
+      "inverterModel": "",
+      "inverterPower": "6",
+      "maxDcVoltage": "450",
+      "maxDcCurrent": "80",
+      "acOutput": "",
+      "mpptRange": "",
+      "numMppt": "",
+      "assignments": {},
+      "sensors": [],
+      "mbInventory": []
+    }
+  }
+]
