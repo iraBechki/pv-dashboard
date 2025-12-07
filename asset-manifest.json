@@ -1,15 +1,20 @@
 {
   "files": {
-    "main.css": "/pv-dashboard/static/css/main.3809ba5d.css",
-    "main.js": "/pv-dashboard/static/js/main.f338de37.js",
-    "static/js/453.f17e874e.chunk.js": "/pv-dashboard/static/js/453.f17e874e.chunk.js",
+    "main.css": "/pv-dashboard/static/css/main.d7d98640.css",
+    "main.js": "/pv-dashboard/static/js/main.5d8e6213.js",
+    "static/js/453.126e4dd0.chunk.js": "/pv-dashboard/static/js/453.126e4dd0.chunk.js",
+    "static/media/grid.png": "/pv-dashboard/static/media/grid.e33076d4092be605766e.png",
+    "static/media/solar-panel.png": "/pv-dashboard/static/media/solar-panel.582fc3d43bc99019767c.png",
+    "static/media/house.png": "/pv-dashboard/static/media/house.667ebffbb2ef2a966146.png",
+    "static/media/inverter.png": "/pv-dashboard/static/media/inverter.14e9f65779d1fec0157b.png",
+    "static/media/battery.png": "/pv-dashboard/static/media/battery.12ede9afce0487691a98.png",
     "index.html": "/pv-dashboard/index.html",
-    "main.3809ba5d.css.map": "/pv-dashboard/static/css/main.3809ba5d.css.map",
-    "main.f338de37.js.map": "/pv-dashboard/static/js/main.f338de37.js.map",
-    "453.f17e874e.chunk.js.map": "/pv-dashboard/static/js/453.f17e874e.chunk.js.map"
+    "main.d7d98640.css.map": "/pv-dashboard/static/css/main.d7d98640.css.map",
+    "main.5d8e6213.js.map": "/pv-dashboard/static/js/main.5d8e6213.js.map",
+    "453.126e4dd0.chunk.js.map": "/pv-dashboard/static/js/453.126e4dd0.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.3809ba5d.css",
-    "static/js/main.f338de37.js"
+    "static/css/main.d7d98640.css",
+    "static/js/main.5d8e6213.js"
   ]
 }
