@@ -1,0 +1,161 @@
+{
+    "mb_list": [
+        {
+            "id": "ID1",
+            "type": "Courant DC",
+            "range": "0-30A",
+            "Voltage divider gain": null,
+            "Input pin": "PA0",
+            "online": false,
+            "Firmware version": 1,
+            "config": [
+                "I1D",
+                "T_m",
+                "BattS",
+                "Rssi"
+            ]
+        },
+        {
+            "id": "ID2",
+            "type": "Courant DC",
+            "range": "0-30A",
+            "Voltage divider gain": null,
+            "Input pin": "PA0",
+            "online": false,
+            "Firmware version": 1,
+            "config": [
+                "I2D",
+                "BattS",
+                "Rssi"
+            ]
+        },
+        {
+            "id": "ID3",
+            "type": "Courant DC",
+            "range": "-50-50A",
+            "Voltage divider gain": null,
+            "Input pin": "PA0",
+            "online": false,
+            "Firmware version": 1,
+            "config": [
+                "I3D",
+                "BattS",
+                "Rssi"
+            ]
+        },
+        {
+            "id": "VD1",
+            "type": "Tension DC",
+            "range": "0-260V",
+            "Voltage divider gain": 78.8,
+            "Voltage divider R1": "1M",
+            "Voltage divider R2": "12.8K",
+            "Input pin": "PA0",
+            "online": false,
+            "Firmware version": 1,
+            "config": [
+                "V1D",
+                "BattS",
+                "Rssi"
+            ]
+        },
+        {
+            "id": "VD2",
+            "type": "Tension DC",
+            "range": "0-260V",
+            "Voltage divider gain": 78.8,
+            "Voltage divider R1": "1M",
+            "Voltage divider R2": "12.8K",
+            "Input pin": "PA0",
+            "online": false,
+            "Firmware version": 1,
+            "config": [
+                "V2D",
+                "BattS",
+                "Rssi"
+            ]
+        },
+        {
+            "id": "VD3",
+            "type": "Tension DC",
+            "range": "0-260V",
+            "Voltage divider gain": 78.8,
+            "Voltage divider R1": "1M",
+            "Voltage divider R2": "12.8K",
+            "Input pin": "PA0",
+            "online": false,
+            "Firmware version": 1,
+            "config": [
+                "V3D",
+                "BattS",
+                "Rssi"
+            ]
+        },
+        {
+            "id": "IA1",
+            "type": "Courant AC",
+            "range": "0-30A",
+            "Input pin": "PA0",
+            "online": false,
+            "Firmware version": 1,
+            "config": [
+                "I1A",
+                "BattS",
+                "Rssi"
+            ]
+        },
+        {
+            "id": "VA1",
+            "type": "Tension AC",
+            "range": "0-400V",
+            "Input pin": "PA0",
+            "online": false,
+            "Firmware version": 1,
+            "config": [
+                "V1A",
+                "BattS",
+                "Rssi"
+            ]
+        },
+        {
+            "id": "INVD",
+            "type": "Inverter RS480",
+            "range": null,
+            "Input pin": "PA0",
+            "online": false,
+            "Firmware version": 1,
+            "config": [
+                "PV1_V",
+                "PV1_I",
+                "PV2_V",
+                "PV2_I",
+                "Vbat",
+                "Ibat",
+                "Vout",
+                "Iout",
+                "Pout",
+                "BattS",
+                "Rssi"
+            ]
+        },
+        {
+            "id": "WS",
+            "type": "Environmental (Solar irradiance/Temperature/Humidity)",
+            "Input pin": [
+                "PA0",
+                "PA1",
+                "PB1"
+            ],
+            "online": false,
+            "Firmware version": 1,
+            "config": [
+                "G",
+                "T_amb",
+                "V",
+                "Hum",
+                "BattS",
+                "Rssi"
+            ]
+        }
+    ]
+}

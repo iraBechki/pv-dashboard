@@ -4,9 +4,9 @@ import PropTypes from "prop-types";
 function Navigation({ currentPage, onPageChange }) {
   const menuItems = [
     { id: "dashboard", label: "Dashboard", icon: "📊" },
-    { id: "analytics", label: "Analytics", icon: "📈" },
     { id: "history", label: "History", icon: "📅" },
     { id: "alerts", label: "Alerts", icon: "🔔" },
+    { id: "analytics", label: "Analytics", icon: "📈" },
   ];
 
   return (

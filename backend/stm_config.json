@@ -1,0 +1,12 @@
+CONFIG:START
+CONFIG:DELAY=10
+ID1,I1D,T_m,BattS,Rssi
+ID2,I2D,BattS,Rssi
+ID3,I3D,BattS,Rssi
+VD1,V1D,BattS,Rssi
+VD2,V2D,BattS,Rssi
+VD3,V3D,BattS,Rssi
+IA1,I1A,BattS,Rssi
+VA1,V1A,BattS,Rssi
+WS,G,T_amb,V,Hum,BattS,Rssi
+CONFIG:END

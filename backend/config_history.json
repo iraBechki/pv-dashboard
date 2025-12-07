@@ -1944,5 +1944,5081 @@
       "sensors": [],
       "mbInventory": []
     }
+  },
+  {
+    "timestamp": "2025-11-25T02:02:07.938042",
+    "config": {
+      "stationId": "PV-001",
+      "stationName": "",
+      "description": "",
+      "installationDate": "",
+      "siteName": "",
+      "address": "",
+      "latitude": "",
+      "longitude": "",
+      "elevation": "",
+      "operatorName": "",
+      "organization": "",
+      "contactEmail": "",
+      "phone": "",
+      "systemType": "Grid-tied",
+      "totalCapacity": "33",
+      "commissioningDate": "",
+      "numArrays": 1,
+      "arrays": [
+        {
+          "id": 1,
+          "tilt": "15",
+          "azimuth": "0",
+          "mounting": "Fixed"
+        }
+      ],
+      "totalStrings": "1",
+      "stringsPerArray": "1",
+      "modulesPerString": "5",
+      "stringVoltage": "250",
+      "stringCurrent": "13",
+      "combinerBox": "",
+      "moduleManufacturer": "",
+      "moduleModel": "",
+      "moduleType": "Monocrystalline",
+      "ratedPower": "450",
+      "voc": "39",
+      "isc": "13.9",
+      "vmp": "36",
+      "imp": "13",
+      "tempCoeff": "",
+      "totalModules": "",
+      "inverterManufacturer": "",
+      "inverterModel": "",
+      "inverterPower": "6",
+      "maxDcVoltage": "450",
+      "maxDcCurrent": "80",
+      "acOutput": "",
+      "mpptRange": "",
+      "numMppt": "",
+      "assignments": {
+        "arr-1-str-1": [
+          "ID1",
+          "VD1"
+        ],
+        "sens-1764032455683": [
+          "ID3",
+          "VD2"
+        ],
+        "sens-1764032469117": [
+          "IA1",
+          "VA1"
+        ],
+        "sens-1764032494000": [
+          "WS"
+        ]
+      },
+      "sensors": [
+        {
+          "id": "sens-1764032455683",
+          "name": "battery",
+          "arrayId": 1,
+          "type": "Irradiance"
+        },
+        {
+          "id": "sens-1764032469117",
+          "name": "inverter",
+          "arrayId": 1,
+          "type": "Irradiance"
+        },
+        {
+          "id": "sens-1764032494000",
+          "name": "invirenment",
+          "arrayId": 1,
+          "type": "Irradiance"
+        }
+      ],
+      "mbInventory": [
+        {
+          "id": "ID1",
+          "type": "Courant DC",
+          "range": "0-30A",
+          "Voltage divider gain": null,
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "ID1",
+            "I1D",
+            "T_m",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "ID3",
+          "type": "Courant DC",
+          "range": "-50-50A",
+          "Voltage divider gain": null,
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "ID3",
+            "I3D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VD1",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": true,
+          "Firmware version": 1,
+          "config": [
+            "VD1",
+            "V1D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VD2",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": true,
+          "Firmware version": 1,
+          "config": [
+            "VD2",
+            "V2D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "IA1",
+          "type": "Courant AC",
+          "range": "0-30A",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "IA1",
+            "IA1D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VA1",
+          "type": "Tension AC",
+          "range": "0-400V",
+          "Input pin": "PA0",
+          "online": true,
+          "Firmware version": 1,
+          "config": [
+            "VA1",
+            "VA1D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "WS",
+          "type": "Environmental (Solar irradiance/Temperature/Humidity)",
+          "Input pin": [
+            "PA0",
+            "PA1",
+            "PB1"
+          ],
+          "online": true,
+          "Firmware version": 1,
+          "config": [
+            "WS",
+            "G",
+            "T_amb",
+            "V",
+            "Hum",
+            "BattS",
+            "Rssi"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-11-25T03:30:19.261564",
+    "config": {
+      "stationId": "PV-001",
+      "stationName": "",
+      "description": "",
+      "installationDate": "",
+      "siteName": "",
+      "address": "",
+      "latitude": "",
+      "longitude": "",
+      "elevation": "",
+      "operatorName": "",
+      "organization": "",
+      "contactEmail": "",
+      "phone": "",
+      "systemType": "Grid-tied",
+      "totalCapacity": "33",
+      "commissioningDate": "",
+      "numArrays": 1,
+      "arrays": [
+        {
+          "id": 1,
+          "tilt": "15",
+          "azimuth": "0",
+          "mounting": "Fixed"
+        }
+      ],
+      "totalStrings": "1",
+      "stringsPerArray": "1",
+      "modulesPerString": "5",
+      "stringVoltage": "250",
+      "stringCurrent": "13",
+      "combinerBox": "",
+      "moduleManufacturer": "",
+      "moduleModel": "",
+      "moduleType": "Monocrystalline",
+      "ratedPower": "450",
+      "voc": "39",
+      "isc": "13.9",
+      "vmp": "36",
+      "imp": "13",
+      "tempCoeff": "",
+      "totalModules": "",
+      "inverterManufacturer": "",
+      "inverterModel": "",
+      "inverterPower": "6",
+      "maxDcVoltage": "450",
+      "maxDcCurrent": "80",
+      "acOutput": "",
+      "mpptRange": "",
+      "numMppt": "",
+      "assignments": {
+        "arr-1-str-1": [
+          "VD1"
+        ]
+      },
+      "sensors": [],
+      "mbInventory": [
+        {
+          "id": "VD1",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": true,
+          "Firmware version": 1,
+          "config": [
+            "V1D",
+            "BattS",
+            "Rssi"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-11-25T04:31:44.151750",
+    "config": {
+      "stationId": "PV-001",
+      "stationName": "",
+      "description": "",
+      "installationDate": "",
+      "siteName": "",
+      "address": "",
+      "latitude": "",
+      "longitude": "",
+      "elevation": "",
+      "operatorName": "",
+      "organization": "",
+      "contactEmail": "",
+      "phone": "",
+      "systemType": "Grid-tied",
+      "totalCapacity": "33",
+      "commissioningDate": "",
+      "numArrays": 1,
+      "arrays": [
+        {
+          "id": 1,
+          "tilt": "15",
+          "azimuth": "0",
+          "mounting": "Fixed"
+        }
+      ],
+      "totalStrings": "1",
+      "stringsPerArray": "1",
+      "modulesPerString": "5",
+      "stringVoltage": "250",
+      "stringCurrent": "13",
+      "combinerBox": "",
+      "moduleManufacturer": "",
+      "moduleModel": "",
+      "moduleType": "Monocrystalline",
+      "ratedPower": "450",
+      "voc": "39",
+      "isc": "13.9",
+      "vmp": "36",
+      "imp": "13",
+      "tempCoeff": "",
+      "totalModules": "",
+      "inverterManufacturer": "",
+      "inverterModel": "",
+      "inverterPower": "6",
+      "maxDcVoltage": "450",
+      "maxDcCurrent": "80",
+      "acOutput": "",
+      "mpptRange": "",
+      "numMppt": "",
+      "assignments": {
+        "arr-1-str-1": [
+          "VD1"
+        ]
+      },
+      "sensors": [],
+      "mbInventory": [
+        {
+          "id": "VD1",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V1D",
+            "BattS",
+            "Rssi"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-11-25T04:42:34.279790",
+    "config": {
+      "stationId": "PV-001",
+      "stationName": "",
+      "description": "",
+      "installationDate": "",
+      "siteName": "",
+      "address": "",
+      "latitude": "",
+      "longitude": "",
+      "elevation": "",
+      "operatorName": "",
+      "organization": "",
+      "contactEmail": "",
+      "phone": "",
+      "systemType": "Grid-tied",
+      "totalCapacity": "33",
+      "commissioningDate": "",
+      "numArrays": 1,
+      "arrays": [
+        {
+          "id": 1,
+          "tilt": "15",
+          "azimuth": "0",
+          "mounting": "Fixed"
+        }
+      ],
+      "totalStrings": "1",
+      "stringsPerArray": "1",
+      "modulesPerString": "5",
+      "stringVoltage": "250",
+      "stringCurrent": "13",
+      "combinerBox": "",
+      "moduleManufacturer": "",
+      "moduleModel": "",
+      "moduleType": "Monocrystalline",
+      "ratedPower": "450",
+      "voc": "39",
+      "isc": "13.9",
+      "vmp": "36",
+      "imp": "13",
+      "tempCoeff": "",
+      "totalModules": "",
+      "inverterManufacturer": "",
+      "inverterModel": "",
+      "inverterPower": "6",
+      "maxDcVoltage": "450",
+      "maxDcCurrent": "80",
+      "acOutput": "",
+      "mpptRange": "",
+      "numMppt": "",
+      "assignments": {
+        "arr-1-str-1": [
+          "VD1"
+        ]
+      },
+      "sensors": [],
+      "mbInventory": [
+        {
+          "id": "VD1",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V1D",
+            "BattS",
+            "Rssi"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-11-25T04:47:48.803305",
+    "config": {
+      "stationId": "PV-001",
+      "stationName": "",
+      "description": "",
+      "installationDate": "",
+      "siteName": "",
+      "address": "",
+      "latitude": "",
+      "longitude": "",
+      "elevation": "",
+      "operatorName": "",
+      "organization": "",
+      "contactEmail": "",
+      "phone": "",
+      "systemType": "Grid-tied",
+      "totalCapacity": "33",
+      "commissioningDate": "",
+      "numArrays": 1,
+      "arrays": [
+        {
+          "id": 1,
+          "tilt": "15",
+          "azimuth": "0",
+          "mounting": "Fixed"
+        }
+      ],
+      "totalStrings": "1",
+      "stringsPerArray": "1",
+      "modulesPerString": "5",
+      "stringVoltage": "250",
+      "stringCurrent": "13",
+      "combinerBox": "",
+      "moduleManufacturer": "",
+      "moduleModel": "",
+      "moduleType": "Monocrystalline",
+      "ratedPower": "450",
+      "voc": "39",
+      "isc": "13.9",
+      "vmp": "36",
+      "imp": "13",
+      "tempCoeff": "",
+      "totalModules": "",
+      "inverterManufacturer": "",
+      "inverterModel": "",
+      "inverterPower": "6",
+      "maxDcVoltage": "450",
+      "maxDcCurrent": "80",
+      "acOutput": "",
+      "mpptRange": "",
+      "numMppt": "",
+      "assignments": {
+        "arr-1-str-1": [
+          "VD1"
+        ]
+      },
+      "sensors": [],
+      "mbInventory": [
+        {
+          "id": "ID3",
+          "type": "Courant DC",
+          "range": "-50-50A",
+          "Voltage divider gain": null,
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I3D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VD1",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V1D",
+            "BattS",
+            "Rssi"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-11-25T05:00:20.790414",
+    "config": {
+      "stationId": "PV-001",
+      "stationName": "",
+      "description": "",
+      "installationDate": "",
+      "siteName": "",
+      "address": "",
+      "latitude": "",
+      "longitude": "",
+      "elevation": "",
+      "operatorName": "",
+      "organization": "",
+      "contactEmail": "",
+      "phone": "",
+      "systemType": "Grid-tied",
+      "totalCapacity": "33",
+      "commissioningDate": "",
+      "numArrays": 1,
+      "arrays": [
+        {
+          "id": 1,
+          "tilt": "15",
+          "azimuth": "0",
+          "mounting": "Fixed"
+        }
+      ],
+      "totalStrings": "1",
+      "stringsPerArray": "1",
+      "modulesPerString": "5",
+      "stringVoltage": "250",
+      "stringCurrent": "13",
+      "combinerBox": "",
+      "moduleManufacturer": "",
+      "moduleModel": "",
+      "moduleType": "Monocrystalline",
+      "ratedPower": "450",
+      "voc": "39",
+      "isc": "13.9",
+      "vmp": "36",
+      "imp": "13",
+      "tempCoeff": "",
+      "totalModules": "",
+      "inverterManufacturer": "",
+      "inverterModel": "",
+      "inverterPower": "6",
+      "maxDcVoltage": "450",
+      "maxDcCurrent": "80",
+      "acOutput": "",
+      "mpptRange": "",
+      "numMppt": "",
+      "assignments": {
+        "arr-1-str-1": [
+          "VD1"
+        ]
+      },
+      "sensors": [],
+      "mbInventory": [
+        {
+          "id": "ID3",
+          "type": "Courant DC",
+          "range": "-50-50A",
+          "Voltage divider gain": null,
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I3D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VD1",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": true,
+          "Firmware version": 1,
+          "config": [
+            "V1D",
+            "BattS",
+            "Rssi"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-11-25T05:00:35.177353",
+    "config": {
+      "stationId": "PV-001",
+      "stationName": "",
+      "description": "",
+      "installationDate": "",
+      "siteName": "",
+      "address": "",
+      "latitude": "",
+      "longitude": "",
+      "elevation": "",
+      "operatorName": "",
+      "organization": "",
+      "contactEmail": "",
+      "phone": "",
+      "systemType": "Grid-tied",
+      "totalCapacity": "33",
+      "commissioningDate": "",
+      "numArrays": 1,
+      "arrays": [
+        {
+          "id": 1,
+          "tilt": "15",
+          "azimuth": "0",
+          "mounting": "Fixed"
+        }
+      ],
+      "totalStrings": "1",
+      "stringsPerArray": "1",
+      "modulesPerString": "5",
+      "stringVoltage": "250",
+      "stringCurrent": "13",
+      "combinerBox": "",
+      "moduleManufacturer": "",
+      "moduleModel": "",
+      "moduleType": "Monocrystalline",
+      "ratedPower": "450",
+      "voc": "39",
+      "isc": "13.9",
+      "vmp": "36",
+      "imp": "13",
+      "tempCoeff": "",
+      "totalModules": "",
+      "inverterManufacturer": "",
+      "inverterModel": "",
+      "inverterPower": "6",
+      "maxDcVoltage": "450",
+      "maxDcCurrent": "80",
+      "acOutput": "",
+      "mpptRange": "",
+      "numMppt": "",
+      "assignments": {
+        "arr-1-str-1": [
+          "VD1"
+        ]
+      },
+      "sensors": [],
+      "mbInventory": [
+        {
+          "id": "ID3",
+          "type": "Courant DC",
+          "range": "-50-50A",
+          "Voltage divider gain": null,
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I3D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VD1",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": true,
+          "Firmware version": 1,
+          "config": [
+            "V1D",
+            "BattS",
+            "Rssi"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-11-26T16:19:59.843771",
+    "config": {
+      "stationId": "PV-001",
+      "stationName": "",
+      "description": "",
+      "installationDate": "",
+      "siteName": "",
+      "address": "",
+      "latitude": "",
+      "longitude": "",
+      "elevation": "",
+      "operatorName": "",
+      "organization": "",
+      "contactEmail": "",
+      "phone": "",
+      "systemType": "Grid-tied",
+      "totalCapacity": "33",
+      "commissioningDate": "",
+      "numArrays": 1,
+      "arrays": [
+        {
+          "id": 1,
+          "tilt": "15",
+          "azimuth": "0",
+          "mounting": "Fixed"
+        }
+      ],
+      "totalStrings": "1",
+      "stringsPerArray": "1",
+      "modulesPerString": "5",
+      "stringVoltage": "250",
+      "stringCurrent": "13",
+      "combinerBox": "",
+      "moduleManufacturer": "",
+      "moduleModel": "",
+      "moduleType": "Monocrystalline",
+      "ratedPower": "450",
+      "voc": "39",
+      "isc": "13.9",
+      "vmp": "36",
+      "imp": "13",
+      "tempCoeff": "",
+      "totalModules": "",
+      "inverterManufacturer": "",
+      "inverterModel": "",
+      "inverterPower": "6",
+      "maxDcVoltage": "450",
+      "maxDcCurrent": "80",
+      "acOutput": "",
+      "mpptRange": "",
+      "numMppt": "",
+      "assignments": {
+        "arr-1-str-1": [
+          "VD1"
+        ]
+      },
+      "sensors": [],
+      "mbInventory": [
+        {
+          "id": "VD1",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": true,
+          "Firmware version": 1,
+          "config": [
+            "V1D",
+            "BattS",
+            "Rssi"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-11-29T23:27:36.247319",
+    "config": {
+      "stationId": "PV-001",
+      "stationName": "",
+      "description": "",
+      "installationDate": "",
+      "siteName": "",
+      "address": "",
+      "latitude": "",
+      "longitude": "",
+      "elevation": "",
+      "operatorName": "",
+      "organization": "",
+      "contactEmail": "",
+      "phone": "",
+      "systemType": "Grid-tied",
+      "totalCapacity": "33",
+      "commissioningDate": "",
+      "numArrays": 1,
+      "arrays": [
+        {
+          "id": 1,
+          "tilt": "15",
+          "azimuth": "0",
+          "mounting": "Fixed"
+        }
+      ],
+      "totalStrings": "1",
+      "stringsPerArray": "1",
+      "modulesPerString": "5",
+      "stringVoltage": "250",
+      "stringCurrent": "13",
+      "combinerBox": "",
+      "moduleManufacturer": "",
+      "moduleModel": "",
+      "moduleType": "Monocrystalline",
+      "ratedPower": "450",
+      "voc": "39",
+      "isc": "13.9",
+      "vmp": "36",
+      "imp": "13",
+      "tempCoeff": "",
+      "totalModules": "",
+      "inverterManufacturer": "",
+      "inverterModel": "",
+      "inverterPower": "6",
+      "maxDcVoltage": "450",
+      "maxDcCurrent": "80",
+      "acOutput": "",
+      "mpptRange": "",
+      "numMppt": "",
+      "assignments": {
+        "arr-1-str-1": [
+          "VD1"
+        ]
+      },
+      "sensors": [],
+      "mbInventory": [
+        {
+          "id": "VD1",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": true,
+          "Firmware version": 1,
+          "config": [
+            "V1D",
+            "BattS",
+            "Rssi"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-11-29T23:27:59.899135",
+    "config": {
+      "stationId": "PV-001",
+      "stationName": "",
+      "description": "",
+      "installationDate": "",
+      "siteName": "",
+      "address": "",
+      "latitude": "",
+      "longitude": "",
+      "elevation": "",
+      "operatorName": "",
+      "organization": "",
+      "contactEmail": "",
+      "phone": "",
+      "systemType": "Grid-tied",
+      "totalCapacity": "33",
+      "commissioningDate": "",
+      "numArrays": 1,
+      "arrays": [
+        {
+          "id": 1,
+          "tilt": "15",
+          "azimuth": "0",
+          "mounting": "Fixed"
+        }
+      ],
+      "totalStrings": "1",
+      "stringsPerArray": "1",
+      "modulesPerString": "5",
+      "stringVoltage": "250",
+      "stringCurrent": "13",
+      "combinerBox": "",
+      "moduleManufacturer": "",
+      "moduleModel": "",
+      "moduleType": "Monocrystalline",
+      "ratedPower": "450",
+      "voc": "39",
+      "isc": "13.9",
+      "vmp": "36",
+      "imp": "13",
+      "tempCoeff": "",
+      "totalModules": "",
+      "inverterManufacturer": "",
+      "inverterModel": "",
+      "inverterPower": "6",
+      "maxDcVoltage": "450",
+      "maxDcCurrent": "80",
+      "acOutput": "",
+      "mpptRange": "",
+      "numMppt": "",
+      "assignments": {
+        "arr-1-str-1": [
+          "VD1"
+        ]
+      },
+      "sensors": [],
+      "mbInventory": [
+        {
+          "id": "VD1",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": true,
+          "Firmware version": 1,
+          "config": [
+            "V1D",
+            "BattS",
+            "Rssi"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-11-30T14:09:27.558276",
+    "config": {
+      "stationId": "PV-001",
+      "stationName": "",
+      "description": "",
+      "installationDate": "",
+      "siteName": "",
+      "address": "",
+      "latitude": "",
+      "longitude": "",
+      "elevation": "",
+      "operatorName": "",
+      "organization": "",
+      "contactEmail": "",
+      "phone": "",
+      "systemType": "Grid-tied",
+      "totalCapacity": "33",
+      "commissioningDate": "",
+      "numArrays": 1,
+      "arrays": [
+        {
+          "id": 1,
+          "tilt": "15",
+          "azimuth": "0",
+          "mounting": "Fixed"
+        }
+      ],
+      "totalStrings": "1",
+      "stringsPerArray": "1",
+      "modulesPerString": "5",
+      "stringVoltage": "250",
+      "stringCurrent": "13",
+      "combinerBox": "",
+      "moduleManufacturer": "",
+      "moduleModel": "",
+      "moduleType": "Monocrystalline",
+      "ratedPower": "450",
+      "voc": "39",
+      "isc": "13.9",
+      "vmp": "36",
+      "imp": "13",
+      "tempCoeff": "",
+      "totalModules": "",
+      "inverterManufacturer": "",
+      "inverterModel": "",
+      "inverterPower": "6",
+      "maxDcVoltage": "450",
+      "maxDcCurrent": "80",
+      "acOutput": "",
+      "mpptRange": "",
+      "numMppt": "",
+      "assignments": {
+        "arr-1-str-1": [
+          "VD1",
+          "ID1"
+        ],
+        "sens-1764508088705": [
+          "IA1",
+          "VA1"
+        ],
+        "sens-1764508125000": [
+          "ID3",
+          "VD3"
+        ],
+        "sens-1764508149741": [
+          "WS"
+        ]
+      },
+      "sensors": [
+        {
+          "id": "sens-1764508088705",
+          "name": "inveter",
+          "arrayId": 1,
+          "type": "Irradiance"
+        },
+        {
+          "id": "sens-1764508125000",
+          "name": "battery",
+          "arrayId": 1,
+          "type": "Irradiance"
+        },
+        {
+          "id": "sens-1764508149741",
+          "name": "enviremental",
+          "arrayId": 1,
+          "type": "Irradiance"
+        }
+      ],
+      "mbInventory": [
+        {
+          "id": "ID1",
+          "type": "Courant DC",
+          "range": "0-30A",
+          "Voltage divider gain": null,
+          "Input pin": "PA0",
+          "online": true,
+          "Firmware version": 1,
+          "config": [
+            "I1D",
+            "T_m",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "ID2",
+          "type": "Courant DC",
+          "range": "0-30A",
+          "Voltage divider gain": null,
+          "Input pin": "PA0",
+          "online": true,
+          "Firmware version": 1,
+          "config": [
+            "I2D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "ID3",
+          "type": "Courant DC",
+          "range": "-50-50A",
+          "Voltage divider gain": null,
+          "Input pin": "PA0",
+          "online": true,
+          "Firmware version": 1,
+          "config": [
+            "I3D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VD1",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": true,
+          "Firmware version": 1,
+          "config": [
+            "V1D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VD2",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V2D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VD3",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": true,
+          "Firmware version": 1,
+          "config": [
+            "V3D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "IA1",
+          "type": "Courant AC",
+          "range": "0-30A",
+          "Input pin": "PA0",
+          "online": true,
+          "Firmware version": 1,
+          "config": [
+            "I1A",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VA1",
+          "type": "Tension AC",
+          "range": "0-400V",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V1A",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "WS",
+          "type": "Environmental (Solar irradiance/Temperature/Humidity)",
+          "Input pin": [
+            "PA0",
+            "PA1",
+            "PB1"
+          ],
+          "online": true,
+          "Firmware version": 1,
+          "config": [
+            "G",
+            "T_amb",
+            "V",
+            "Hum",
+            "BattS",
+            "Rssi"
+          ]
+        }
+      ],
+      "measurementDelay": 10,
+      "isMeasuring": true
+    }
+  },
+  {
+    "timestamp": "2025-11-30T14:10:18.042898",
+    "config": {
+      "stationId": "PV-001",
+      "stationName": "",
+      "description": "",
+      "installationDate": "",
+      "siteName": "",
+      "address": "",
+      "latitude": "",
+      "longitude": "",
+      "elevation": "",
+      "operatorName": "",
+      "organization": "",
+      "contactEmail": "",
+      "phone": "",
+      "systemType": "Grid-tied",
+      "totalCapacity": "5",
+      "commissioningDate": "",
+      "numArrays": 1,
+      "arrays": [
+        {
+          "id": 1,
+          "tilt": "15",
+          "azimuth": "0",
+          "mounting": "Fixed"
+        }
+      ],
+      "totalStrings": "2",
+      "stringsPerArray": "2",
+      "modulesPerString": "5",
+      "stringVoltage": "250",
+      "stringCurrent": "13",
+      "combinerBox": "",
+      "moduleManufacturer": "",
+      "moduleModel": "",
+      "moduleType": "Monocrystalline",
+      "ratedPower": "450",
+      "voc": "39",
+      "isc": "13.9",
+      "vmp": "36",
+      "imp": "13",
+      "tempCoeff": "",
+      "totalModules": "",
+      "inverterManufacturer": "",
+      "inverterModel": "",
+      "inverterPower": "6",
+      "maxDcVoltage": "450",
+      "maxDcCurrent": "80",
+      "acOutput": "",
+      "mpptRange": "",
+      "numMppt": "",
+      "assignments": {
+        "arr-1-str-1": [
+          "VD1",
+          "ID1"
+        ],
+        "sens-1764508088705": [
+          "IA1",
+          "VA1"
+        ],
+        "sens-1764508125000": [
+          "ID3",
+          "VD3"
+        ],
+        "sens-1764508149741": [
+          "WS"
+        ]
+      },
+      "sensors": [
+        {
+          "id": "sens-1764508088705",
+          "name": "inveter",
+          "arrayId": 1,
+          "type": "Irradiance"
+        },
+        {
+          "id": "sens-1764508125000",
+          "name": "battery",
+          "arrayId": 1,
+          "type": "Irradiance"
+        },
+        {
+          "id": "sens-1764508149741",
+          "name": "enviremental",
+          "arrayId": 1,
+          "type": "Irradiance"
+        }
+      ],
+      "mbInventory": [
+        {
+          "id": "ID1",
+          "type": "Courant DC",
+          "range": "0-30A",
+          "Voltage divider gain": null,
+          "Input pin": "PA0",
+          "online": true,
+          "Firmware version": 1,
+          "config": [
+            "I1D",
+            "T_m",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "ID2",
+          "type": "Courant DC",
+          "range": "0-30A",
+          "Voltage divider gain": null,
+          "Input pin": "PA0",
+          "online": true,
+          "Firmware version": 1,
+          "config": [
+            "I2D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "ID3",
+          "type": "Courant DC",
+          "range": "-50-50A",
+          "Voltage divider gain": null,
+          "Input pin": "PA0",
+          "online": true,
+          "Firmware version": 1,
+          "config": [
+            "I3D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VD1",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": true,
+          "Firmware version": 1,
+          "config": [
+            "V1D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VD2",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V2D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VD3",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": true,
+          "Firmware version": 1,
+          "config": [
+            "V3D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "IA1",
+          "type": "Courant AC",
+          "range": "0-30A",
+          "Input pin": "PA0",
+          "online": true,
+          "Firmware version": 1,
+          "config": [
+            "I1A",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VA1",
+          "type": "Tension AC",
+          "range": "0-400V",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V1A",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "WS",
+          "type": "Environmental (Solar irradiance/Temperature/Humidity)",
+          "Input pin": [
+            "PA0",
+            "PA1",
+            "PB1"
+          ],
+          "online": true,
+          "Firmware version": 1,
+          "config": [
+            "G",
+            "T_amb",
+            "V",
+            "Hum",
+            "BattS",
+            "Rssi"
+          ]
+        }
+      ],
+      "measurementDelay": 10,
+      "isMeasuring": true
+    }
+  },
+  {
+    "timestamp": "2025-11-30T14:22:26.061419",
+    "config": {
+      "stationId": "PV-001",
+      "stationName": "",
+      "description": "",
+      "installationDate": "",
+      "siteName": "",
+      "address": "",
+      "latitude": "",
+      "longitude": "",
+      "elevation": "",
+      "operatorName": "",
+      "organization": "",
+      "contactEmail": "",
+      "phone": "",
+      "systemType": "Grid-tied",
+      "totalCapacity": "5",
+      "commissioningDate": "",
+      "numArrays": 1,
+      "arrays": [
+        {
+          "id": 1,
+          "tilt": "15",
+          "azimuth": "0",
+          "mounting": "Fixed"
+        }
+      ],
+      "totalStrings": "1",
+      "stringsPerArray": "1",
+      "modulesPerString": "5",
+      "stringVoltage": "250",
+      "stringCurrent": "13",
+      "combinerBox": "",
+      "moduleManufacturer": "",
+      "moduleModel": "",
+      "moduleType": "Monocrystalline",
+      "ratedPower": "450",
+      "voc": "39",
+      "isc": "13.9",
+      "vmp": "36",
+      "imp": "13",
+      "tempCoeff": "",
+      "totalModules": "",
+      "inverterManufacturer": "",
+      "inverterModel": "",
+      "inverterPower": "6",
+      "maxDcVoltage": "450",
+      "maxDcCurrent": "80",
+      "acOutput": "",
+      "mpptRange": "",
+      "numMppt": "",
+      "assignments": {
+        "arr-1-str-1": [
+          "VD1",
+          "ID1"
+        ],
+        "sens-1764508088705": [
+          "IA1",
+          "VA1"
+        ],
+        "sens-1764508125000": [
+          "ID3",
+          "VD3"
+        ],
+        "sens-1764508149741": [
+          "WS"
+        ]
+      },
+      "sensors": [
+        {
+          "id": "sens-1764508088705",
+          "name": "inveter",
+          "arrayId": 1,
+          "type": "Irradiance"
+        },
+        {
+          "id": "sens-1764508125000",
+          "name": "battery",
+          "arrayId": 1,
+          "type": "Irradiance"
+        },
+        {
+          "id": "sens-1764508149741",
+          "name": "enviremental",
+          "arrayId": 1,
+          "type": "Irradiance"
+        }
+      ],
+      "mbInventory": [
+        {
+          "id": "ID1",
+          "type": "Courant DC",
+          "range": "0-30A",
+          "Voltage divider gain": null,
+          "Input pin": "PA0",
+          "online": true,
+          "Firmware version": 1,
+          "config": [
+            "I1D",
+            "T_m",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "ID2",
+          "type": "Courant DC",
+          "range": "0-30A",
+          "Voltage divider gain": null,
+          "Input pin": "PA0",
+          "online": true,
+          "Firmware version": 1,
+          "config": [
+            "I2D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "ID3",
+          "type": "Courant DC",
+          "range": "-50-50A",
+          "Voltage divider gain": null,
+          "Input pin": "PA0",
+          "online": true,
+          "Firmware version": 1,
+          "config": [
+            "I3D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VD1",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": true,
+          "Firmware version": 1,
+          "config": [
+            "V1D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VD2",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V2D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VD3",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": true,
+          "Firmware version": 1,
+          "config": [
+            "V3D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "IA1",
+          "type": "Courant AC",
+          "range": "0-30A",
+          "Input pin": "PA0",
+          "online": true,
+          "Firmware version": 1,
+          "config": [
+            "I1A",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VA1",
+          "type": "Tension AC",
+          "range": "0-400V",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V1A",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "WS",
+          "type": "Environmental (Solar irradiance/Temperature/Humidity)",
+          "Input pin": [
+            "PA0",
+            "PA1",
+            "PB1"
+          ],
+          "online": true,
+          "Firmware version": 1,
+          "config": [
+            "G",
+            "T_amb",
+            "V",
+            "Hum",
+            "BattS",
+            "Rssi"
+          ]
+        }
+      ],
+      "measurementDelay": 10,
+      "isMeasuring": true
+    }
+  },
+  {
+    "timestamp": "2025-11-30T14:31:22.039311",
+    "config": {
+      "stationId": "PV-001",
+      "stationName": "",
+      "description": "",
+      "installationDate": "",
+      "siteName": "",
+      "address": "",
+      "latitude": "",
+      "longitude": "",
+      "elevation": "",
+      "operatorName": "",
+      "organization": "",
+      "contactEmail": "",
+      "phone": "",
+      "systemType": "Grid-tied",
+      "totalCapacity": "5",
+      "commissioningDate": "",
+      "numArrays": 1,
+      "arrays": [
+        {
+          "id": 1,
+          "tilt": "15",
+          "azimuth": "0",
+          "mounting": "Fixed"
+        }
+      ],
+      "totalStrings": "1",
+      "stringsPerArray": "1",
+      "modulesPerString": "5",
+      "stringVoltage": "250",
+      "stringCurrent": "13",
+      "combinerBox": "",
+      "moduleManufacturer": "",
+      "moduleModel": "",
+      "moduleType": "Monocrystalline",
+      "ratedPower": "450",
+      "voc": "39",
+      "isc": "13.9",
+      "vmp": "36",
+      "imp": "13",
+      "tempCoeff": "",
+      "totalModules": "",
+      "inverterManufacturer": "",
+      "inverterModel": "",
+      "inverterPower": "6",
+      "maxDcVoltage": "450",
+      "maxDcCurrent": "80",
+      "acOutput": "",
+      "mpptRange": "",
+      "numMppt": "",
+      "assignments": {
+        "arr-1-str-1": [
+          "VD1",
+          "ID1"
+        ],
+        "sens-1764509384289": [
+          "IA1",
+          "VA1"
+        ],
+        "sens-1764509436240": [
+          "ID3",
+          "VD3"
+        ],
+        "sens-1764509458592": [
+          "WS"
+        ]
+      },
+      "sensors": [
+        {
+          "id": "sens-1764509384289",
+          "name": "",
+          "arrayId": 1,
+          "type": "Irradiance",
+          "category": "inverter"
+        },
+        {
+          "id": "sens-1764509436240",
+          "name": "",
+          "arrayId": 1,
+          "type": "Irradiance",
+          "category": "battery"
+        },
+        {
+          "id": "sens-1764509458592",
+          "name": "",
+          "arrayId": 1,
+          "type": "Irradiance",
+          "category": "environmental"
+        }
+      ],
+      "mbInventory": [
+        {
+          "id": "ID1",
+          "type": "Courant DC",
+          "range": "0-30A",
+          "Voltage divider gain": null,
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I1D",
+            "T_m",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "ID3",
+          "type": "Courant DC",
+          "range": "-50-50A",
+          "Voltage divider gain": null,
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I3D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VD1",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V1D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VD3",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V3D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "IA1",
+          "type": "Courant AC",
+          "range": "0-30A",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I1A",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VA1",
+          "type": "Tension AC",
+          "range": "0-400V",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V1A",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "WS",
+          "type": "Environmental (Solar irradiance/Temperature/Humidity)",
+          "Input pin": [
+            "PA0",
+            "PA1",
+            "PB1"
+          ],
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "G",
+            "T_amb",
+            "V",
+            "Hum",
+            "BattS",
+            "Rssi"
+          ]
+        }
+      ],
+      "measurementDelay": 10,
+      "isMeasuring": true
+    }
+  },
+  {
+    "timestamp": "2025-11-30T14:42:32.360441",
+    "config": {
+      "stationId": "PV-001",
+      "stationName": "",
+      "description": "",
+      "installationDate": "",
+      "siteName": "",
+      "address": "",
+      "latitude": "",
+      "longitude": "",
+      "elevation": "",
+      "operatorName": "",
+      "organization": "",
+      "contactEmail": "",
+      "phone": "",
+      "systemType": "Grid-tied",
+      "totalCapacity": "5",
+      "commissioningDate": "",
+      "numArrays": 1,
+      "arrays": [
+        {
+          "id": 1,
+          "tilt": "15",
+          "azimuth": "0",
+          "mounting": "Fixed"
+        }
+      ],
+      "totalStrings": "1",
+      "stringsPerArray": "1",
+      "modulesPerString": "5",
+      "stringVoltage": "250",
+      "stringCurrent": "13",
+      "combinerBox": "",
+      "moduleManufacturer": "",
+      "moduleModel": "",
+      "moduleType": "Monocrystalline",
+      "ratedPower": "450",
+      "voc": "39",
+      "isc": "13.9",
+      "vmp": "36",
+      "imp": "13",
+      "tempCoeff": "",
+      "totalModules": "",
+      "inverterManufacturer": "",
+      "inverterModel": "",
+      "inverterPower": "6",
+      "maxDcVoltage": "450",
+      "maxDcCurrent": "80",
+      "acOutput": "",
+      "mpptRange": "",
+      "numMppt": "",
+      "assignments": {
+        "arr-1-str-1": [
+          "VD1",
+          "ID1"
+        ],
+        "sens-1764509384289": [
+          "IA1",
+          "VA1"
+        ],
+        "sens-1764509436240": [
+          "ID3",
+          "VD3"
+        ],
+        "sens-1764509458592": [
+          "WS"
+        ]
+      },
+      "sensors": [
+        {
+          "id": "sens-1764509384289",
+          "name": "",
+          "arrayId": 1,
+          "type": "Irradiance",
+          "category": "inverter"
+        },
+        {
+          "id": "sens-1764509436240",
+          "name": "",
+          "arrayId": 1,
+          "type": "Irradiance",
+          "category": "battery"
+        },
+        {
+          "id": "sens-1764509458592",
+          "name": "",
+          "arrayId": 1,
+          "type": "Irradiance",
+          "category": "environmental"
+        }
+      ],
+      "mbInventory": [
+        {
+          "id": "ID1",
+          "type": "Courant DC",
+          "range": "0-30A",
+          "Voltage divider gain": null,
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I1D",
+            "T_m",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "ID3",
+          "type": "Courant DC",
+          "range": "-50-50A",
+          "Voltage divider gain": null,
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I3D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VD1",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V1D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VD3",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V3D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "IA1",
+          "type": "Courant AC",
+          "range": "0-30A",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I1A",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VA1",
+          "type": "Tension AC",
+          "range": "0-400V",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V1A",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "WS",
+          "type": "Environmental (Solar irradiance/Temperature/Humidity)",
+          "Input pin": [
+            "PA0",
+            "PA1",
+            "PB1"
+          ],
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "G",
+            "T_amb",
+            "V",
+            "Hum",
+            "BattS",
+            "Rssi"
+          ]
+        }
+      ],
+      "measurementDelay": 10,
+      "isMeasuring": true
+    }
+  },
+  {
+    "timestamp": "2025-11-30T14:43:19.881933",
+    "config": {
+      "stationId": "PV-001",
+      "stationName": "",
+      "description": "",
+      "installationDate": "",
+      "siteName": "",
+      "address": "",
+      "latitude": "",
+      "longitude": "",
+      "elevation": "",
+      "operatorName": "",
+      "organization": "",
+      "contactEmail": "",
+      "phone": "",
+      "systemType": "Grid-tied",
+      "totalCapacity": "5",
+      "commissioningDate": "",
+      "numArrays": 1,
+      "arrays": [
+        {
+          "id": 1,
+          "tilt": "15",
+          "azimuth": "0",
+          "mounting": "Fixed"
+        }
+      ],
+      "totalStrings": "1",
+      "stringsPerArray": "1",
+      "modulesPerString": "5",
+      "stringVoltage": "250",
+      "stringCurrent": "13",
+      "combinerBox": "",
+      "moduleManufacturer": "",
+      "moduleModel": "",
+      "moduleType": "Monocrystalline",
+      "ratedPower": "450",
+      "voc": "39",
+      "isc": "13.9",
+      "vmp": "36",
+      "imp": "13",
+      "tempCoeff": "",
+      "totalModules": "",
+      "inverterManufacturer": "",
+      "inverterModel": "",
+      "inverterPower": "6",
+      "maxDcVoltage": "450",
+      "maxDcCurrent": "80",
+      "acOutput": "",
+      "mpptRange": "",
+      "numMppt": "",
+      "assignments": {
+        "arr-1-str-1": [
+          "VD1",
+          "ID1"
+        ],
+        "sens-1764509384289": [
+          "IA1",
+          "VA1"
+        ],
+        "sens-1764509436240": [
+          "ID3",
+          "VD3"
+        ],
+        "sens-1764509458592": [
+          "WS"
+        ]
+      },
+      "sensors": [
+        {
+          "id": "sens-1764509384289",
+          "name": "",
+          "arrayId": 1,
+          "type": "Irradiance",
+          "category": "inverter"
+        },
+        {
+          "id": "sens-1764509436240",
+          "name": "",
+          "arrayId": 1,
+          "type": "Irradiance",
+          "category": "battery"
+        },
+        {
+          "id": "sens-1764509458592",
+          "name": "",
+          "arrayId": 1,
+          "type": "Irradiance",
+          "category": "environmental"
+        }
+      ],
+      "mbInventory": [
+        {
+          "id": "ID1",
+          "type": "Courant DC",
+          "range": "0-30A",
+          "Voltage divider gain": null,
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I1D",
+            "T_m",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "ID3",
+          "type": "Courant DC",
+          "range": "-50-50A",
+          "Voltage divider gain": null,
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I3D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VD1",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V1D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VD3",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V3D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "IA1",
+          "type": "Courant AC",
+          "range": "0-30A",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I1A",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VA1",
+          "type": "Tension AC",
+          "range": "0-400V",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V1A",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "WS",
+          "type": "Environmental (Solar irradiance/Temperature/Humidity)",
+          "Input pin": [
+            "PA0",
+            "PA1",
+            "PB1"
+          ],
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "G",
+            "T_amb",
+            "V",
+            "Hum",
+            "BattS",
+            "Rssi"
+          ]
+        }
+      ],
+      "measurementDelay": 10,
+      "isMeasuring": true
+    }
+  },
+  {
+    "timestamp": "2025-11-30T14:44:38.617724",
+    "config": {
+      "stationId": "PV-001",
+      "stationName": "",
+      "description": "",
+      "installationDate": "",
+      "siteName": "",
+      "address": "",
+      "latitude": "",
+      "longitude": "",
+      "elevation": "",
+      "operatorName": "",
+      "organization": "",
+      "contactEmail": "",
+      "phone": "",
+      "systemType": "Grid-tied",
+      "totalCapacity": "5",
+      "commissioningDate": "",
+      "numArrays": 1,
+      "arrays": [
+        {
+          "id": 1,
+          "tilt": "15",
+          "azimuth": "0",
+          "mounting": "Fixed"
+        }
+      ],
+      "totalStrings": "1",
+      "stringsPerArray": "1",
+      "modulesPerString": "5",
+      "stringVoltage": "250",
+      "stringCurrent": "13",
+      "combinerBox": "",
+      "moduleManufacturer": "",
+      "moduleModel": "",
+      "moduleType": "Monocrystalline",
+      "ratedPower": "450",
+      "voc": "39",
+      "isc": "13.9",
+      "vmp": "36",
+      "imp": "13",
+      "tempCoeff": "",
+      "totalModules": "",
+      "inverterManufacturer": "",
+      "inverterModel": "",
+      "inverterPower": "6",
+      "maxDcVoltage": "450",
+      "maxDcCurrent": "80",
+      "acOutput": "",
+      "mpptRange": "",
+      "numMppt": "",
+      "assignments": {
+        "arr-1-str-1": [
+          "VD1",
+          "ID1"
+        ],
+        "sens-1764509384289": [
+          "IA1",
+          "VA1"
+        ],
+        "sens-1764509436240": [
+          "ID3",
+          "VD3"
+        ],
+        "sens-1764509458592": [
+          "WS"
+        ]
+      },
+      "sensors": [
+        {
+          "id": "sens-1764509384289",
+          "name": "inv1",
+          "arrayId": 1,
+          "type": "Irradiance",
+          "category": "inverter"
+        },
+        {
+          "id": "sens-1764509436240",
+          "name": "batt1",
+          "arrayId": 1,
+          "type": "Irradiance",
+          "category": "battery"
+        },
+        {
+          "id": "sens-1764509458592",
+          "name": "ws1",
+          "arrayId": 1,
+          "type": "Irradiance",
+          "category": "environmental"
+        }
+      ],
+      "mbInventory": [
+        {
+          "id": "ID1",
+          "type": "Courant DC",
+          "range": "0-30A",
+          "Voltage divider gain": null,
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I1D",
+            "T_m",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "ID3",
+          "type": "Courant DC",
+          "range": "-50-50A",
+          "Voltage divider gain": null,
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I3D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VD1",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V1D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VD3",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V3D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "IA1",
+          "type": "Courant AC",
+          "range": "0-30A",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I1A",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VA1",
+          "type": "Tension AC",
+          "range": "0-400V",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V1A",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "WS",
+          "type": "Environmental (Solar irradiance/Temperature/Humidity)",
+          "Input pin": [
+            "PA0",
+            "PA1",
+            "PB1"
+          ],
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "G",
+            "T_amb",
+            "V",
+            "Hum",
+            "BattS",
+            "Rssi"
+          ]
+        }
+      ],
+      "measurementDelay": 10,
+      "isMeasuring": true
+    }
+  },
+  {
+    "timestamp": "2025-11-30T14:45:24.249420",
+    "config": {
+      "stationId": "PV-001",
+      "stationName": "",
+      "description": "",
+      "installationDate": "",
+      "siteName": "",
+      "address": "",
+      "latitude": "",
+      "longitude": "",
+      "elevation": "",
+      "operatorName": "",
+      "organization": "",
+      "contactEmail": "",
+      "phone": "",
+      "systemType": "Grid-tied",
+      "totalCapacity": "5",
+      "commissioningDate": "",
+      "numArrays": 1,
+      "arrays": [
+        {
+          "id": 1,
+          "tilt": "15",
+          "azimuth": "0",
+          "mounting": "Fixed"
+        }
+      ],
+      "totalStrings": "1",
+      "stringsPerArray": "1",
+      "modulesPerString": "5",
+      "stringVoltage": "250",
+      "stringCurrent": "13",
+      "combinerBox": "",
+      "moduleManufacturer": "",
+      "moduleModel": "",
+      "moduleType": "Monocrystalline",
+      "ratedPower": "450",
+      "voc": "39",
+      "isc": "13.9",
+      "vmp": "36",
+      "imp": "13",
+      "tempCoeff": "",
+      "totalModules": "",
+      "inverterManufacturer": "",
+      "inverterModel": "",
+      "inverterPower": "6",
+      "maxDcVoltage": "450",
+      "maxDcCurrent": "80",
+      "acOutput": "",
+      "mpptRange": "",
+      "numMppt": "",
+      "assignments": {
+        "arr-1-str-1": [
+          "VD1",
+          "ID1"
+        ],
+        "sens-1764509384289": [
+          "IA1",
+          "VA1"
+        ],
+        "sens-1764509436240": [
+          "ID3",
+          "VD3"
+        ],
+        "sens-1764509458592": [
+          "WS"
+        ]
+      },
+      "sensors": [
+        {
+          "id": "sens-1764509384289",
+          "name": "",
+          "arrayId": 1,
+          "type": "Irradiance",
+          "category": "inverter"
+        },
+        {
+          "id": "sens-1764509436240",
+          "name": "",
+          "arrayId": 1,
+          "type": "Irradiance",
+          "category": "battery"
+        },
+        {
+          "id": "sens-1764509458592",
+          "name": "",
+          "arrayId": 1,
+          "type": "Irradiance",
+          "category": "environmental"
+        }
+      ],
+      "mbInventory": [
+        {
+          "id": "ID1",
+          "type": "Courant DC",
+          "range": "0-30A",
+          "Voltage divider gain": null,
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I1D",
+            "T_m",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "ID3",
+          "type": "Courant DC",
+          "range": "-50-50A",
+          "Voltage divider gain": null,
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I3D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VD1",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V1D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VD3",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V3D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "IA1",
+          "type": "Courant AC",
+          "range": "0-30A",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I1A",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VA1",
+          "type": "Tension AC",
+          "range": "0-400V",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V1A",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "WS",
+          "type": "Environmental (Solar irradiance/Temperature/Humidity)",
+          "Input pin": [
+            "PA0",
+            "PA1",
+            "PB1"
+          ],
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "G",
+            "T_amb",
+            "V",
+            "Hum",
+            "BattS",
+            "Rssi"
+          ]
+        }
+      ],
+      "measurementDelay": 10,
+      "isMeasuring": true
+    }
+  },
+  {
+    "timestamp": "2025-12-02T13:08:36.484128",
+    "config": {
+      "stationId": "PV-001",
+      "stationName": "",
+      "description": "",
+      "installationDate": "",
+      "siteName": "",
+      "address": "",
+      "latitude": "36.72615 ",
+      "longitude": "3.18291",
+      "elevation": "",
+      "operatorName": "",
+      "organization": "",
+      "contactEmail": "",
+      "phone": "",
+      "systemType": "Grid-tied",
+      "totalCapacity": "5",
+      "commissioningDate": "",
+      "numArrays": 1,
+      "arrays": [
+        {
+          "id": 1,
+          "tilt": "15",
+          "azimuth": "0",
+          "mounting": "Fixed"
+        }
+      ],
+      "totalStrings": "1",
+      "stringsPerArray": "1",
+      "modulesPerString": "5",
+      "stringVoltage": "250",
+      "stringCurrent": "13",
+      "combinerBox": "",
+      "moduleManufacturer": "",
+      "moduleModel": "",
+      "moduleType": "Monocrystalline",
+      "ratedPower": "450",
+      "voc": "39",
+      "isc": "13.9",
+      "vmp": "36",
+      "imp": "13",
+      "tempCoeff": "",
+      "totalModules": "",
+      "inverterManufacturer": "",
+      "inverterModel": "",
+      "inverterPower": "6",
+      "maxDcVoltage": "450",
+      "maxDcCurrent": "80",
+      "acOutput": "",
+      "mpptRange": "",
+      "numMppt": "",
+      "assignments": {
+        "arr-1-str-1": [
+          "VD1",
+          "ID1"
+        ],
+        "sens-1764509384289": [
+          "IA1",
+          "VA1"
+        ],
+        "sens-1764509436240": [
+          "ID3",
+          "VD3"
+        ],
+        "sens-1764509458592": [
+          "WS"
+        ]
+      },
+      "sensors": [
+        {
+          "id": "sens-1764509384289",
+          "name": "",
+          "arrayId": 1,
+          "type": "Irradiance",
+          "category": "inverter"
+        },
+        {
+          "id": "sens-1764509436240",
+          "name": "",
+          "arrayId": 1,
+          "type": "Irradiance",
+          "category": "battery"
+        },
+        {
+          "id": "sens-1764509458592",
+          "name": "",
+          "arrayId": 1,
+          "type": "Irradiance",
+          "category": "environmental"
+        }
+      ],
+      "mbInventory": [
+        {
+          "id": "ID1",
+          "type": "Courant DC",
+          "range": "0-30A",
+          "Voltage divider gain": null,
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I1D",
+            "T_m",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "ID3",
+          "type": "Courant DC",
+          "range": "-50-50A",
+          "Voltage divider gain": null,
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I3D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VD1",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V1D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VD3",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V3D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "IA1",
+          "type": "Courant AC",
+          "range": "0-30A",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I1A",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VA1",
+          "type": "Tension AC",
+          "range": "0-400V",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V1A",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "WS",
+          "type": "Environmental (Solar irradiance/Temperature/Humidity)",
+          "Input pin": [
+            "PA0",
+            "PA1",
+            "PB1"
+          ],
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "G",
+            "T_amb",
+            "V",
+            "Hum",
+            "BattS",
+            "Rssi"
+          ]
+        }
+      ],
+      "measurementDelay": 10,
+      "isMeasuring": true
+    }
+  },
+  {
+    "timestamp": "2025-12-02T15:45:36.233413",
+    "config": {
+      "stationId": "PV-001",
+      "stationName": "",
+      "description": "",
+      "installationDate": "",
+      "siteName": "",
+      "address": "",
+      "latitude": "36.72615 ",
+      "longitude": "3.18291",
+      "elevation": "",
+      "operatorName": "",
+      "organization": "",
+      "contactEmail": "",
+      "phone": "",
+      "systemType": "Grid-tied",
+      "totalCapacity": "5",
+      "commissioningDate": "",
+      "numArrays": 1,
+      "arrays": [
+        {
+          "id": 1,
+          "tilt": "15",
+          "azimuth": "0",
+          "mounting": "Fixed"
+        }
+      ],
+      "totalStrings": "1",
+      "stringsPerArray": "1",
+      "modulesPerString": "5",
+      "stringVoltage": "250",
+      "stringCurrent": "13",
+      "combinerBox": "",
+      "moduleManufacturer": "",
+      "moduleModel": "",
+      "moduleType": "Monocrystalline",
+      "ratedPower": "450",
+      "voc": "39",
+      "isc": "13.9",
+      "vmp": "36",
+      "imp": "13",
+      "tempCoeff": "",
+      "totalModules": "",
+      "inverterManufacturer": "",
+      "inverterModel": "",
+      "inverterPower": "6",
+      "maxDcVoltage": "450",
+      "maxDcCurrent": "80",
+      "acOutput": "",
+      "mpptRange": "",
+      "numMppt": "",
+      "assignments": {
+        "arr-1-str-1": [
+          "VD1",
+          "ID1"
+        ],
+        "sens-1764509384289": [
+          "IA1",
+          "VA1",
+          "INVD"
+        ],
+        "sens-1764509436240": [
+          "ID3",
+          "VD3"
+        ],
+        "sens-1764509458592": [
+          "WS"
+        ]
+      },
+      "sensors": [
+        {
+          "id": "sens-1764509384289",
+          "name": "",
+          "arrayId": 1,
+          "type": "Irradiance",
+          "category": "inverter"
+        },
+        {
+          "id": "sens-1764509436240",
+          "name": "",
+          "arrayId": 1,
+          "type": "Irradiance",
+          "category": "battery"
+        },
+        {
+          "id": "sens-1764509458592",
+          "name": "",
+          "arrayId": 1,
+          "type": "Irradiance",
+          "category": "environmental"
+        }
+      ],
+      "mbInventory": [
+        {
+          "id": "ID1",
+          "type": "Courant DC",
+          "range": "0-30A",
+          "Voltage divider gain": null,
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I1D",
+            "T_m",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "ID3",
+          "type": "Courant DC",
+          "range": "-50-50A",
+          "Voltage divider gain": null,
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I3D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VD1",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V1D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VD3",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V3D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "IA1",
+          "type": "Courant AC",
+          "range": "0-30A",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I1A",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VA1",
+          "type": "Tension AC",
+          "range": "0-400V",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V1A",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "INVD",
+          "type": "Inverter RS480",
+          "range": null,
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "PV1_V",
+            "PV1_I",
+            "PV2_V",
+            "PV2_I",
+            "Vbat",
+            "Ibat",
+            "Vout",
+            "Iout",
+            "Pout",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "WS",
+          "type": "Environmental (Solar irradiance/Temperature/Humidity)",
+          "Input pin": [
+            "PA0",
+            "PA1",
+            "PB1"
+          ],
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "G",
+            "T_amb",
+            "V",
+            "Hum",
+            "BattS",
+            "Rssi"
+          ]
+        }
+      ],
+      "measurementDelay": 10,
+      "isMeasuring": true
+    }
+  },
+  {
+    "timestamp": "2025-12-02T22:47:25.307880",
+    "config": {
+      "stationId": "PV-001",
+      "stationName": "",
+      "description": "",
+      "installationDate": "",
+      "siteName": "",
+      "address": "",
+      "latitude": "36.72615 ",
+      "longitude": "3.18291",
+      "elevation": "",
+      "operatorName": "",
+      "organization": "",
+      "contactEmail": "",
+      "phone": "",
+      "systemType": "Grid-tied",
+      "totalCapacity": "5",
+      "commissioningDate": "",
+      "numArrays": 1,
+      "arrays": [
+        {
+          "id": 1,
+          "tilt": "15",
+          "azimuth": "0",
+          "mounting": "Fixed"
+        }
+      ],
+      "totalStrings": "1",
+      "stringsPerArray": "1",
+      "modulesPerString": "5",
+      "stringVoltage": "250",
+      "stringCurrent": "13",
+      "combinerBox": "",
+      "moduleManufacturer": "",
+      "moduleModel": "",
+      "moduleType": "Monocrystalline",
+      "ratedPower": "450",
+      "voc": "39",
+      "isc": "13.9",
+      "vmp": "36",
+      "imp": "13",
+      "tempCoeff": "",
+      "totalModules": "",
+      "inverterManufacturer": "",
+      "inverterModel": "",
+      "inverterPower": "6",
+      "maxDcVoltage": "450",
+      "maxDcCurrent": "80",
+      "acOutput": "",
+      "mpptRange": "",
+      "numMppt": "2",
+      "storage": {
+        "numBatteries": 8,
+        "batteryType": "Lithium-ion",
+        "batteryManufacturer": "",
+        "batteryModel": "",
+        "nominalVoltage": 48,
+        "capacity": 200,
+        "capacityUnit": "Ah",
+        "maxChargeRate": 50,
+        "maxDischargeRate": 50,
+        "minSoc": 20,
+        "maxSoc": 100,
+        "temperatureMin": -10,
+        "temperatureMax": 45
+      },
+      "thresholds": {
+        "voltage": {
+          "pv_min": 150,
+          "pv_max": 450,
+          "battery_min": 42,
+          "battery_max": 58,
+          "ac_min": 198,
+          "ac_max": 264
+        },
+        "current": {
+          "max_pv_current": 30,
+          "max_battery_current": 100,
+          "max_ac_current": 50
+        },
+        "power_discrepancy": {
+          "max_percentage": 15
+        },
+        "temperature": {
+          "panel_max": 85,
+          "ambient_max": 50,
+          "ambient_min": -10
+        },
+        "communication": {
+          "min_rssi": -90
+        }
+      },
+      "assignments": {
+        "arr-1-str-1": [
+          "VD1",
+          "ID1"
+        ],
+        "sens-1764509384289": [
+          "IA1",
+          "VA1",
+          "INVD"
+        ],
+        "sens-1764509436240": [
+          "ID3",
+          "VD3"
+        ],
+        "sens-1764509458592": [
+          "WS"
+        ]
+      },
+      "sensors": [
+        {
+          "id": "sens-1764509384289",
+          "name": "",
+          "arrayId": 1,
+          "type": "Irradiance",
+          "category": "inverter"
+        },
+        {
+          "id": "sens-1764509436240",
+          "name": "",
+          "arrayId": 1,
+          "type": "Irradiance",
+          "category": "battery"
+        },
+        {
+          "id": "sens-1764509458592",
+          "name": "",
+          "arrayId": 1,
+          "type": "Irradiance",
+          "category": "environmental"
+        }
+      ],
+      "mbInventory": [
+        {
+          "id": "ID1",
+          "type": "Courant DC",
+          "range": "0-30A",
+          "Voltage divider gain": null,
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I1D",
+            "T_m",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "ID3",
+          "type": "Courant DC",
+          "range": "-50-50A",
+          "Voltage divider gain": null,
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I3D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VD1",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V1D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VD3",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V3D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "IA1",
+          "type": "Courant AC",
+          "range": "0-30A",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I1A",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VA1",
+          "type": "Tension AC",
+          "range": "0-400V",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V1A",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "INVD",
+          "type": "Inverter RS480",
+          "range": null,
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "PV1_V",
+            "PV1_I",
+            "PV2_V",
+            "PV2_I",
+            "Vbat",
+            "Ibat",
+            "Vout",
+            "Iout",
+            "Pout",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "WS",
+          "type": "Environmental (Solar irradiance/Temperature/Humidity)",
+          "Input pin": [
+            "PA0",
+            "PA1",
+            "PB1"
+          ],
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "G",
+            "T_amb",
+            "V",
+            "Hum",
+            "BattS",
+            "Rssi"
+          ]
+        }
+      ],
+      "measurementDelay": 10,
+      "isMeasuring": true
+    }
+  },
+  {
+    "timestamp": "2025-12-02T22:51:22.135070",
+    "config": {
+      "stationId": "PV-001",
+      "stationName": "",
+      "description": "",
+      "installationDate": "",
+      "siteName": "",
+      "address": "",
+      "latitude": "36.72615 ",
+      "longitude": "3.18291",
+      "elevation": "",
+      "operatorName": "",
+      "organization": "",
+      "contactEmail": "",
+      "phone": "",
+      "systemType": "Grid-tied",
+      "totalCapacity": "5",
+      "commissioningDate": "",
+      "numArrays": 1,
+      "arrays": [
+        {
+          "id": 1,
+          "tilt": "15",
+          "azimuth": "0",
+          "mounting": "Fixed"
+        }
+      ],
+      "totalStrings": "1",
+      "stringsPerArray": "2",
+      "modulesPerString": "5",
+      "stringVoltage": "250",
+      "stringCurrent": "13",
+      "combinerBox": "",
+      "moduleManufacturer": "",
+      "moduleModel": "",
+      "moduleType": "Monocrystalline",
+      "ratedPower": "450",
+      "voc": "39",
+      "isc": "13.9",
+      "vmp": "36",
+      "imp": "13",
+      "tempCoeff": "",
+      "totalModules": "",
+      "inverterManufacturer": "",
+      "inverterModel": "",
+      "inverterPower": "6",
+      "maxDcVoltage": "450",
+      "maxDcCurrent": "80",
+      "acOutput": "",
+      "mpptRange": "",
+      "numMppt": "2",
+      "storage": {
+        "numBatteries": 8,
+        "batteryType": "Lithium-ion",
+        "batteryManufacturer": "",
+        "batteryModel": "",
+        "nominalVoltage": 48,
+        "capacity": 200,
+        "capacityUnit": "Ah",
+        "maxChargeRate": 50,
+        "maxDischargeRate": 50,
+        "minSoc": 20,
+        "maxSoc": 100,
+        "temperatureMin": -10,
+        "temperatureMax": 45
+      },
+      "thresholds": {
+        "voltage": {
+          "pv_min": 150,
+          "pv_max": 450,
+          "battery_min": 42,
+          "battery_max": 58,
+          "ac_min": 198,
+          "ac_max": 264
+        },
+        "current": {
+          "max_pv_current": 30,
+          "max_battery_current": 100,
+          "max_ac_current": 50
+        },
+        "power_discrepancy": {
+          "max_percentage": 15
+        },
+        "temperature": {
+          "panel_max": 85,
+          "ambient_max": 50,
+          "ambient_min": -10
+        },
+        "communication": {
+          "min_rssi": -90
+        }
+      },
+      "assignments": {
+        "arr-1-str-1": [
+          "VD1",
+          "ID1"
+        ],
+        "sens-1764509384289": [
+          "IA1",
+          "VA1",
+          "INVD"
+        ],
+        "sens-1764509436240": [
+          "ID3",
+          "VD3"
+        ],
+        "sens-1764509458592": [
+          "WS"
+        ]
+      },
+      "sensors": [
+        {
+          "id": "sens-1764509384289",
+          "name": "",
+          "arrayId": 1,
+          "type": "Irradiance",
+          "category": "inverter"
+        },
+        {
+          "id": "sens-1764509436240",
+          "name": "",
+          "arrayId": 1,
+          "type": "Irradiance",
+          "category": "battery"
+        },
+        {
+          "id": "sens-1764509458592",
+          "name": "",
+          "arrayId": 1,
+          "type": "Irradiance",
+          "category": "environmental"
+        }
+      ],
+      "mbInventory": [
+        {
+          "id": "ID1",
+          "type": "Courant DC",
+          "range": "0-30A",
+          "Voltage divider gain": null,
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I1D",
+            "T_m",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "ID3",
+          "type": "Courant DC",
+          "range": "-50-50A",
+          "Voltage divider gain": null,
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I3D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VD1",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V1D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VD3",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V3D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "IA1",
+          "type": "Courant AC",
+          "range": "0-30A",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I1A",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VA1",
+          "type": "Tension AC",
+          "range": "0-400V",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V1A",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "INVD",
+          "type": "Inverter RS480",
+          "range": null,
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "PV1_V",
+            "PV1_I",
+            "PV2_V",
+            "PV2_I",
+            "Vbat",
+            "Ibat",
+            "Vout",
+            "Iout",
+            "Pout",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "WS",
+          "type": "Environmental (Solar irradiance/Temperature/Humidity)",
+          "Input pin": [
+            "PA0",
+            "PA1",
+            "PB1"
+          ],
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "G",
+            "T_amb",
+            "V",
+            "Hum",
+            "BattS",
+            "Rssi"
+          ]
+        }
+      ],
+      "measurementDelay": 10,
+      "isMeasuring": true
+    }
+  },
+  {
+    "timestamp": "2025-12-02T22:52:50.696778",
+    "config": {
+      "stationId": "PV-001",
+      "stationName": "",
+      "description": "",
+      "installationDate": "",
+      "siteName": "",
+      "address": "",
+      "latitude": "36.72615 ",
+      "longitude": "3.18291",
+      "elevation": "",
+      "operatorName": "",
+      "organization": "",
+      "contactEmail": "",
+      "phone": "",
+      "systemType": "Grid-tied",
+      "totalCapacity": "5",
+      "commissioningDate": "",
+      "numArrays": 1,
+      "arrays": [
+        {
+          "id": 1,
+          "tilt": "15",
+          "azimuth": "0",
+          "mounting": "Fixed"
+        }
+      ],
+      "totalStrings": "1",
+      "stringsPerArray": "2",
+      "modulesPerString": "5",
+      "stringVoltage": "250",
+      "stringCurrent": "13",
+      "combinerBox": "",
+      "moduleManufacturer": "",
+      "moduleModel": "",
+      "moduleType": "Monocrystalline",
+      "ratedPower": "450",
+      "voc": "39",
+      "isc": "13.9",
+      "vmp": "36",
+      "imp": "13",
+      "tempCoeff": "",
+      "totalModules": "",
+      "inverterManufacturer": "",
+      "inverterModel": "",
+      "inverterPower": "6",
+      "maxDcVoltage": "450",
+      "maxDcCurrent": "80",
+      "acOutput": "",
+      "mpptRange": "",
+      "numMppt": "2",
+      "storage": {
+        "numBatteries": 8,
+        "batteryType": "Lithium-ion",
+        "batteryManufacturer": "",
+        "batteryModel": "",
+        "nominalVoltage": 48,
+        "capacity": 200,
+        "capacityUnit": "Ah",
+        "maxChargeRate": 50,
+        "maxDischargeRate": 50,
+        "minSoc": 20,
+        "maxSoc": 100,
+        "temperatureMin": -10,
+        "temperatureMax": 45
+      },
+      "thresholds": {
+        "voltage": {
+          "pv_min": 150,
+          "pv_max": 450,
+          "battery_min": 42,
+          "battery_max": 58,
+          "ac_min": 198,
+          "ac_max": 264
+        },
+        "current": {
+          "max_pv_current": 30,
+          "max_battery_current": 100,
+          "max_ac_current": 50
+        },
+        "power_discrepancy": {
+          "max_percentage": 15
+        },
+        "temperature": {
+          "panel_max": 85,
+          "ambient_max": 50,
+          "ambient_min": -10
+        },
+        "communication": {
+          "min_rssi": -90
+        }
+      },
+      "assignments": {
+        "arr-1-str-1": [
+          "VD1",
+          "ID1"
+        ],
+        "sens-1764509384289": [
+          "IA1",
+          "VA1",
+          "INVD"
+        ],
+        "sens-1764509436240": [
+          "ID3",
+          "VD3"
+        ],
+        "sens-1764509458592": [
+          "WS"
+        ]
+      },
+      "sensors": [
+        {
+          "id": "sens-1764509384289",
+          "name": "",
+          "arrayId": 1,
+          "type": "Irradiance",
+          "category": "inverter"
+        },
+        {
+          "id": "sens-1764509436240",
+          "name": "",
+          "arrayId": 1,
+          "type": "Irradiance",
+          "category": "battery"
+        },
+        {
+          "id": "sens-1764509458592",
+          "name": "",
+          "arrayId": 1,
+          "type": "Irradiance",
+          "category": "environmental"
+        }
+      ],
+      "mbInventory": [
+        {
+          "id": "ID1",
+          "type": "Courant DC",
+          "range": "0-30A",
+          "Voltage divider gain": null,
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I1D",
+            "T_m",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "ID3",
+          "type": "Courant DC",
+          "range": "-50-50A",
+          "Voltage divider gain": null,
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I3D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VD1",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V1D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VD3",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V3D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "IA1",
+          "type": "Courant AC",
+          "range": "0-30A",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I1A",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VA1",
+          "type": "Tension AC",
+          "range": "0-400V",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V1A",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "INVD",
+          "type": "Inverter RS480",
+          "range": null,
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "PV1_V",
+            "PV1_I",
+            "PV2_V",
+            "PV2_I",
+            "Vbat",
+            "Ibat",
+            "Vout",
+            "Iout",
+            "Pout",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "WS",
+          "type": "Environmental (Solar irradiance/Temperature/Humidity)",
+          "Input pin": [
+            "PA0",
+            "PA1",
+            "PB1"
+          ],
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "G",
+            "T_amb",
+            "V",
+            "Hum",
+            "BattS",
+            "Rssi"
+          ]
+        }
+      ],
+      "measurementDelay": 10,
+      "isMeasuring": true
+    }
+  },
+  {
+    "timestamp": "2025-12-02T22:53:33.233574",
+    "config": {
+      "stationId": "PV-001",
+      "stationName": "",
+      "description": "",
+      "installationDate": "",
+      "siteName": "",
+      "address": "",
+      "latitude": "36.72615 ",
+      "longitude": "3.18291",
+      "elevation": "",
+      "operatorName": "",
+      "organization": "",
+      "contactEmail": "",
+      "phone": "",
+      "systemType": "Grid-tied",
+      "totalCapacity": "5",
+      "commissioningDate": "",
+      "numArrays": 1,
+      "arrays": [
+        {
+          "id": 1,
+          "tilt": "15",
+          "azimuth": "0",
+          "mounting": "Fixed"
+        }
+      ],
+      "totalStrings": "1",
+      "stringsPerArray": "2",
+      "modulesPerString": "5",
+      "stringVoltage": "250",
+      "stringCurrent": "13",
+      "combinerBox": "",
+      "moduleManufacturer": "",
+      "moduleModel": "",
+      "moduleType": "Monocrystalline",
+      "ratedPower": "450",
+      "voc": "39",
+      "isc": "13.9",
+      "vmp": "36",
+      "imp": "13",
+      "tempCoeff": "",
+      "totalModules": "",
+      "inverterManufacturer": "",
+      "inverterModel": "",
+      "inverterPower": "6",
+      "maxDcVoltage": "450",
+      "maxDcCurrent": "80",
+      "acOutput": "",
+      "mpptRange": "",
+      "numMppt": "2",
+      "storage": {
+        "numBatteries": 8,
+        "batteryType": "Lithium-ion",
+        "batteryManufacturer": "",
+        "batteryModel": "",
+        "nominalVoltage": 48,
+        "capacity": 200,
+        "capacityUnit": "Ah",
+        "maxChargeRate": 50,
+        "maxDischargeRate": 50,
+        "minSoc": 20,
+        "maxSoc": 100,
+        "temperatureMin": -10,
+        "temperatureMax": 45
+      },
+      "thresholds": {
+        "voltage": {
+          "pv_min": 150,
+          "pv_max": 450,
+          "battery_min": 42,
+          "battery_max": 58,
+          "ac_min": 198,
+          "ac_max": 264
+        },
+        "current": {
+          "max_pv_current": 30,
+          "max_battery_current": 100,
+          "max_ac_current": 50
+        },
+        "power_discrepancy": {
+          "max_percentage": 15
+        },
+        "temperature": {
+          "panel_max": 85,
+          "ambient_max": 50,
+          "ambient_min": -10
+        },
+        "communication": {
+          "min_rssi": -90
+        }
+      },
+      "assignments": {
+        "arr-1-str-1": [
+          "VD1",
+          "ID1"
+        ],
+        "sens-1764509384289": [
+          "IA1",
+          "VA1",
+          "INVD"
+        ],
+        "sens-1764509436240": [
+          "ID3",
+          "VD3"
+        ],
+        "sens-1764509458592": [
+          "WS"
+        ],
+        "arr-1-str-2": [
+          "VD2",
+          "ID2"
+        ]
+      },
+      "sensors": [
+        {
+          "id": "sens-1764509384289",
+          "name": "",
+          "arrayId": 1,
+          "type": "Irradiance",
+          "category": "inverter"
+        },
+        {
+          "id": "sens-1764509436240",
+          "name": "",
+          "arrayId": 1,
+          "type": "Irradiance",
+          "category": "battery"
+        },
+        {
+          "id": "sens-1764509458592",
+          "name": "",
+          "arrayId": 1,
+          "type": "Irradiance",
+          "category": "environmental"
+        }
+      ],
+      "mbInventory": [
+        {
+          "id": "ID1",
+          "type": "Courant DC",
+          "range": "0-30A",
+          "Voltage divider gain": null,
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I1D",
+            "T_m",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "ID2",
+          "type": "Courant DC",
+          "range": "0-30A",
+          "Voltage divider gain": null,
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I2D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "ID3",
+          "type": "Courant DC",
+          "range": "-50-50A",
+          "Voltage divider gain": null,
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I3D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VD1",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V1D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VD2",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V2D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VD3",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V3D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "IA1",
+          "type": "Courant AC",
+          "range": "0-30A",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I1A",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VA1",
+          "type": "Tension AC",
+          "range": "0-400V",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V1A",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "INVD",
+          "type": "Inverter RS480",
+          "range": null,
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "PV1_V",
+            "PV1_I",
+            "PV2_V",
+            "PV2_I",
+            "Vbat",
+            "Ibat",
+            "Vout",
+            "Iout",
+            "Pout",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "WS",
+          "type": "Environmental (Solar irradiance/Temperature/Humidity)",
+          "Input pin": [
+            "PA0",
+            "PA1",
+            "PB1"
+          ],
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "G",
+            "T_amb",
+            "V",
+            "Hum",
+            "BattS",
+            "Rssi"
+          ]
+        }
+      ],
+      "measurementDelay": 10,
+      "isMeasuring": true
+    }
+  },
+  {
+    "timestamp": "2025-12-03T00:32:41.103046",
+    "config": {
+      "stationId": "PV-001",
+      "stationName": "",
+      "description": "",
+      "installationDate": "",
+      "siteName": "",
+      "address": "",
+      "latitude": "36.72615 ",
+      "longitude": "3.18291",
+      "elevation": "",
+      "operatorName": "",
+      "organization": "",
+      "contactEmail": "",
+      "phone": "",
+      "systemType": "Grid-tied",
+      "totalCapacity": "5",
+      "commissioningDate": "",
+      "numArrays": 1,
+      "arrays": [
+        {
+          "id": 1,
+          "tilt": "15",
+          "azimuth": "0",
+          "mounting": "Fixed"
+        }
+      ],
+      "totalStrings": "1",
+      "stringsPerArray": "2",
+      "modulesPerString": "5",
+      "stringVoltage": "250",
+      "stringCurrent": "13",
+      "combinerBox": "",
+      "moduleManufacturer": "",
+      "moduleModel": "",
+      "moduleType": "Monocrystalline",
+      "ratedPower": "450",
+      "voc": "39",
+      "isc": "13.9",
+      "vmp": "36",
+      "imp": "13",
+      "tempCoeff": "",
+      "totalModules": "",
+      "inverterManufacturer": "",
+      "inverterModel": "",
+      "inverterPower": "6",
+      "maxDcVoltage": "450",
+      "maxDcCurrent": "80",
+      "acOutput": "",
+      "mpptRange": "",
+      "numMppt": "2",
+      "storage": {
+        "numBatteries": 8,
+        "batteryType": "Lithium-ion",
+        "batteryManufacturer": "",
+        "batteryModel": "",
+        "nominalVoltage": 48,
+        "capacity": 200,
+        "capacityUnit": "Ah",
+        "maxChargeRate": 50,
+        "maxDischargeRate": 50,
+        "minSoc": 20,
+        "maxSoc": 100,
+        "temperatureMin": -10,
+        "temperatureMax": 45
+      },
+      "thresholds": {
+        "voltage": {
+          "pv_min": 150,
+          "pv_max": 450,
+          "battery_min": 42,
+          "battery_max": 58,
+          "ac_min": 198,
+          "ac_max": 264
+        },
+        "current": {
+          "max_pv_current": 30,
+          "max_battery_current": 100,
+          "max_ac_current": 50
+        },
+        "power_discrepancy": {
+          "max_percentage": 15
+        },
+        "temperature": {
+          "panel_max": 85,
+          "ambient_max": 50,
+          "ambient_min": -10
+        },
+        "communication": {
+          "min_rssi": -90
+        }
+      },
+      "assignments": {
+        "arr-1-str-1": [
+          "VD1",
+          "ID1"
+        ],
+        "sens-1764509384289": [
+          "IA1",
+          "VA1",
+          "INVD"
+        ],
+        "sens-1764509436240": [
+          "ID3",
+          "VD3"
+        ],
+        "sens-1764509458592": [
+          "WS"
+        ],
+        "arr-1-str-2": [
+          "VD2",
+          "ID2"
+        ]
+      },
+      "sensors": [
+        {
+          "id": "sens-1764509384289",
+          "name": "",
+          "arrayId": 1,
+          "type": "Irradiance",
+          "category": "inverter"
+        },
+        {
+          "id": "sens-1764509436240",
+          "name": "",
+          "arrayId": 1,
+          "type": "Irradiance",
+          "category": "battery"
+        },
+        {
+          "id": "sens-1764509458592",
+          "name": "",
+          "arrayId": 1,
+          "type": "Irradiance",
+          "category": "environmental"
+        }
+      ],
+      "mbInventory": [
+        {
+          "id": "ID1",
+          "type": "Courant DC",
+          "range": "0-30A",
+          "Voltage divider gain": null,
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I1D",
+            "T_m",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "ID2",
+          "type": "Courant DC",
+          "range": "0-30A",
+          "Voltage divider gain": null,
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I2D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "ID3",
+          "type": "Courant DC",
+          "range": "-50-50A",
+          "Voltage divider gain": null,
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I3D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VD1",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V1D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VD2",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V2D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VD3",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V3D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "IA1",
+          "type": "Courant AC",
+          "range": "0-30A",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I1A",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VA1",
+          "type": "Tension AC",
+          "range": "0-400V",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V1A",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "INVD",
+          "type": "Inverter RS480",
+          "range": null,
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "PV1_V",
+            "PV1_I",
+            "PV2_V",
+            "PV2_I",
+            "Vbat",
+            "Ibat",
+            "Vout",
+            "Iout",
+            "Pout",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "WS",
+          "type": "Environmental (Solar irradiance/Temperature/Humidity)",
+          "Input pin": [
+            "PA0",
+            "PA1",
+            "PB1"
+          ],
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "G",
+            "T_amb",
+            "V",
+            "Hum",
+            "BattS",
+            "Rssi"
+          ]
+        }
+      ],
+      "measurementDelay": 10,
+      "isMeasuring": true
+    }
+  },
+  {
+    "timestamp": "2025-12-07T01:03:30.427828",
+    "config": {
+      "stationId": "PV-001",
+      "stationName": "",
+      "description": "",
+      "installationDate": "",
+      "siteName": "",
+      "address": "",
+      "latitude": "36.72615 ",
+      "longitude": "3.18291",
+      "elevation": "",
+      "operatorName": "",
+      "organization": "",
+      "contactEmail": "",
+      "phone": "",
+      "systemType": "Grid-tied",
+      "totalCapacity": "5",
+      "commissioningDate": "",
+      "numArrays": 1,
+      "arrays": [
+        {
+          "id": 1,
+          "tilt": "15",
+          "azimuth": "0",
+          "mounting": "Fixed"
+        }
+      ],
+      "totalStrings": "1",
+      "stringsPerArray": "1",
+      "modulesPerString": "5",
+      "stringVoltage": "250",
+      "stringCurrent": "13",
+      "combinerBox": "",
+      "moduleManufacturer": "",
+      "moduleModel": "",
+      "moduleType": "Monocrystalline",
+      "ratedPower": "450",
+      "voc": "39",
+      "isc": "13.9",
+      "vmp": "36",
+      "imp": "13",
+      "tempCoeff": "",
+      "totalModules": "",
+      "inverterManufacturer": "",
+      "inverterModel": "",
+      "inverterPower": "6",
+      "maxDcVoltage": "450",
+      "maxDcCurrent": "80",
+      "acOutput": "",
+      "mpptRange": "",
+      "numMppt": "2",
+      "storage": {
+        "numBatteries": 8,
+        "batteryType": "Lithium-ion",
+        "batteryManufacturer": "",
+        "batteryModel": "",
+        "nominalVoltage": 48,
+        "capacity": 200,
+        "capacityUnit": "Ah",
+        "maxChargeRate": 50,
+        "maxDischargeRate": 50,
+        "minSoc": 20,
+        "maxSoc": 100,
+        "temperatureMin": -10,
+        "temperatureMax": 45
+      },
+      "thresholds": {
+        "voltage": {
+          "pv_min": 150,
+          "pv_max": 450,
+          "battery_min": 42,
+          "battery_max": 58,
+          "ac_min": 198,
+          "ac_max": 264
+        },
+        "current": {
+          "max_pv_current": 30,
+          "max_battery_current": 100,
+          "max_ac_current": 50
+        },
+        "power_discrepancy": {
+          "max_percentage": 15
+        },
+        "temperature": {
+          "panel_max": 85,
+          "ambient_max": 50,
+          "ambient_min": -10
+        },
+        "communication": {
+          "min_rssi": -90
+        }
+      },
+      "assignments": {
+        "arr-1-str-1": [
+          "VD1",
+          "ID1"
+        ],
+        "sens-1764509384289": [
+          "IA1",
+          "VA1",
+          "INVD"
+        ],
+        "sens-1764509436240": [
+          "ID3",
+          "VD3"
+        ],
+        "sens-1764509458592": [
+          "WS"
+        ],
+        "arr-1-str-2": [
+          "VD2",
+          "ID2"
+        ]
+      },
+      "sensors": [
+        {
+          "id": "sens-1764509384289",
+          "name": "",
+          "arrayId": 1,
+          "type": "Irradiance",
+          "category": "inverter"
+        },
+        {
+          "id": "sens-1764509436240",
+          "name": "",
+          "arrayId": 1,
+          "type": "Irradiance",
+          "category": "battery"
+        },
+        {
+          "id": "sens-1764509458592",
+          "name": "",
+          "arrayId": 1,
+          "type": "Irradiance",
+          "category": "environmental"
+        }
+      ],
+      "mbInventory": [
+        {
+          "id": "ID1",
+          "type": "Courant DC",
+          "range": "0-30A",
+          "Voltage divider gain": null,
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I1D",
+            "T_m",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "ID2",
+          "type": "Courant DC",
+          "range": "0-30A",
+          "Voltage divider gain": null,
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I2D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "ID3",
+          "type": "Courant DC",
+          "range": "-50-50A",
+          "Voltage divider gain": null,
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I3D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VD1",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V1D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VD2",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V2D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VD3",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V3D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "IA1",
+          "type": "Courant AC",
+          "range": "0-30A",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I1A",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VA1",
+          "type": "Tension AC",
+          "range": "0-400V",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V1A",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "INVD",
+          "type": "Inverter RS480",
+          "range": null,
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "PV1_V",
+            "PV1_I",
+            "PV2_V",
+            "PV2_I",
+            "Vbat",
+            "Ibat",
+            "Vout",
+            "Iout",
+            "Pout",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "WS",
+          "type": "Environmental (Solar irradiance/Temperature/Humidity)",
+          "Input pin": [
+            "PA0",
+            "PA1",
+            "PB1"
+          ],
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "G",
+            "T_amb",
+            "V",
+            "Hum",
+            "BattS",
+            "Rssi"
+          ]
+        }
+      ],
+      "measurementDelay": 10,
+      "isMeasuring": true
+    }
+  },
+  {
+    "timestamp": "2025-12-07T01:06:41.403361",
+    "config": {
+      "stationId": "PV-001",
+      "stationName": "",
+      "description": "",
+      "installationDate": "",
+      "siteName": "",
+      "address": "",
+      "latitude": "36.72615 ",
+      "longitude": "3.18291",
+      "elevation": "",
+      "operatorName": "",
+      "organization": "",
+      "contactEmail": "",
+      "phone": "",
+      "systemType": "Grid-tied",
+      "totalCapacity": "5",
+      "commissioningDate": "",
+      "numArrays": 1,
+      "arrays": [
+        {
+          "id": 1,
+          "tilt": "15",
+          "azimuth": "0",
+          "mounting": "Fixed"
+        }
+      ],
+      "totalStrings": "1",
+      "stringsPerArray": "1",
+      "modulesPerString": "5",
+      "stringVoltage": "250",
+      "stringCurrent": "13",
+      "combinerBox": "",
+      "moduleManufacturer": "",
+      "moduleModel": "",
+      "moduleType": "Monocrystalline",
+      "ratedPower": "450",
+      "voc": "39",
+      "isc": "13.9",
+      "vmp": "36",
+      "imp": "13",
+      "tempCoeff": "",
+      "totalModules": "",
+      "inverterManufacturer": "",
+      "inverterModel": "",
+      "inverterPower": "6",
+      "maxDcVoltage": "450",
+      "maxDcCurrent": "80",
+      "acOutput": "",
+      "mpptRange": "",
+      "numMppt": "2",
+      "storage": {
+        "numBatteries": 8,
+        "batteryType": "Lithium-ion",
+        "batteryManufacturer": "",
+        "batteryModel": "",
+        "nominalVoltage": 48,
+        "capacity": 200,
+        "capacityUnit": "Ah",
+        "maxChargeRate": 50,
+        "maxDischargeRate": 50,
+        "minSoc": 20,
+        "maxSoc": 100,
+        "temperatureMin": -10,
+        "temperatureMax": 45
+      },
+      "thresholds": {
+        "voltage": {
+          "pv_min": 150,
+          "pv_max": 450,
+          "battery_min": 42,
+          "battery_max": 58,
+          "ac_min": 198,
+          "ac_max": 264
+        },
+        "current": {
+          "max_pv_current": 30,
+          "max_battery_current": 100,
+          "max_ac_current": 50
+        },
+        "power_discrepancy": {
+          "max_percentage": 15
+        },
+        "temperature": {
+          "panel_max": 85,
+          "ambient_max": 50,
+          "ambient_min": -10
+        },
+        "communication": {
+          "min_rssi": -90
+        }
+      },
+      "assignments": {
+        "arr-1-str-1": [
+          "VD1",
+          "ID1"
+        ],
+        "sens-1764509384289": [
+          "IA1",
+          "VA1"
+        ],
+        "sens-1764509436240": [
+          "ID3",
+          "VD3"
+        ],
+        "sens-1764509458592": [
+          "WS"
+        ],
+        "arr-1-str-2": [
+          "VD2",
+          "ID2"
+        ]
+      },
+      "sensors": [
+        {
+          "id": "sens-1764509384289",
+          "name": "",
+          "arrayId": 1,
+          "type": "Irradiance",
+          "category": "inverter"
+        },
+        {
+          "id": "sens-1764509436240",
+          "name": "",
+          "arrayId": 1,
+          "type": "Irradiance",
+          "category": "battery"
+        },
+        {
+          "id": "sens-1764509458592",
+          "name": "",
+          "arrayId": 1,
+          "type": "Irradiance",
+          "category": "environmental"
+        }
+      ],
+      "mbInventory": [
+        {
+          "id": "ID1",
+          "type": "Courant DC",
+          "range": "0-30A",
+          "Voltage divider gain": null,
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I1D",
+            "T_m",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "ID2",
+          "type": "Courant DC",
+          "range": "0-30A",
+          "Voltage divider gain": null,
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I2D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "ID3",
+          "type": "Courant DC",
+          "range": "-50-50A",
+          "Voltage divider gain": null,
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I3D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VD1",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V1D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VD2",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V2D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VD3",
+          "type": "Tension DC",
+          "range": "0-260V",
+          "Voltage divider gain": 78.8,
+          "Voltage divider R1": "1M",
+          "Voltage divider R2": "12.8K",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V3D",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "IA1",
+          "type": "Courant AC",
+          "range": "0-30A",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "I1A",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "VA1",
+          "type": "Tension AC",
+          "range": "0-400V",
+          "Input pin": "PA0",
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "V1A",
+            "BattS",
+            "Rssi"
+          ]
+        },
+        {
+          "id": "WS",
+          "type": "Environmental (Solar irradiance/Temperature/Humidity)",
+          "Input pin": [
+            "PA0",
+            "PA1",
+            "PB1"
+          ],
+          "online": false,
+          "Firmware version": 1,
+          "config": [
+            "G",
+            "T_amb",
+            "V",
+            "Hum",
+            "BattS",
+            "Rssi"
+          ]
+        }
+      ],
+      "measurementDelay": 10,
+      "isMeasuring": true
+    }
   }
 ]

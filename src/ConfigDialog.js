@@ -1,17 +1,65 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import "./ConfigDialog.css";
-import { sendSerialData } from "./serialService";
 import { MBConfigTab } from "./MBConfigTab";
 
 export function ConfigDialog({ isOpen, onClose }) {
   const [mainTab, setMainTab] = useState("station");
   const [centerTab, setCenterTab] = useState("overview");
+  const [ws, setWs] = useState(null);
+  const isMounted = useRef(true);
   const [expandedSections, setExpandedSections] = useState({
     stationInfo: true,
     location: false,
     operator: false,
+    thresholds: false,
   });
+
+  // WebSocket connection effect
+  useEffect(() => {
+    isMounted.current = true;
+    let socket = null;
+
+    if (isOpen) {
+      // Fetch saved config
+      fetch("http://localhost:8000/api/config")
+        .then((res) => res.json())
+        .then((savedConfig) => {
+          if (savedConfig && Object.keys(savedConfig).length > 0) {
+            console.log("Loaded config from server:", savedConfig);
+            setConfig((prev) => ({ ...prev, ...savedConfig }));
+          }
+        })
+        .catch((err) => console.error("Failed to load config:", err));
+
+      socket = new WebSocket("ws://localhost:8000/ws");
+
+      socket.onopen = () => {
+        console.log("ConfigDialog connected to WebSocket");
+        if (isMounted.current) setWs(socket);
+      };
+
+      socket.onmessage = (event) => {
+        try {
+          const response = JSON.parse(event.data);
+          console.log("Server response:", response);
+        } catch (e) {
+          console.error("Error parsing response:", e);
+        }
+      };
+
+      socket.onerror = (error) => {
+        console.error("WebSocket error in dialog:", error);
+      };
+    }
+
+    return () => {
+      isMounted.current = false;
+      if (socket) {
+        socket.close();
+      }
+    };
+  }, [isOpen]);
 
   const [config, setConfig] = useState({
     stationId: "PV-001",
@@ -56,12 +104,64 @@ export function ConfigDialog({ isOpen, onClose }) {
     acOutput: "",
     mpptRange: "",
     numMppt: "",
+    // Storage configuration
+    storage: {
+      numBatteries: 1,
+      batteryType: "Lithium-ion",
+      batteryManufacturer: "",
+      batteryModel: "",
+      nominalVoltage: 48,
+      capacity: 100,
+      capacityUnit: "Ah",
+      maxChargeRate: 50,
+      maxDischargeRate: 50,
+      minSoc: 20,
+      maxSoc: 100,
+      temperatureMin: -10,
+      temperatureMax: 45
+    },
+    // Diagnosis thresholds
+    thresholds: {
+      voltage: {
+        pv_min: 150,
+        pv_max: 450,
+        battery_min: 42,
+        battery_max: 58,
+        ac_min: 198,
+        ac_max: 264
+      },
+      current: {
+        max_pv_current: 30,
+        max_battery_current: 100,
+        max_ac_current: 50
+      },
+      power_discrepancy: {
+        max_percentage: 15
+      },
+      temperature: {
+        panel_max: 85,
+        ambient_max: 50,
+        ambient_min: -10
+      },
+      communication: {
+        min_rssi: -90
+      }
+    },
+    // Tab 2 Data linked here
+    assignments: {}, // Map of pointId -> mbId
+    sensors: [], // Extra sensors added in Tab 2
+    mbInventory: [] // Last scanned inventory
   });
 
   if (!isOpen) return null;
 
   const handleChange = (field, value) => {
     setConfig((prev) => ({ ...prev, [field]: value }));
+  };
+
+  // Helper to update nested config for Tab 2
+  const handleTab2Change = (updates) => {
+    setConfig(prev => ({ ...prev, ...updates }));
   };
 
   const toggleSection = (section) => {
@@ -99,13 +199,17 @@ export function ConfigDialog({ isOpen, onClose }) {
     }));
   };
 
-  const handleSave = async () => {
-    try {
-      await sendSerialData(config);
-      alert("Configuration saved and sent to serial port successfully!");
+  const handleSave = () => {
+    if (ws && ws.readyState === WebSocket.OPEN) {
+      const payload = JSON.stringify({
+        command: "save_config",
+        data: config
+      });
+      ws.send(payload);
+      alert("Configuration saved to server successfully!");
       onClose();
-    } catch (error) {
-      alert(`Error: ${error.message}`);
+    } else {
+      alert("Not connected to server. Cannot save.");
     }
   };
 
@@ -253,6 +357,144 @@ export function ConfigDialog({ isOpen, onClose }) {
                   onChange={(v) => handleChange("phone", v)}
                 />
               </AccordionSection>
+
+              <AccordionSection
+                title="Diagnosis Thresholds"
+                isExpanded={expandedSections.thresholds}
+                onToggle={() => toggleSection("thresholds")}
+              >
+                <h5 style={{ marginTop: 0, marginBottom: '10px', fontSize: '13px', color: '#666' }}>Voltage Limits (V)</h5>
+                <div className="input-row">
+                  <InputField
+                    label="PV Min"
+                    type="number"
+                    value={config.thresholds.voltage.pv_min}
+                    onChange={(v) =>
+                      handleChange("thresholds", { ...config.thresholds, voltage: { ...config.thresholds.voltage, pv_min: parseFloat(v) || 0 } })
+                    }
+                  />
+                  <InputField
+                    label="PV Max"
+                    type="number"
+                    value={config.thresholds.voltage.pv_max}
+                    onChange={(v) =>
+                      handleChange("thresholds", { ...config.thresholds, voltage: { ...config.thresholds.voltage, pv_max: parseFloat(v) || 0 } })
+                    }
+                  />
+                </div>
+                <div className="input-row">
+                  <InputField
+                    label="Battery Min"
+                    type="number"
+                    value={config.thresholds.voltage.battery_min}
+                    onChange={(v) =>
+                      handleChange("thresholds", { ...config.thresholds, voltage: { ...config.thresholds.voltage, battery_min: parseFloat(v) || 0 } })
+                    }
+                  />
+                  <InputField
+                    label="Battery Max"
+                    type="number"
+                    value={config.thresholds.voltage.battery_max}
+                    onChange={(v) =>
+                      handleChange("thresholds", { ...config.thresholds, voltage: { ...config.thresholds.voltage, battery_max: parseFloat(v) || 0 } })
+                    }
+                  />
+                </div>
+                <div className="input-row">
+                  <InputField
+                    label="AC Min"
+                    type="number"
+                    value={config.thresholds.voltage.ac_min}
+                    onChange={(v) =>
+                      handleChange("thresholds", { ...config.thresholds, voltage: { ...config.thresholds.voltage, ac_min: parseFloat(v) || 0 } })
+                    }
+                  />
+                  <InputField
+                    label="AC Max"
+                    type="number"
+                    value={config.thresholds.voltage.ac_max}
+                    onChange={(v) =>
+                      handleChange("thresholds", { ...config.thresholds, voltage: { ...config.thresholds.voltage, ac_max: parseFloat(v) || 0 } })
+                    }
+                  />
+                </div>
+
+                <h5 style={{ marginTop: '15px', marginBottom: '10px', fontSize: '13px', color: '#666' }}>Current Limits (A)</h5>
+                <div className="input-row">
+                  <InputField
+                    label="Max PV Current"
+                    type="number"
+                    value={config.thresholds.current.max_pv_current}
+                    onChange={(v) =>
+                      handleChange("thresholds", { ...config.thresholds, current: { ...config.thresholds.current, max_pv_current: parseFloat(v) || 0 } })
+                    }
+                  />
+                  <InputField
+                    label="Max Battery Current"
+                    type="number"
+                    value={config.thresholds.current.max_battery_current}
+                    onChange={(v) =>
+                      handleChange("thresholds", { ...config.thresholds, current: { ...config.thresholds.current, max_battery_current: parseFloat(v) || 0 } })
+                    }
+                  />
+                </div>
+                <InputField
+                  label="Max AC Current (A)"
+                  type="number"
+                  value={config.thresholds.current.max_ac_current}
+                  onChange={(v) =>
+                    handleChange("thresholds", { ...config.thresholds, current: { ...config.thresholds.current, max_ac_current: parseFloat(v) || 0 } })
+                  }
+                />
+
+                <h5 style={{ marginTop: '15px', marginBottom: '10px', fontSize: '13px', color: '#666' }}>Temperature Limits (°C)</h5>
+                <InputField
+                  label="Panel Max Temperature"
+                  type="number"
+                  value={config.thresholds.temperature.panel_max}
+                  onChange={(v) =>
+                    handleChange("thresholds", { ...config.thresholds, temperature: { ...config.thresholds.temperature, panel_max: parseFloat(v) || 0 } })
+                  }
+                />
+                <div className="input-row">
+                  <InputField
+                    label="Ambient Min"
+                    type="number"
+                    value={config.thresholds.temperature.ambient_min}
+                    onChange={(v) =>
+                      handleChange("thresholds", { ...config.thresholds, temperature: { ...config.thresholds.temperature, ambient_min: parseFloat(v) || 0 } })
+                    }
+                  />
+                  <InputField
+                    label="Ambient Max"
+                    type="number"
+                    value={config.thresholds.temperature.ambient_max}
+                    onChange={(v) =>
+                      handleChange("thresholds", { ...config.thresholds, temperature: { ...config.thresholds.temperature, ambient_max: parseFloat(v) || 0 } })
+                    }
+                  />
+                </div>
+
+                <h5 style={{ marginTop: '15px', marginBottom: '10px', fontSize: '13px', color: '#666' }}>Other Thresholds</h5>
+                <InputField
+                  label="Max Power Discrepancy (%)"
+                  type="number"
+                  value={config.thresholds.power_discrepancy.max_percentage}
+                  onChange={(v) =>
+                    handleChange("thresholds", { ...config.thresholds, power_discrepancy: { max_percentage: parseFloat(v) || 0 } })
+                  }
+                  tooltip="Max % difference between sensor and inverter readings"
+                />
+                <InputField
+                  label="Min RSSI (dBm)"
+                  type="number"
+                  value={config.thresholds.communication.min_rssi}
+                  onChange={(v) =>
+                    handleChange("thresholds", { ...config.thresholds, communication: { min_rssi: parseFloat(v) || -90 } })
+                  }
+                  tooltip="Minimum acceptable signal strength"
+                />
+              </AccordionSection>
             </div>
 
             {/* CENTER PANEL - PV System Configuration */}
@@ -289,6 +531,12 @@ export function ConfigDialog({ isOpen, onClose }) {
                   onClick={() => setCenterTab("inverter")}
                 >
                   Inverter
+                </button>
+                <button
+                  className={centerTab === "storage" ? "tab active" : "tab"}
+                  onClick={() => setCenterTab("storage")}
+                >
+                  Storage
                 </button>
               </div>
 
@@ -551,6 +799,126 @@ export function ConfigDialog({ isOpen, onClose }) {
                     />
                   </div>
                 )}
+
+                {centerTab === "storage" && (
+                  <div className="tab-panel">
+                    <h4>Battery/Storage Configuration</h4>
+                    <InputField
+                      label="Number of Batteries"
+                      type="number"
+                      value={config.storage.numBatteries}
+                      onChange={(v) =>
+                        handleChange("storage", { ...config.storage, numBatteries: parseInt(v) || 1 })
+                      }
+                    />
+                    <div className="input-row">
+                      <SelectField
+                        label="Battery Type"
+                        value={config.storage.batteryType}
+                        onChange={(v) =>
+                          handleChange("storage", { ...config.storage, batteryType: v })
+                        }
+                        options={["Lithium-ion", "Lead-acid", "LiFePO4", "Other"]}
+                      />
+                      <InputField
+                        label="Nominal Voltage (V)"
+                        type="number"
+                        value={config.storage.nominalVoltage}
+                        onChange={(v) =>
+                          handleChange("storage", { ...config.storage, nominalVoltage: parseFloat(v) || 48 })
+                        }
+                      />
+                    </div>
+                    <div className="input-row">
+                      <InputField
+                        label="Manufacturer"
+                        value={config.storage.batteryManufacturer}
+                        onChange={(v) =>
+                          handleChange("storage", { ...config.storage, batteryManufacturer: v })
+                        }
+                      />
+                      <InputField
+                        label="Model"
+                        value={config.storage.batteryModel}
+                        onChange={(v) =>
+                          handleChange("storage", { ...config.storage, batteryModel: v })
+                        }
+                      />
+                    </div>
+                    <div className="input-row">
+                      <InputField
+                        label="Capacity"
+                        type="number"
+                        value={config.storage.capacity}
+                        onChange={(v) =>
+                          handleChange("storage", { ...config.storage, capacity: parseFloat(v) || 100 })
+                        }
+                      />
+                      <SelectField
+                        label="Capacity Unit"
+                        value={config.storage.capacityUnit}
+                        onChange={(v) =>
+                          handleChange("storage", { ...config.storage, capacityUnit: v })
+                        }
+                        options={["Ah", "kWh"]}
+                      />
+                    </div>
+                    <div className="input-row">
+                      <InputField
+                        label="Max Charge Rate (A)"
+                        type="number"
+                        value={config.storage.maxChargeRate}
+                        onChange={(v) =>
+                          handleChange("storage", { ...config.storage, maxChargeRate: parseFloat(v) || 50 })
+                        }
+                      />
+                      <InputField
+                        label="Max Discharge Rate (A)"
+                        type="number"
+                        value={config.storage.maxDischargeRate}
+                        onChange={(v) =>
+                          handleChange("storage", { ...config.storage, maxDischargeRate: parseFloat(v) || 50 })
+                        }
+                      />
+                    </div>
+                    <div className="input-row">
+                      <InputField
+                        label="Min SOC (%)"
+                        type="number"
+                        value={config.storage.minSoc}
+                        onChange={(v) =>
+                          handleChange("storage", { ...config.storage, minSoc: parseFloat(v) || 20 })
+                        }
+                      />
+                      <InputField
+                        label="Max SOC (%)"
+                        type="number"
+                        value={config.storage.maxSoc}
+                        onChange={(v) =>
+                          handleChange("storage", { ...config.storage, maxSoc: parseFloat(v) || 100 })
+                        }
+                      />
+                    </div>
+                    <div className="input-row">
+                      <InputField
+                        label="Min Temperature (°C)"
+                        type="number"
+                        value={config.storage.temperatureMin}
+                        onChange={(v) =>
+                          handleChange("storage", { ...config.storage, temperatureMin: parseFloat(v) || -10 })
+                        }
+                      />
+                      <InputField
+                        label="Max Temperature (°C)"
+                        type="number"
+                        value={config.storage.temperatureMax}
+                        onChange={(v) =>
+                          handleChange("storage", { ...config.storage, temperatureMax: parseFloat(v) || 45 })
+                        }
+                      />
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -607,7 +975,7 @@ export function ConfigDialog({ isOpen, onClose }) {
 
         {mainTab === "mbconfig" && (
           <div className="mb-config-wrapper">
-            <MBConfigTab config={config} onConfigChange={handleChange} />
+            <MBConfigTab config={config} onConfigChange={handleTab2Change} />
           </div>
         )}
       </div>

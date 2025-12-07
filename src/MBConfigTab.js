@@ -1,122 +1,345 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import "./MBConfigTab.css";
 
 export function MBConfigTab({ config, onConfigChange }) {
   const [subTab, setSubTab] = useState("layout");
-  const [selectedMB, setSelectedMB] = useState(null);
-  const [selectedPoint, setSelectedPoint] = useState(null);
-  const [draggedMB, setDraggedMB] = useState(null);
+  const [selectedItem, setSelectedItem] = useState(null); // { type: 'mb' | 'point', id: string }
+  const [editSensorId, setEditSensorId] = useState(null);
+  const [tempSensorName, setTempSensorName] = useState("");
+  const [tempSensorCategory, setTempSensorCategory] = useState("other");
 
-  const [mbList, setMbList] = useState([
-    { id: "MB-01", status: "online", assignment: null, signal: 100 },
-    { id: "MB-02", status: "online", assignment: "String 1 Current", signal: 95 },
-    { id: "MB-03", status: "weak", assignment: "Irradiance", signal: 45 },
-    { id: "MB-04", status: "offline", assignment: "Temperature", signal: 0 },
-    { id: "MB-05", status: "online", assignment: null, signal: 88 },
-  ]);
+  // WebSocket Connection State
+  const [ws, setWs] = useState(null);
+  const [connectionStatus, setConnectionStatus] = useState("disconnected");
+  const [stm32Status, setStm32Status] = useState("unknown"); // connected, disconnected
+  const [measurementData, setMeasurementData] = useState(null);
+  const isMounted = useRef(true);
 
-  const [monitoringPoints, setMonitoringPoints] = useState([
-    {
-      id: "point-1",
-      name: "String 1 Current",
-      mbId: "MB-02",
-      type: "DC Current",
-      location: "Array 1 - String 1",
-      expectedRange: { min: 0, max: 10 },
-      units: "A",
-      decimals: 2,
-      alarms: { criticalHigh: 12, warningHigh: 10, warningLow: 0.5, criticalLow: 0 },
-      samplingRate: 1000,
-    },
-    {
-      id: "point-2",
-      name: "String 2 Current",
-      mbId: null,
-      type: "DC Current",
-      location: "Array 1 - String 2",
-      expectedRange: { min: 0, max: 10 },
-      units: "A",
-      decimals: 2,
-      alarms: { criticalHigh: 12, warningHigh: 10, warningLow: 0.5, criticalLow: 0 },
-      samplingRate: 1000,
-    },
-    {
-      id: "point-3",
-      name: "Irradiance Sensor",
-      mbId: "MB-03",
-      type: "Irradiance",
-      location: "Array 1 Center",
-      expectedRange: { min: 0, max: 1200 },
-      units: "W/m²",
-      decimals: 1,
-      alarms: { criticalHigh: 1500, warningHigh: 1200, warningLow: 50, criticalLow: 0 },
-      samplingRate: 5000,
-    },
-  ]);
+  const mbInventory = config.mbInventory || [];
+  // assignments: { pointId: ["MB-01", "MB-02"] }
+  const assignments = config.assignments || {};
+  const sensors = config.sensors || [];
+  const arrays = config.arrays || [];
 
-  const [measurementTypes, setMeasurementTypes] = useState({
-    electrical: [
-      "DC Voltage",
-      "DC Current",
-      "AC Voltage",
-      "AC Current",
-      "AC Power",
-      "Energy",
-      "Power Factor",
-    ],
-    environmental: [
-      "Irradiance",
-      "Module Temperature",
-      "Ambient Temperature",
-      "Humidity",
-      "Wind Speed",
-      "Rainfall",
-    ],
-    performance: ["Performance Ratio", "Efficiency", "Soiling Loss"],
-    custom: [],
-  });
+  const [masterMBList, setMasterMBList] = useState([]);
+  const [selectedMBIds, setSelectedMBIds] = useState([]);
 
-  const handleDragStart = (mb) => {
-    setDraggedMB(mb);
+  const [measurementDelay, setMeasurementDelay] = useState(10);
+  const [isMeasuring, setIsMeasuring] = useState(false);
+  const [isCommandPending, setIsCommandPending] = useState(false);
+
+  // Fetch measurement state from backend on mount
+  useEffect(() => {
+    fetch("http://localhost:8000/api/measurement_state")
+      .then(res => res.json())
+      .then(data => {
+        setIsMeasuring(data.isMeasuring || false);
+      })
+      .catch(err => console.error("Failed to fetch measurement state:", err));
+  }, []);
+
+  // Fetch Master List on Mount
+  useEffect(() => {
+    fetch("http://localhost:8000/api/mb_list")
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data)) {
+          setMasterMBList(data);
+        } else {
+          console.error("Expected array for MB list but got:", data);
+          setMasterMBList([]);
+        }
+        // Initialize selected IDs and Delay based on current config
+        const currentIds = config.mbInventory ? config.mbInventory.map(mb => mb.id) : [];
+        setSelectedMBIds(currentIds);
+        if (config.measurementDelay) {
+          setMeasurementDelay(config.measurementDelay);
+        }
+      })
+      .catch(err => console.error("Failed to fetch MB list:", err));
+  }, [config]); // Re-run if config changes (to load delay)
+
+  // WebSocket Connection
+  useEffect(() => {
+    isMounted.current = true;
+    let socket = new WebSocket("ws://localhost:8000/ws");
+
+    socket.onopen = () => {
+      if (isMounted.current) {
+        console.log("MBConfigTab connected to WebSocket");
+        setConnectionStatus("connected");
+        setWs(socket);
+      }
+    };
+
+    socket.onmessage = (event) => {
+      if (!isMounted.current) return;
+      try {
+        const response = JSON.parse(event.data);
+        if (response.type === "scan_result") {
+          onConfigChange({ mbInventory: response.data });
+          alert(`Scan complete! Found ${response.data.length} devices.`);
+        } else if (response.type === "stm32_status") {
+          setStm32Status(response.status);
+        } else if (response.type === "command_ack") {
+          // Handle Command Confirmation
+          setIsCommandPending(false);
+          if (response.status === "success") {
+            if (response.command === "start") {
+              setIsMeasuring(true);
+              // Save to backend
+              fetch("http://localhost:8000/api/measurement_state", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ isMeasuring: true })
+              });
+              alert("✅ Measurement started successfully!");
+            }
+            if (response.command === "stop") {
+              setIsMeasuring(false);
+              // Save to backend
+              fetch("http://localhost:8000/api/measurement_state", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ isMeasuring: false })
+              });
+              alert("✅ Measurement stopped successfully!");
+            }
+          } else {
+            alert(`❌ Command failed: ${response.message}`);
+          }
+        } else if (response.type === "measurement") {
+          console.log("Received measurement:", response);
+          // New structured format: { type: "measurement", timestamp: "...", data: {MB_ID: {field: value}} }
+          if (response.data) {
+            // Structured data with MB IDs
+            const structuredData = [];
+            for (const [mbId, fields] of Object.entries(response.data)) {
+              structuredData.push({
+                id: mbId,
+                fields: fields,
+                timestamp: response.timestamp
+              });
+            }
+            setMeasurementData(structuredData);
+          } else if (response.values) {
+            // Fallback: Old format with raw values
+            const values = response.values || [];
+            const mappedData = [];
+
+            // Map to MBs first
+            let valIndex = 0;
+            if (config.mbInventory) {
+              config.mbInventory.forEach(mb => {
+                if (valIndex < values.length) {
+                  mappedData.push({
+                    id: mb.id,
+                    type: mb.type,
+                    val: values[valIndex]
+                  });
+                  valIndex++;
+                }
+              });
+            }
+
+            // Then map to Sensors
+            if (config.sensors) {
+              config.sensors.forEach(s => {
+                if (valIndex < values.length) {
+                  mappedData.push({
+                    id: s.id,
+                    type: s.type,
+                    val: values[valIndex]
+                  });
+                  valIndex++;
+                }
+              });
+            }
+
+            setMeasurementData(mappedData);
+          }
+        }
+      } catch (e) {
+        console.error("Error parsing WS message:", e);
+      }
+    };
+
+    socket.onclose = () => {
+      if (isMounted.current) {
+        setConnectionStatus("disconnected");
+        setWs(null);
+      }
+    };
+
+    return () => {
+      isMounted.current = false;
+      if (socket) socket.close();
+    };
+  }, [onConfigChange, config.mbInventory, config.sensors]); // Added config.mbInventory, config.sensors to dependencies
+
+  const toggleMBSelection = (id) => {
+    setSelectedMBIds(prev => {
+      if (prev.includes(id)) {
+        return prev.filter(x => x !== id);
+      } else {
+        return [...prev, id];
+      }
+    });
   };
 
-  const handleDrop = (point) => {
-    if (!draggedMB) return;
-
-    const updatedPoints = monitoringPoints.map((p) =>
-      p.id === point.id ? { ...p, mbId: draggedMB.id } : p
-    );
-    setMonitoringPoints(updatedPoints);
-
-    const updatedMBs = mbList.map((mb) =>
-      mb.id === draggedMB.id ? { ...mb, assignment: point.name } : mb
-    );
-    setMbList(updatedMBs);
-
-    setDraggedMB(null);
+  const handleSaveSelection = () => {
+    fetch("http://localhost:8000/api/mb_selection", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        selected_ids: selectedMBIds,
+        delay: parseInt(measurementDelay) || 10
+      })
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.status === "success") {
+          alert(data.message);
+          // Update local inventory state to reflect selection
+          const newInventory = masterMBList.filter(mb => selectedMBIds.includes(mb.id));
+          onConfigChange({
+            mbInventory: newInventory,
+            measurementDelay: parseInt(measurementDelay) || 10
+          });
+        } else {
+          alert("Error: " + data.message);
+        }
+      })
+      .catch(err => alert("Failed to save selection: " + err));
   };
 
-  const handlePointUpdate = (field, value) => {
-    if (!selectedPoint) return;
-    const updated = monitoringPoints.map((p) =>
-      p.id === selectedPoint.id ? { ...p, [field]: value } : p
-    );
-    setMonitoringPoints(updated);
-    setSelectedPoint({ ...selectedPoint, [field]: value });
+  const handleScan = () => {
+    if (ws && ws.readyState === WebSocket.OPEN) {
+      ws.send(JSON.stringify({ command: "scan" }));
+    } else {
+      alert("WebSocket not connected. Ensure backend is running.");
+    }
   };
 
-  const scanForMBs = () => {
-    alert("Scanning for MBs... (simulated)");
+  const handleStartMeasurement = () => {
+    if (ws && ws.readyState === WebSocket.OPEN) {
+      ws.send(JSON.stringify({ command: "start_measurement" }));
+    }
   };
 
-  const addNewMB = () => {
-    const newId = `MB-${String(mbList.length + 1).padStart(2, "0")}`;
-    setMbList([
-      ...mbList,
-      { id: newId, status: "online", assignment: null, signal: 100 },
-    ]);
+  const handleStopMeasurement = () => {
+    if (ws && ws.readyState === WebSocket.OPEN) {
+      ws.send(JSON.stringify({ command: "stop_measurement" }));
+    }
   };
+
+  // Updated to handle multiple MBs per point
+  const handleAddMBToPoint = (pointId, mbId) => {
+    if (!mbId) return;
+    const currentAssigned = assignments[pointId] || [];
+
+    // Avoid duplicates
+    if (!currentAssigned.includes(mbId)) {
+      const newAssignments = { ...assignments, [pointId]: [...currentAssigned, mbId] };
+      onConfigChange({ assignments: newAssignments });
+    }
+    setSelectedItem({ type: 'mb', id: mbId });
+  };
+
+  const handleRemoveMBFromPoint = (pointId, mbId) => {
+    const currentAssigned = assignments[pointId] || [];
+    const newAssigned = currentAssigned.filter(id => id !== mbId);
+
+    const newAssignments = { ...assignments };
+    if (newAssigned.length === 0) {
+      delete newAssignments[pointId];
+    } else {
+      newAssignments[pointId] = newAssigned;
+    }
+    onConfigChange({ assignments: newAssignments });
+  };
+
+  const handleAddSensor = (arrayId) => {
+    const newSensorId = `sens-${Date.now()}`;
+    const newSensor = {
+      id: newSensorId,
+      name: "New Sensor",
+      arrayId: arrayId,
+      category: "other" // New field: inverter/battery/environmental/other
+    };
+    onConfigChange({ sensors: [...sensors, newSensor] });
+    // Start editing immediately
+    setEditSensorId(newSensorId);
+    setTempSensorName("New Sensor");
+    setTempSensorCategory("other");
+  };
+
+  const handleRenameSensor = (id) => {
+    const updatedSensors = sensors.map(s => s.id === id ? { ...s, name: tempSensorName, category: tempSensorCategory } : s);
+    onConfigChange({ sensors: updatedSensors });
+    setEditSensorId(null);
+  };
+
+  const handleRemoveSensor = (sensorId) => {
+    onConfigChange({ sensors: sensors.filter(s => s.id !== sensorId) });
+    if (assignments[sensorId]) {
+      const newAssignments = { ...assignments };
+      delete newAssignments[sensorId];
+      onConfigChange({ assignments: newAssignments });
+    }
+  };
+
+  // Check if MB is assigned anywhere (to filter dropdowns)
+  const getAvailableMBs = () => {
+    // Flatten all assigned MBs
+    const allAssigned = Object.values(assignments).flat();
+    return mbInventory.filter(mb => !allAssigned.includes(mb.id));
+  };
+
+  const getDetailData = () => {
+    if (!selectedItem) return null;
+
+    if (selectedItem.type === 'mb') {
+      const mb = mbInventory.find(m => m.id === selectedItem.id);
+      if (!mb) return null;
+
+      // Find assignment
+      let locationName = "Unassigned";
+      const foundEntry = Object.entries(assignments).find(([_, mbIds]) => mbIds.includes(mb.id));
+
+      if (foundEntry) {
+        const [pointId] = foundEntry;
+        // Search arrays/strings
+        for (const arr of arrays) {
+          const numStrings = parseInt(config.stringsPerArray || 1);
+          for (let i = 1; i <= numStrings; i++) {
+            if (`arr-${arr.id}-str-${i}` === pointId) {
+              locationName = `Array ${arr.id} - String ${i}`;
+              break;
+            }
+          }
+        }
+        // Search sensors
+        const sens = sensors.find(s => s.id === pointId);
+        if (sens) locationName = `Array ${sens.arrayId} - ${sens.name}`;
+      }
+
+      return {
+        title: `MB Details: ${mb.id}`,
+        rows: [
+          { label: "Status", value: mb.status, type: "status" },
+          { label: "Type", value: mb.type },
+          { label: "Signal", value: `${mb.signal}%` },
+          { label: "Assignment", value: locationName }
+        ]
+      };
+    }
+    return null;
+  };
+
+  const details = getDetailData();
+  const availableMBs = getAvailableMBs();
 
   return (
     <div className="mb-config-container">
@@ -145,305 +368,245 @@ export function MBConfigTab({ config, onConfigChange }) {
         >
           Data Processing
         </button>
-        <button
-          className={subTab === "communication" ? "sub-tab active" : "sub-tab"}
-          onClick={() => setSubTab("communication")}
-        >
-          Communication Settings
-        </button>
       </div>
 
       {subTab === "layout" && (
         <div className="mb-three-panel">
           {/* LEFT PANEL - MB Inventory */}
           <div className="mb-left-panel">
-            <h3>📦 MB Inventory</h3>
+            <div className="panel-header">
+              <h3>📦 MB Inventory</h3>
+              <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                <span
+                  title={`STM32 Status: ${stm32Status}`}
+                  style={{
+                    padding: '2px 8px',
+                    borderRadius: '12px',
+                    fontSize: '0.75rem',
+                    backgroundColor: stm32Status === 'connected' ? '#e8f5e9' : '#ffebee',
+                    color: stm32Status === 'connected' ? '#2e7d32' : '#c62828',
+                    border: `1px solid ${stm32Status === 'connected' ? '#a5d6a7' : '#ef9a9a'}`
+                  }}
+                >
+                  STM32: {stm32Status}
+                </span>
+                <div className={`connection-dot ${connectionStatus}`} title={`Server: ${connectionStatus}`}></div>
+              </div>
+            </div>
+
             <div className="mb-actions">
-              <button className="btn-primary" onClick={addNewMB}>
-                + Add MB
-              </button>
-              <button className="btn-secondary" onClick={scanForMBs}>
-                🔍 Scan
+              <div style={{ marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px', background: '#f8f9fa', padding: '8px', borderRadius: '4px', border: '1px solid #eee' }}>
+                <label style={{ fontSize: '12px', color: '#555' }}>Sampling Interval (s):</label>
+                <input
+                  type="number"
+                  value={measurementDelay}
+                  onChange={(e) => setMeasurementDelay(e.target.value)}
+                  style={{ width: '50px', padding: '4px', border: '1px solid #ccc', borderRadius: '3px' }}
+                  min="1"
+                />
+              </div>
+              <button className="btn-primary full-width" onClick={handleSaveSelection}>
+                💾 Save Selection & Gen Config
               </button>
             </div>
 
-            <div className="mb-list">
-              {mbList.map((mb) => (
+            <div className="mb-inventory-list">
+              {masterMBList.length === 0 && <p className="empty-text">Loading MB List...</p>}
+              {masterMBList.map((mb) => (
                 <div
                   key={mb.id}
-                  className={`mb-item ${mb.status} ${selectedMB?.id === mb.id ? "selected" : ""}`}
-                  draggable
-                  onDragStart={() => handleDragStart(mb)}
-                  onClick={() => setSelectedMB(mb)}
+                  className={`mb-inventory-item small ${selectedItem?.id === mb.id ? "selected" : ""}`}
+                  onClick={() => setSelectedItem({ type: 'mb', id: mb.id })}
                 >
-                  <div className="mb-header">
-                    <strong>{mb.id}</strong>
-                    <StatusIcon status={mb.status} />
+                  <div className="mb-row-main">
+                    <input
+                      type="checkbox"
+                      checked={selectedMBIds.includes(mb.id)}
+                      onChange={(e) => { e.stopPropagation(); toggleMBSelection(mb.id); }}
+                      style={{ marginRight: '8px' }}
+                    />
+                    <span className="mb-id">{mb.id}</span>
+                    <span
+                      className="status-dot"
+                      style={{ backgroundColor: mb.online ? '#4CAF50' : '#ccc' }}
+                      title={mb.online ? "Online" : "Offline"}
+                    ></span>
                   </div>
-                  <div className="mb-details">
-                    <div className="signal-bar">
-                      <div
-                        className="signal-fill"
-                        style={{ width: `${mb.signal}%` }}
-                      />
-                    </div>
-                    <div className="mb-assignment">
-                      {mb.assignment || "Unassigned"}
-                    </div>
+                  <div className="mb-type-mini" style={{ fontSize: '0.75em', color: '#666', marginLeft: '24px' }}>
+                    {mb.type}
                   </div>
                 </div>
               ))}
             </div>
-
-            <div className="mb-quick-actions">
-              <h4>Quick Actions</h4>
-              <button
-                className="action-btn"
-                disabled={!selectedMB}
-                onClick={() => alert(`Testing ${selectedMB?.id}`)}
-              >
-                🔧 Test Selected
-              </button>
-              <button
-                className="action-btn"
-                disabled={!selectedMB}
-                onClick={() => alert(`Calibrating ${selectedMB?.id}`)}
-              >
-                📐 Calibrate
-              </button>
-              <button
-                className="action-btn"
-                disabled={!selectedMB}
-                onClick={() => alert(`Viewing logs for ${selectedMB?.id}`)}
-              >
-                📄 View Logs
-              </button>
-              <button
-                className="action-btn"
-                disabled={!selectedMB}
-                onClick={() => alert(`Configuring LoRa for ${selectedMB?.id}`)}
-              >
-                📡 Configure LoRa
-              </button>
-            </div>
           </div>
 
-          {/* CENTER PANEL - Visual PV Layout */}
+          {/* CENTER PANEL - PV System Assignment */}
           <div className="mb-center-panel">
-            <h3>⚡ PV System Monitoring Map</h3>
-            <div className="pv-layout">
-              <div className="array-container">
-                <div className="array-title">ARRAY 1</div>
-                <div className="strings-row">
-                  {monitoringPoints
-                    .filter((p) => p.type === "DC Current")
-                    .map((point) => (
-                      <div
-                        key={point.id}
-                        className={`monitoring-point ${point.mbId ? "assigned" : "empty"} ${
-                          selectedPoint?.id === point.id ? "selected" : ""
-                        }`}
-                        onDragOver={(e) => e.preventDefault()}
-                        onDrop={() => handleDrop(point)}
-                        onClick={() => setSelectedPoint(point)}
-                      >
-                        <div className="point-title">{point.name}</div>
-                        {point.mbId ? (
-                          <div className="assigned-mb">
-                            <span className="mb-badge">{point.mbId}</span>
-                            <span className="mb-icon">⚡</span>
-                          </div>
-                        ) : (
-                          <div className="drop-zone">Drop MB here</div>
-                        )}
-                        <div className="point-type">{point.type}</div>
-                      </div>
-                    ))}
-                </div>
+            <div className="panel-header">
+              <h3>⚡ System Assignment</h3>
+            </div>
 
-                <div className="environmental-sensors">
-                  {monitoringPoints
-                    .filter((p) => p.type === "Irradiance")
-                    .map((point) => (
-                      <div
-                        key={point.id}
-                        className={`monitoring-point environmental ${
-                          point.mbId ? "assigned" : "empty"
-                        } ${selectedPoint?.id === point.id ? "selected" : ""}`}
-                        onDragOver={(e) => e.preventDefault()}
-                        onDrop={() => handleDrop(point)}
-                        onClick={() => setSelectedPoint(point)}
-                      >
-                        <div className="point-title">{point.name}</div>
-                        {point.mbId ? (
-                          <div className="assigned-mb">
-                            <span className="mb-badge">{point.mbId}</span>
-                            <span className="mb-icon">☀️</span>
-                          </div>
-                        ) : (
-                          <div className="drop-zone">Drop MB here</div>
-                        )}
-                        <div className="point-type">{point.type}</div>
-                      </div>
-                    ))}
-                </div>
-              </div>
+            <div className="system-tree">
+              {arrays.length === 0 && <p className="empty-text">No arrays defined in Tab 1.</p>}
+              {arrays.map((array, idx) => {
+                const numStrings = parseInt(config.stringsPerArray || 1);
+                const stringIndices = Array.from({ length: numStrings }, (_, i) => i + 1);
 
-              <div className="drag-hint">
-                💡 <strong>Drag MBs</strong> from the left panel to monitoring
-                points to assign
-              </div>
+                return (
+                  <div key={array.id} className="array-group">
+                    <div className="array-header">
+                      <span>Array {idx + 1} (ID: {array.id})</span>
+                      <button className="add-sensor-btn" onClick={() => handleAddSensor(array.id)}>+ Sensor</button>
+                    </div>
+
+                    <div className="string-list">
+                      {stringIndices.map(strIndex => {
+                        const pointId = `arr-${array.id}-str-${strIndex}`;
+                        const assignedMBs = assignments[pointId] || [];
+
+                        return (
+                          <div key={pointId} className="string-block">
+                            <div className="string-row-header">
+                              <div className="string-label">
+                                <span className="icon">⚡</span> String {strIndex}
+                              </div>
+                              <select
+                                className="mb-select-add"
+                                value=""
+                                onChange={(e) => handleAddMBToPoint(pointId, e.target.value)}
+                              >
+                                <option value="">+ Add MB</option>
+                                {availableMBs.map(mb => (
+                                  <option key={mb.id} value={mb.id}>{mb.id}</option>
+                                ))}
+                              </select>
+                            </div>
+                            {assignedMBs.length > 0 && (
+                              <div className="assigned-mbs-list">
+                                {assignedMBs.map(mbId => (
+                                  <div key={mbId} className="assigned-mb-tag">
+                                    {mbId}
+                                    <span className="remove-x" onClick={() => handleRemoveMBFromPoint(pointId, mbId)}>×</span>
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        )
+                      })}
+
+                      {sensors.filter(s => s.arrayId === array.id).map(sens => (
+                        <div key={sens.id} className="string-block sensor">
+                          <div className="string-row-header">
+                            <div className="string-label">
+                              <span className="icon">📡</span>
+                              {editSensorId === sens.id ? (
+                                <div>
+                                  <input
+                                    type="text"
+                                    className="rename-input"
+                                    value={tempSensorName}
+                                    onChange={(e) => setTempSensorName(e.target.value)}
+                                    onKeyDown={(e) => e.key === 'Enter' && handleRenameSensor(sens.id)}
+                                    autoFocus
+                                    style={{ marginBottom: '5px' }}
+                                  />
+                                  <div style={{ marginTop: '5px', display: 'flex', gap: '8px' }}>
+                                    <select
+                                      value={tempSensorCategory}
+                                      onChange={(e) => setTempSensorCategory(e.target.value)}
+                                      style={{ padding: '4px', borderRadius: '4px', border: '1px solid #ccc', flex: 1 }}
+                                    >
+                                      <option value="inverter">Inverter</option>
+                                      <option value="battery">Battery</option>
+                                      <option value="environmental">Environmental</option>
+                                      <option value="other">Other</option>
+                                    </select>
+                                    <button onClick={() => handleRenameSensor(sens.id)} style={{ padding: '4px 12px', cursor: 'pointer' }}>✓ Save</button>
+                                    <button onClick={() => setEditSensorId(null)} style={{ padding: '4px 12px', cursor: 'pointer' }}>✕ Cancel</button>
+                                  </div>
+                                </div>
+                              ) : (
+                                <span onDoubleClick={() => { setEditSensorId(sens.id); setTempSensorName(sens.name); setTempSensorCategory(sens.category || 'other'); }} title="Double click to rename">
+                                  {sens.name} ({sens.category || 'other'}) <span className="edit-pencil" onClick={() => { setEditSensorId(sens.id); setTempSensorName(sens.name); setTempSensorCategory(sens.category || 'other'); }}>✎</span>
+                                </span>
+                              )}
+                              <button className="remove-mini-btn" onClick={() => handleRemoveSensor(sens.id)}>✕</button>
+                            </div>
+                            <select
+                              className="mb-select-add"
+                              value=""
+                              onChange={(e) => handleAddMBToPoint(sens.id, e.target.value)}
+                            >
+                              <option value="">+ Add MB</option>
+                              {availableMBs.map(mb => (
+                                <option key={mb.id} value={mb.id}>{mb.id}</option>
+                              ))}
+                            </select>
+                          </div>
+                          {(assignments[sens.id] || []).length > 0 && (
+                            <div className="assigned-mbs-list">
+                              {(assignments[sens.id] || []).map(mbId => (
+                                <div key={mbId} className="assigned-mb-tag">
+                                  {mbId}
+                                  <span className="remove-x" onClick={() => handleRemoveMBFromPoint(sens.id, mbId)}>×</span>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )
+              })}
             </div>
           </div>
 
-          {/* RIGHT PANEL - Monitoring Point Configuration */}
+          {/* RIGHT PANEL - Details */}
           <div className="mb-right-panel">
-            <h3>⚙️ Monitoring Point Config</h3>
-            {selectedPoint ? (
-              <div className="point-config">
-                <h4>Selected: {selectedPoint.name}</h4>
-
-                <div className="config-section">
-                  <h5>Basic Configuration</h5>
-                  <InputField
-                    label="Point Name"
-                    value={selectedPoint.name}
-                    onChange={(v) => handlePointUpdate("name", v)}
-                  />
-                  <SelectField
-                    label="MB Assignment"
-                    value={selectedPoint.mbId || ""}
-                    onChange={(v) => handlePointUpdate("mbId", v)}
-                    options={["", ...mbList.map((mb) => mb.id)]}
-                  />
-                  <SelectField
-                    label="Measurement Type"
-                    value={selectedPoint.type}
-                    onChange={(v) => handlePointUpdate("type", v)}
-                    options={[
-                      ...measurementTypes.electrical,
-                      ...measurementTypes.environmental,
-                    ]}
-                  />
-                  <InputField
-                    label="Physical Location"
-                    value={selectedPoint.location}
-                    onChange={(v) => handlePointUpdate("location", v)}
-                  />
-                </div>
-
-                <div className="config-section">
-                  <h5>Measurement Parameters</h5>
-                  <div className="input-row">
-                    <InputField
-                      label="Min Range"
-                      type="number"
-                      value={selectedPoint.expectedRange.min}
-                      onChange={(v) =>
-                        handlePointUpdate("expectedRange", {
-                          ...selectedPoint.expectedRange,
-                          min: v,
-                        })
-                      }
-                    />
-                    <InputField
-                      label="Max Range"
-                      type="number"
-                      value={selectedPoint.expectedRange.max}
-                      onChange={(v) =>
-                        handlePointUpdate("expectedRange", {
-                          ...selectedPoint.expectedRange,
-                          max: v,
-                        })
-                      }
-                    />
-                  </div>
-                  <div className="input-row">
-                    <InputField
-                      label="Units"
-                      value={selectedPoint.units}
-                      onChange={(v) => handlePointUpdate("units", v)}
-                    />
-                    <InputField
-                      label="Decimal Places"
-                      type="number"
-                      value={selectedPoint.decimals}
-                      onChange={(v) => handlePointUpdate("decimals", v)}
-                    />
-                  </div>
-                </div>
-
-                <div className="config-section">
-                  <h5>Alarm Thresholds</h5>
-                  <InputField
-                    label="Critical High"
-                    type="number"
-                    value={selectedPoint.alarms.criticalHigh}
-                    onChange={(v) =>
-                      handlePointUpdate("alarms", {
-                        ...selectedPoint.alarms,
-                        criticalHigh: v,
-                      })
-                    }
-                  />
-                  <InputField
-                    label="Warning High"
-                    type="number"
-                    value={selectedPoint.alarms.warningHigh}
-                    onChange={(v) =>
-                      handlePointUpdate("alarms", {
-                        ...selectedPoint.alarms,
-                        warningHigh: v,
-                      })
-                    }
-                  />
-                  <InputField
-                    label="Warning Low"
-                    type="number"
-                    value={selectedPoint.alarms.warningLow}
-                    onChange={(v) =>
-                      handlePointUpdate("alarms", {
-                        ...selectedPoint.alarms,
-                        warningLow: v,
-                      })
-                    }
-                  />
-                  <InputField
-                    label="Critical Low"
-                    type="number"
-                    value={selectedPoint.alarms.criticalLow}
-                    onChange={(v) =>
-                      handlePointUpdate("alarms", {
-                        ...selectedPoint.alarms,
-                        criticalLow: v,
-                      })
-                    }
-                  />
-                </div>
-
-                <div className="config-section">
-                  <h5>Data Processing</h5>
-                  <InputField
-                    label="Sampling Rate (ms)"
-                    type="number"
-                    value={selectedPoint.samplingRate}
-                    onChange={(v) => handlePointUpdate("samplingRate", v)}
-                  />
+            <h3>📝 Details</h3>
+            {details ? (
+              <div className="details-card">
+                <h4>{details.title}</h4>
+                <div className="details-grid">
+                  {details.rows.map((row, i) => (
+                    <div key={i} className="detail-row">
+                      <label>{row.label}</label>
+                      {row.type === "status" ? (
+                        <span className={`status-badge ${row.value}`}>{row.value}</span>
+                      ) : row.type === "status-bool" ? (
+                        <span className={`status-badge ${row.raw ? "online" : "offline"}`} style={{ backgroundColor: row.raw ? '#4CAF50' : '#ccc' }}>
+                          {row.value}
+                        </span>
+                      ) : (
+                        <span>{row.value}</span>
+                      )}
+                    </div>
+                  ))}
                 </div>
               </div>
             ) : (
               <div className="no-selection">
-                <p>👈 Select a monitoring point from the diagram</p>
+                <p>Select an MB from the inventory to view details.</p>
               </div>
             )}
           </div>
         </div>
       )}
 
-      {subTab === "measurements" && <MeasurementTypesPanel types={measurementTypes} />}
+
+
+      {subTab === "measurements" && (
+        <MeasurementTypesPanel
+          onStart={handleStartMeasurement}
+          onStop={handleStopMeasurement}
+          data={measurementData}
+          isMeasuring={isMeasuring}
+        />
+      )}
       {subTab === "alarms" && <AlarmConfigPanel />}
       {subTab === "processing" && <DataProcessingPanel />}
-      {subTab === "communication" && <CommunicationPanel />}
     </div>
   );
 }
@@ -453,136 +616,85 @@ MBConfigTab.propTypes = {
   onConfigChange: PropTypes.func.isRequired,
 };
 
-function StatusIcon({ status }) {
-  const icons = {
-    online: "✓",
-    weak: "⚠",
-    offline: "✖",
-  };
-  return <span className={`status-icon ${status}`}>{icons[status]}</span>;
-}
+// --- Subcomponents ---
 
-StatusIcon.propTypes = {
-  status: PropTypes.string.isRequired,
-};
-
-function InputField({ label, value, onChange, type = "text" }) {
-  return (
-    <div className="config-input">
-      <label>{label}</label>
-      <input type={type} value={value} onChange={(e) => onChange(e.target.value)} />
-    </div>
-  );
-}
-
-InputField.propTypes = {
-  label: PropTypes.string.isRequired,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  onChange: PropTypes.func.isRequired,
-  type: PropTypes.string,
-};
-
-InputField.defaultProps = {
-  type: "text",
-};
-
-function SelectField({ label, value, onChange, options }) {
-  return (
-    <div className="config-input">
-      <label>{label}</label>
-      <select value={value} onChange={(e) => onChange(e.target.value)}>
-        {options.map((opt) => (
-          <option key={opt} value={opt}>
-            {opt || "-- None --"}
-          </option>
-        ))}
-      </select>
-    </div>
-  );
-}
-
-SelectField.propTypes = {
-  label: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-  options: PropTypes.arrayOf(PropTypes.string).isRequired,
-};
-
-function MeasurementTypesPanel({ types }) {
+function MeasurementTypesPanel({ onStart, onStop, data, isMeasuring, isPending }) {
   return (
     <div className="sub-panel">
-      <h3>📊 Measurement Types</h3>
-      <div className="measurement-categories">
-        <div className="category-card">
-          <h4>⚡ Electrical Parameters</h4>
-          <ul>
-            {types.electrical.map((type) => (
-              <li key={type}>{type}</li>
-            ))}
-          </ul>
-        </div>
-        <div className="category-card">
-          <h4>🌤️ Environmental Sensors</h4>
-          <ul>
-            {types.environmental.map((type) => (
-              <li key={type}>{type}</li>
-            ))}
-          </ul>
-        </div>
-        <div className="category-card">
-          <h4>📈 System Performance</h4>
-          <ul>
-            {types.performance.map((type) => (
-              <li key={type}>{type}</li>
-            ))}
-          </ul>
-        </div>
-        <div className="category-card">
-          <h4>🔧 Custom Types</h4>
-          <button className="btn-primary">+ Add Custom Type</button>
+      <div className="panel-header">
+        <h3>📊 Measurement & Live Data</h3>
+        <div className="controls-row">
+          <button
+            className={isMeasuring ? "btn-success" : "btn-disabled"}
+            onClick={!isMeasuring && !isPending ? onStart : null}
+            disabled={isMeasuring || isPending}
+            style={{ opacity: isPending ? 0.7 : 1 }}
+          >
+            {isPending && !isMeasuring ? "⏳ Starting..." : isMeasuring ? "✓ Running" : "▶ Start Measurement"}
+          </button>
+
+          <button
+            className={isMeasuring ? "btn-danger" : "btn-disabled"}
+            onClick={isMeasuring && !isPending ? onStop : null}
+            disabled={!isMeasuring || isPending}
+            style={{ opacity: isPending ? 0.7 : 1 }}
+          >
+            {isPending && isMeasuring ? "⏳ Stopping..." : isMeasuring ? "⏹ Stop Measurement" : "⏹ Stopped"}
+          </button>
         </div>
       </div>
+
+      {data && data.length > 0 ? (
+        <div className="live-data-grid">
+          {data.map((d, i) => (
+            <div key={i} className="live-data-card">
+              <div className="card-header">
+                <strong>{d.id}</strong>
+                {d.timestamp && <span className="data-timestamp" style={{ fontSize: '0.7em', color: '#666' }}>{d.timestamp}</span>}
+              </div>
+              {d.fields ? (
+                // Structured data with field names
+                <div className="card-fields">
+                  {Object.entries(d.fields).map(([fieldName, value]) => (
+                    <div key={fieldName} className="field-row" style={{ display: 'flex', justifyContent: 'space-between', padding: '4px 0', borderBottom: '1px solid #eee' }}>
+                      <span style={{ color: '#666', fontSize: '0.85em' }}>{fieldName}:</span>
+                      <span style={{ fontWeight: 'bold', color: value === 'NaN' || value === 'nan' ? '#e57373' : 'inherit' }}>
+                        {value === 'NaN' || value === 'nan' ? '--' : (typeof value === 'number' ? value.toFixed(2) : value)}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                // Fallback: single value display
+                <div className="card-value">
+                  {d.val !== undefined ? Number(d.val).toFixed(2) : "--"}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="empty-state">
+          <p>No Data</p>
+        </div>
+      )}
     </div>
   );
 }
 
 MeasurementTypesPanel.propTypes = {
-  types: PropTypes.object.isRequired,
+  onStart: PropTypes.func.isRequired,
+  onStop: PropTypes.func.isRequired,
+  data: PropTypes.array,
+  delay: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  onDelayChange: PropTypes.func
 };
 
 function AlarmConfigPanel() {
   return (
     <div className="sub-panel">
       <h3>🚨 Alarm Configuration</h3>
-      <div className="alarm-sections">
-        <div className="alarm-card">
-          <h4>Alarm Rules</h4>
-          <ul>
-            <li>✓ Threshold alarms</li>
-            <li>✓ Rate-of-change detection</li>
-            <li>✓ Communication loss</li>
-            <li>✓ Data quality alerts</li>
-          </ul>
-        </div>
-        <div className="alarm-card">
-          <h4>Notification Settings</h4>
-          <label>
-            <input type="checkbox" /> Email alerts
-          </label>
-          <label>
-            <input type="checkbox" /> SMS notifications
-          </label>
-          <label>
-            <input type="checkbox" /> Dashboard warnings
-          </label>
-        </div>
-        <div className="alarm-card">
-          <h4>Alarm History</h4>
-          <p>Active alarms: 2</p>
-          <p>Last 24h: 15 alarms</p>
-          <button className="btn-secondary">View Full History</button>
-        </div>
-      </div>
+      <p>Alarm settings go here...</p>
     </div>
   );
 }
@@ -591,82 +703,7 @@ function DataProcessingPanel() {
   return (
     <div className="sub-panel">
       <h3>⚙️ Data Processing</h3>
-      <div className="processing-grid">
-        <div className="processing-card">
-          <h4>Sampling Strategy</h4>
-          <select>
-            <option>Fixed interval</option>
-            <option>Event-based</option>
-            <option>Adaptive</option>
-            <option>Burst</option>
-          </select>
-        </div>
-        <div className="processing-card">
-          <h4>Data Quality</h4>
-          <label>
-            <input type="checkbox" defaultChecked /> Range checking
-          </label>
-          <label>
-            <input type="checkbox" defaultChecked /> Spike detection
-          </label>
-          <label>
-            <input type="checkbox" /> Gap handling
-          </label>
-        </div>
-        <div className="processing-card">
-          <h4>Aggregation</h4>
-          <label>
-            <input type="checkbox" defaultChecked /> Calculate averages
-          </label>
-          <label>
-            <input type="checkbox" /> Track min/max
-          </label>
-          <label>
-            <input type="checkbox" /> Statistical analysis
-          </label>
-        </div>
-        <div className="processing-card">
-          <h4>Storage Optimization</h4>
-          <label>
-            <input type="checkbox" /> Data compression
-          </label>
-          <label>
-            <input type="checkbox" /> Auto-archiving
-          </label>
-          <InputField label="Retention (days)" value="365" onChange={() => {}} />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function CommunicationPanel() {
-  return (
-    <div className="sub-panel">
-      <h3>📡 Communication Settings</h3>
-      <div className="comm-settings">
-        <div className="comm-card">
-          <h4>LoRa Configuration</h4>
-          <InputField label="Frequency (MHz)" value="915" onChange={() => {}} />
-          <InputField label="Bandwidth (kHz)" value="125" onChange={() => {}} />
-          <InputField label="Spreading Factor" value="7" onChange={() => {}} />
-          <InputField label="Tx Power (dBm)" value="14" onChange={() => {}} />
-        </div>
-        <div className="comm-card">
-          <h4>Network Settings</h4>
-          <InputField label="Network ID" value="0x01" onChange={() => {}} />
-          <InputField label="Encryption Key" type="password" value="****" onChange={() => {}} />
-          <label>
-            <input type="checkbox" defaultChecked /> Auto-retry on failure
-          </label>
-        </div>
-        <div className="comm-card">
-          <h4>Traffic Statistics</h4>
-          <p>Estimated daily messages: ~1440</p>
-          <p>LoRa airtime: 12.5%</p>
-          <p>Battery impact: Low</p>
-        </div>
-      </div>
+      <p>Data processing settings go here...</p>
     </div>
   );
 }

@@ -128,6 +128,7 @@ function Header({ user }) {
         <h1 className="app-title">SensaGrid</h1>
       </div>
       <div className="header-right">
+        <AlertBadge />
         <span className="datetime">{datetime}</span>
         <div className="user-badge">
           <span className="user-icon">
@@ -137,6 +138,63 @@ function Header({ user }) {
         </div>
       </div>
     </header>
+  );
+}
+
+// Alert Badge Component
+function AlertBadge() {
+  const [unreadCount, setUnreadCount] = useState(0);
+
+  useEffect(() => {
+    const fetchCount = async () => {
+      try {
+        const response = await fetch('http://localhost:8000/api/alerts/unread');
+        const data = await response.json();
+        setUnreadCount(data.count);
+      } catch (error) {
+        console.error('Error fetching unread count:', error);
+      }
+    };
+
+    fetchCount();
+    const interval = setInterval(fetchCount, 10000); // Refresh every 10s
+    return () => clearInterval(interval);
+  }, []);
+
+  if (unreadCount === 0) return null;
+
+  return (
+    <div
+      className="alert-badge"
+      style={{
+        position: 'relative',
+        marginRight: '15px',
+        cursor: 'pointer'
+      }}
+      title={`${unreadCount} unread alert${unreadCount > 1 ? 's' : ''}`}
+    >
+      <span style={{ fontSize: '1.2rem' }}>🔔</span>
+      <span
+        className="alert-count"
+        style={{
+          position: 'absolute',
+          top: '-5px',
+          right: '-8px',
+          background: '#dc2626',
+          color: 'white',
+          borderRadius: '50%',
+          width: '18px',
+          height: '18px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: '0.7rem',
+          fontWeight: 'bold'
+        }}
+      >
+        {unreadCount > 9 ? '9+' : unreadCount}
+      </span>
+    </div>
   );
 }
 

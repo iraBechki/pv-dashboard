@@ -5,15 +5,15 @@
   "installationDate": "",
   "siteName": "",
   "address": "",
-  "latitude": "",
-  "longitude": "",
+  "latitude": "36.72615 ",
+  "longitude": "3.18291",
   "elevation": "",
   "operatorName": "",
   "organization": "",
   "contactEmail": "",
   "phone": "",
   "systemType": "Grid-tied",
-  "totalCapacity": "33",
+  "totalCapacity": "5",
   "commissioningDate": "",
   "numArrays": 1,
   "arrays": [
@@ -47,8 +47,230 @@
   "maxDcCurrent": "80",
   "acOutput": "",
   "mpptRange": "",
-  "numMppt": "",
-  "assignments": {},
-  "sensors": [],
-  "mbInventory": []
+  "numMppt": "2",
+  "storage": {
+    "numBatteries": 8,
+    "batteryType": "Lithium-ion",
+    "batteryManufacturer": "",
+    "batteryModel": "",
+    "nominalVoltage": 48,
+    "capacity": 200,
+    "capacityUnit": "Ah",
+    "maxChargeRate": 50,
+    "maxDischargeRate": 50,
+    "minSoc": 20,
+    "maxSoc": 100,
+    "temperatureMin": -10,
+    "temperatureMax": 45
+  },
+  "thresholds": {
+    "voltage": {
+      "pv_min": 150,
+      "pv_max": 450,
+      "battery_min": 42,
+      "battery_max": 58,
+      "ac_min": 198,
+      "ac_max": 264
+    },
+    "current": {
+      "max_pv_current": 30,
+      "max_battery_current": 100,
+      "max_ac_current": 50
+    },
+    "power_discrepancy": {
+      "max_percentage": 15
+    },
+    "temperature": {
+      "panel_max": 85,
+      "ambient_max": 50,
+      "ambient_min": -10
+    },
+    "communication": {
+      "min_rssi": -90
+    }
+  },
+  "assignments": {
+    "arr-1-str-1": [
+      "VD1",
+      "ID1"
+    ],
+    "sens-1764509384289": [
+      "IA1",
+      "VA1"
+    ],
+    "sens-1764509436240": [
+      "ID3",
+      "VD3"
+    ],
+    "sens-1764509458592": [
+      "WS"
+    ],
+    "arr-1-str-2": [
+      "VD2",
+      "ID2"
+    ]
+  },
+  "sensors": [
+    {
+      "id": "sens-1764509384289",
+      "name": "",
+      "arrayId": 1,
+      "type": "Irradiance",
+      "category": "inverter"
+    },
+    {
+      "id": "sens-1764509436240",
+      "name": "",
+      "arrayId": 1,
+      "type": "Irradiance",
+      "category": "battery"
+    },
+    {
+      "id": "sens-1764509458592",
+      "name": "",
+      "arrayId": 1,
+      "type": "Irradiance",
+      "category": "environmental"
+    }
+  ],
+  "mbInventory": [
+    {
+      "id": "ID1",
+      "type": "Courant DC",
+      "range": "0-30A",
+      "Voltage divider gain": null,
+      "Input pin": "PA0",
+      "online": false,
+      "Firmware version": 1,
+      "config": [
+        "I1D",
+        "T_m",
+        "BattS",
+        "Rssi"
+      ]
+    },
+    {
+      "id": "ID2",
+      "type": "Courant DC",
+      "range": "0-30A",
+      "Voltage divider gain": null,
+      "Input pin": "PA0",
+      "online": false,
+      "Firmware version": 1,
+      "config": [
+        "I2D",
+        "BattS",
+        "Rssi"
+      ]
+    },
+    {
+      "id": "ID3",
+      "type": "Courant DC",
+      "range": "-50-50A",
+      "Voltage divider gain": null,
+      "Input pin": "PA0",
+      "online": false,
+      "Firmware version": 1,
+      "config": [
+        "I3D",
+        "BattS",
+        "Rssi"
+      ]
+    },
+    {
+      "id": "VD1",
+      "type": "Tension DC",
+      "range": "0-260V",
+      "Voltage divider gain": 78.8,
+      "Voltage divider R1": "1M",
+      "Voltage divider R2": "12.8K",
+      "Input pin": "PA0",
+      "online": false,
+      "Firmware version": 1,
+      "config": [
+        "V1D",
+        "BattS",
+        "Rssi"
+      ]
+    },
+    {
+      "id": "VD2",
+      "type": "Tension DC",
+      "range": "0-260V",
+      "Voltage divider gain": 78.8,
+      "Voltage divider R1": "1M",
+      "Voltage divider R2": "12.8K",
+      "Input pin": "PA0",
+      "online": false,
+      "Firmware version": 1,
+      "config": [
+        "V2D",
+        "BattS",
+        "Rssi"
+      ]
+    },
+    {
+      "id": "VD3",
+      "type": "Tension DC",
+      "range": "0-260V",
+      "Voltage divider gain": 78.8,
+      "Voltage divider R1": "1M",
+      "Voltage divider R2": "12.8K",
+      "Input pin": "PA0",
+      "online": false,
+      "Firmware version": 1,
+      "config": [
+        "V3D",
+        "BattS",
+        "Rssi"
+      ]
+    },
+    {
+      "id": "IA1",
+      "type": "Courant AC",
+      "range": "0-30A",
+      "Input pin": "PA0",
+      "online": false,
+      "Firmware version": 1,
+      "config": [
+        "I1A",
+        "BattS",
+        "Rssi"
+      ]
+    },
+    {
+      "id": "VA1",
+      "type": "Tension AC",
+      "range": "0-400V",
+      "Input pin": "PA0",
+      "online": false,
+      "Firmware version": 1,
+      "config": [
+        "V1A",
+        "BattS",
+        "Rssi"
+      ]
+    },
+    {
+      "id": "WS",
+      "type": "Environmental (Solar irradiance/Temperature/Humidity)",
+      "Input pin": [
+        "PA0",
+        "PA1",
+        "PB1"
+      ],
+      "online": false,
+      "Firmware version": 1,
+      "config": [
+        "G",
+        "T_amb",
+        "V",
+        "Hum",
+        "BattS",
+        "Rssi"
+      ]
+    }
+  ],
+  "measurementDelay": 10,
+  "isMeasuring": true
 }

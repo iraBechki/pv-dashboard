@@ -229,6 +229,7 @@ td {
 .component-card.clickable {
   cursor: pointer;
 }
+
 .component-card.clickable:focus {
   outline: 3px solid rgba(11, 108, 255, 0.14);
   outline-offset: 2px;
@@ -245,6 +246,7 @@ td {
   z-index: 2000;
   padding: 1rem;
 }
+
 .detail-modal {
   background: #fff;
   border-radius: 10px;
@@ -253,6 +255,7 @@ td {
   box-shadow: 0 12px 36px rgba(8, 24, 48, 0.28);
   padding: 1rem;
 }
+
 .detail-header {
   display: flex;
   align-items: center;
@@ -260,16 +263,19 @@ td {
   gap: 12px;
   margin-bottom: 0.5rem;
 }
+
 .detail-header h4 {
   margin: 0;
   font-size: 1.05rem;
 }
+
 .detail-close {
   background: transparent;
   border: none;
   font-size: 1.05rem;
   cursor: pointer;
 }
+
 .detail-body p {
   margin: 0;
   color: #333;
@@ -303,16 +309,8 @@ td {
   }
 }
 
-/* Station Overview - organized grid */
-.station-overview {
-  margin-top: 1rem;
-  /* make overall panel white with a subtle border */
-  background: #ffffff;
-  border: 1.5px solid rgba(11, 24, 40, 0.06);
-  border-radius: 12px;
-  padding: 1rem;
-  box-shadow: 0 6px 18px rgba(11, 24, 40, 0.03); /* slightly lighter shadow */
-}
+
+
 .station-overview h3 {
   margin: 0 0 0.75rem 0;
   font-size: 1.05rem;
@@ -335,6 +333,7 @@ td {
   justify-content: center;
   height: 100%;
 }
+
 .flow-col .arrow-icon {
   font-size: 1.6rem;
   color: #9aa4b2;
@@ -343,14 +342,17 @@ td {
     transform 220ms ease,
     text-shadow 220ms ease;
 }
+
 .flow-col .flow-out {
   color: #1e88e5;
   transform: translateX(2px);
 }
+
 .flow-col .flow-in {
   color: #f6a623;
   transform: translateX(-2px);
 }
+
 .flow-col .flow-neutral {
   color: #9aa4b2;
 }
@@ -378,9 +380,11 @@ td {
     box-shadow 150ms ease;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* center content vertically */
+  justify-content: center;
+  /* center content vertically */
   align-items: center;
-  height: 120px; /* fixed height for uniform size */
+  height: 120px;
+  /* fixed height for uniform size */
   min-height: 120px;
   width: 100%;
   box-sizing: border-box;
@@ -388,6 +392,7 @@ td {
   /* thicker subtle border so cards are visually defined on white background */
   border: 1.5px solid rgba(11, 24, 40, 0.08);
 }
+
 .component-card:hover {
   transform: translateY(-4px);
 }
@@ -396,16 +401,20 @@ td {
 .grid-card {
   min-width: 140px;
 }
+
 .power-card {
   min-width: 140px;
   max-width: 180px;
 }
+
 .solar-card {
   min-height: 60px;
 }
+
 .inverter-card {
   min-height: 64px;
 }
+
 .storage-card {
   min-height: 76px;
 }
@@ -414,9 +423,11 @@ td {
 .status-green {
   border: 1px solid rgba(22, 176, 81, 0.12);
 }
+
 .status-yellow {
   border: 1px solid rgba(255, 198, 0, 0.12);
 }
+
 .status-red {
   border: 1px solid rgba(211, 47, 47, 0.12);
 }
@@ -429,6 +440,7 @@ td {
   margin-top: 8px;
   overflow: hidden;
 }
+
 .storage-fill {
   height: 100%;
   background: linear-gradient(90deg, #74c0fc, #1e88e5);
@@ -447,6 +459,7 @@ td {
   color: #1e88e5;
   text-shadow: 0 0 12px rgba(30, 136, 229, 0.12);
 }
+
 .arrow-icon.flow-in {
   color: #f6a623;
   text-shadow: 0 0 12px rgba(246, 166, 35, 0.12);
@@ -458,8 +471,10 @@ td {
   justify-content: center;
   align-items: center;
   height: 22px;
-  margin: 0; /* small gap already handled by center-stack gap */
+  margin: 0;
+  /* small gap already handled by center-stack gap */
 }
+
 .arrow-vert-icon {
   font-size: 1.25rem;
   color: #9aa4b2;
@@ -469,16 +484,21 @@ td {
     text-shadow 220ms ease;
   line-height: 1;
 }
+
 .arrow-vert-icon.flow-out {
-  color: #1e88e5; /* blue when energy flows downward */
+  color: #1e88e5;
+  /* blue when energy flows downward */
   transform: translateY(2px);
   text-shadow: 0 0 8px rgba(30, 136, 229, 0.12);
 }
+
 .arrow-vert-icon.flow-in {
-  color: #f6a623; /* orange if you want reverse flow */
+  color: #f6a623;
+  /* orange if you want reverse flow */
   transform: translateY(-2px);
   text-shadow: 0 0 8px rgba(246, 166, 35, 0.12);
 }
+
 .vertical-arrow.arrow-glow .arrow-vert-icon {
   transform: scale(1.08);
 }
@@ -495,21 +515,805 @@ td {
     gap: 10px;
     justify-items: stretch;
   }
+
   .flow-col {
     justify-content: flex-start;
     padding-left: 8px;
   }
+
   .center-stack {
     max-width: none;
   }
+
   .grid-card,
   .power-card {
     width: 100%;
   }
+
   .center-stack .vertical-arrow {
     height: 18px;
   }
+
   .arrow-vert-icon {
     font-size: 1.1rem;
   }
+}
+
+/* New Station Overview Styles - Grid Layout */
+.station-overview-new {
+  margin-top: 20px;
+  background: white;
+  border-radius: 12px;
+  padding: 25px 40px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ... existing header styles ... */
+
+/* Irradiance */
+.irradiance-container-side {
+  position: absolute;
+  right: 100%;
+  top: 65%;
+  /*here change the vertical position */
+  transform: translateY(-50%);
+  margin-right: 1.5rem;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pill-and-title-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.irradiance-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  padding: 0.25rem 0.75rem;
+  border-radius: 16px;
+  font-size: 0.8rem;
+  color: #92400e;
+  font-weight: 600;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Pulsing sun animation */
+.irradiance-pill svg {
+  animation: pulse-sun 2s ease-in-out infinite;
+}
+
+@keyframes pulse-sun {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+/* Arrow container - vertical stack */
+.irradiance-arrows {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 18px;
+  /* Offset to align with pill center (accounting for title height) */
+}
+
+/* Arrow from irradiance to panel */
+.irradiance-arrow-line {
+  font-size: 1.2rem;
+  color: #f59e0b;
+  font-weight: bold;
+  line-height: 1;
+  animation: slide-arrow 1.5s ease-in-out infinite;
+}
+
+.irradiance-arrows .irradiance-arrow-line:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.irradiance-arrows .irradiance-arrow-line:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.irradiance-arrows .irradiance-arrow-line:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes slide-arrow {
+
+  0%,
+  100% {
+    transform: translateX(0);
+    opacity: 0.4;
+  }
+
+  50% {
+    transform: translateX(5px);
+    opacity: 1;
+  }
+}
+
+/* Connection Dots with flow animation */
+.connection-dots span {
+  font-size: 1.5rem;
+  line-height: 0.5;
+  animation: flow-dots 2s ease-in-out infinite;
+}
+
+.connection-dots span:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.connection-dots span:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.connection-dots span:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+@keyframes flow-dots {
+
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+/* Icon hover effects */
+.icon-wrapper:hover {
+  transform: scale(1.08);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  border-color: #667eea;
+}
+
+.icon-wrapper:active {
+  transform: scale(0.95);
+}
+
+.overview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.overview-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.alert-badge-small {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #fee2e2;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  color: #991b1b;
+  font-weight: 600;
+}
+
+.info-icon-small {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  color: #6b7280;
+  cursor: pointer;
+}
+
+/* Main Layout */
+.station-grid-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  /* Removed gap, spacing handled by dots */
+  position: relative;
+  min-height: 500px;
+}
+
+/* Grid Cells */
+.grid-cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.grid-row-middle {
+  display: flex;
+  align-items: flex-start;
+  /* Align to top to ensure icons line up */
+  justify-content: center;
+  width: 100%;
+  gap: 0;
+  /* Removed gap, spacing handled by dots */
+}
+
+/* Component Groups */
+.component-group,
+.solar-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+}
+
+/* Value Labels - Standardized for all components */
+.value-label {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #374151;
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* Value label positioning for battery and house */
+.component-group .value-label {
+  position: absolute;
+  top: 100%;
+  margin-top: 0.5rem;
+  white-space: nowrap;
+}
+
+/* Solar group value label stays in flow */
+.solar-group .value-label {
+  position: static;
+  margin: 0;
+}
+
+.sub-value {
+  font-size: 0.75rem;
+  color: #6b7280;
+  font-weight: 400;
+}
+
+/* Component Titles */
+.component-title {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #9ca3af;
+  text-align: center;
+  margin-top: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Icon Wrappers - Standardized Circular Containers */
+.icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+
+  /* Standard Circle Style */
+  width: 70px;
+  height: 70px;
+  background: white;
+  border: 3px solid #e5e7eb;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  z-index: 10;
+}
+
+.icon-wrapper:hover {
+  transform: scale(1.05);
+  border-color: #cbd5e1;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* Specific Icon Styling & Sizing */
+.solar-img {
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.battery-wrapper {
+  position: relative;
+}
+
+.battery-img {
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.house-img {
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.grid-img {
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.inverter-img {
+  /* Reduced by 25% from 60px -> 45px */
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+}
+
+/* Battery Badge */
+.battery-badge {
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #10b981;
+  color: white;
+  font-size: 0.65rem;
+  padding: 1px 6px;
+  border-radius: 8px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Irradiance */
+.irradiance-container-side {
+  position: absolute;
+  right: 100%;
+  top: 65%;
+  /*here change the vertical position */
+  transform: translateY(-50%);
+  margin-right: 1.5rem;
+  white-space: nowrap;
+}
+
+.irradiance-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  padding: 0.25rem 0.75rem;
+  border-radius: 16px;
+  font-size: 0.8rem;
+  color: #92400e;
+  font-weight: 600;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Connection Dots */
+.connection-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: #cbd5e1;
+  /* Light gray dots */
+}
+
+.connection-dots span {
+  font-size: 1.5rem;
+  /* Large dots */
+  line-height: 0.5;
+}
+
+.vertical-dots {
+  flex-direction: column;
+  height: 80px;
+  /* Match horizontal spacing for equal distances */
+  width: 100%;
+}
+
+.horizontal-dots {
+  flex-direction: row;
+  width: 100px;
+  /* Fixed distance */
+  height: 70px;
+  /* Match icon height for vertical centering */
+  margin: 0;
+}
+
+/* Spacing adjustments - Removed as we are using fixed sizes now */
+.top-dots {
+  margin-bottom: 0;
+}
+
+.bottom-dots {
+  margin-top: 0;
+}
+
+.left-dots {
+  margin-right: 0;
+}
+
+.right-dots {
+  margin-left: 0;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .grid-row-middle {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .horizontal-dots {
+    transform: rotate(90deg);
+  }
+
+  .left-dots {
+    order: 2;
+    margin: 0;
+  }
+
+  .right-dots {
+    order: 4;
+    margin: 0;
+  }
+
+  .grid-cell.left-center {
+    order: 1;
+  }
+
+  .grid-cell.center-center {
+    order: 3;
+  }
+
+  .grid-cell.right-center {
+    order: 5;
+  }
+}
+
+.alert-icon {
+  font-size: 1.2rem;
+}
+
+.alert-count {
+  font-weight: 600;
+  color: #991b1b;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .flow-diagram {
+    padding: 1rem;
+  }
+
+  .top-section {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .middle-section {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .dotted-line.horizontal {
+    width: 4px;
+    height: 40px;
+    background-image: radial-gradient(circle, #999 2px, transparent 2px);
+    background-size: 8px 8px;
+    background-repeat: repeat-y;
+  }
+
+  .inverter-component {
+    width: 120px;
+    height: 120px;
+  }
+
+  .bottom-corners {
+    padding: 0 1rem;
+  }
+}
+
+/* Alert pulse animation for component indicators */
+@keyframes pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+}
+
+/* Alert indicator styles */
+.icon-wrapper.has-alert {
+  border-width: 4px;
+}
+
+/* =========================================
+   New Alerts Page Styles
+   ========================================= */
+
+.alerts-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.view-mode-tabs {
+  display: flex;
+  background: #f1f5f9;
+  padding: 4px;
+  border-radius: 8px;
+}
+
+.tab-btn {
+  padding: 8px 16px;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  color: #64748b;
+  transition: all 0.2s;
+}
+
+.tab-btn.active {
+  background: white;
+  color: #0f172a;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.alert-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.severity-filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filter-pill {
+  padding: 6px 12px;
+  border: 1px solid #e2e8f0;
+  background: white;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: #64748b;
+}
+
+.filter-pill:hover {
+  background: #f8fafc;
+}
+
+.filter-pill.active {
+  background: #3b82f6;
+  color: white;
+  border-color: #3b82f6;
+}
+
+.filter-pill.critical.active {
+  background: #ef4444;
+  border-color: #ef4444;
+}
+
+.filter-pill.error.active {
+  background: #f97316;
+  border-color: #f97316;
+}
+
+.filter-pill.warning.active {
+  background: #eab308;
+  border-color: #eab308;
+}
+
+.filter-pill.info.active {
+  background: #3b82f6;
+  border-color: #3b82f6;
+}
+
+.alerts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+.alert-item {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border-left: 4px solid #cbd5e1;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: transform 0.2s;
+}
+
+.alert-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.alert-item.critical {
+  border-left-color: #ef4444;
+  background: #fef2f2;
+}
+
+.alert-item.error {
+  border-left-color: #f97316;
+  background: #fff7ed;
+}
+
+.alert-item.warning {
+  border-left-color: #eab308;
+  background: #fefce8;
+}
+
+.alert-item.info {
+  border-left-color: #3b82f6;
+  background: #eff6ff;
+}
+
+.alert-item.resolved {
+  opacity: 0.7;
+  border-left-color: #10b981;
+  background: #f0fdf4;
+}
+
+.alert-header-compact {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.alert-icon-small {
+  font-size: 1.2rem;
+}
+
+.alert-title-compact {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.alert-time-compact {
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+.alert-body-compact p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #334155;
+  line-height: 1.4;
+}
+
+.alert-meta {
+  display: flex;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.meta-tag {
+  font-size: 0.7rem;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: #475569;
+}
+
+.alert-footer-compact {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.status-badges {
+  display: flex;
+  gap: 6px;
+}
+
+.badge {
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.badge.resolved {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.badge.ack {
+  background: #e2e8f0;
+  color: #475569;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 6px;
+}
+
+.ack-btn-tiny {
+  padding: 4px 8px;
+  font-size: 0.75rem;
+  background: white;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #475569;
+}
+
+.ack-btn-tiny:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.delete-btn-tiny {
+  padding: 4px 8px;
+  font-size: 0.75rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+.delete-btn-tiny:hover {
+  opacity: 1;
+  background: rgba(239, 68, 68, 0.1);
+  border-radius: 4px;
 }
