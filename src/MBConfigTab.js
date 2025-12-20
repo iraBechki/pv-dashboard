@@ -31,7 +31,7 @@ export function MBConfigTab({ config, onConfigChange }) {
 
   // Fetch measurement state from backend on mount
   useEffect(() => {
-    fetch("http://localhost:8000/api/measurement_state")
+    fetch("/api/measurement_state")
       .then(res => res.json())
       .then(data => {
         setIsMeasuring(data.isMeasuring || false);
@@ -41,7 +41,7 @@ export function MBConfigTab({ config, onConfigChange }) {
 
   // Fetch Master List on Mount
   useEffect(() => {
-    fetch("http://localhost:8000/api/mb_list")
+    fetch("/api/mb_list")
       .then(res => res.json())
       .then(data => {
         if (Array.isArray(data)) {
@@ -63,7 +63,8 @@ export function MBConfigTab({ config, onConfigChange }) {
   // WebSocket Connection
   useEffect(() => {
     isMounted.current = true;
-    let socket = new WebSocket("ws://localhost:8000/ws");
+    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+    let socket = new WebSocket(`${protocol}//${window.location.host}/ws`);
 
     socket.onopen = () => {
       if (isMounted.current) {
@@ -89,7 +90,7 @@ export function MBConfigTab({ config, onConfigChange }) {
             if (response.command === "start") {
               setIsMeasuring(true);
               // Save to backend
-              fetch("http://localhost:8000/api/measurement_state", {
+              fetch("/api/measurement_state", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ isMeasuring: true })
@@ -99,7 +100,7 @@ export function MBConfigTab({ config, onConfigChange }) {
             if (response.command === "stop") {
               setIsMeasuring(false);
               // Save to backend
-              fetch("http://localhost:8000/api/measurement_state", {
+              fetch("/api/measurement_state", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ isMeasuring: false })
@@ -189,7 +190,7 @@ export function MBConfigTab({ config, onConfigChange }) {
   };
 
   const handleSaveSelection = () => {
-    fetch("http://localhost:8000/api/mb_selection", {
+    fetch("/api/mb_selection", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

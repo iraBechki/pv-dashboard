@@ -8,5 +8,6 @@ VD2,V2D,BattS,Rssi
 VD3,V3D,BattS,Rssi
 IA1,I1A,BattS,Rssi
 VA1,V1A,BattS,Rssi
+INVD,PV1_V,PV1_I,PV2_V,PV2_I,Vbat,Ibat,Vout,Iout,Pout,BattS,Rssi
 WS,G,T_amb,V,Hum,BattS,Rssi
 CONFIG:END

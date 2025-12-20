@@ -5,20 +5,46 @@ import random
 import datetime
 import os
 
-SERVER_URL = "http://localhost:8000/api/simulate"
-CONFIG_FILE = "stm_config.json"
+SERVER_PORT = 8000
+SERVER_URL = f"http://localhost:{SERVER_PORT}/api/simulate"
+# Try to find stm_config.json in likely locations
+POSSIBLE_CONFIG_PATHS = [
+    "stm_config.json",
+    "backend/dist/stm_config.json",
+    "dist/stm_config.json",
+    "../stm_config.json"
+]
 
-# NaN injection probability (0.0 = never, 1.0 = always)
-# Set to 0.15 to simulate ~15% of MBs being disconnected
-NAN_INJECTION_PROBABILITY = 0.15
-
-# Track which MBs should send NaN (simulating disconnection)
+NAN_INJECTION_PROBABILITY = 0.0
 disconnected_mbs = set()
+
+def find_config_file():
+    for path in POSSIBLE_CONFIG_PATHS:
+        if os.path.exists(path):
+            return path
+    return None
+
+def check_server_connection(port):
+    url = f"http://localhost:{port}/api/config"
+    try:
+        with urllib.request.urlopen(url, timeout=1) as response:
+            return response.status == 200
+    except:
+        return False
+
+def find_active_port():
+    # Try ports 8000 to 8010
+    for port in range(8000, 8011):
+        if check_server_connection(port):
+            return port
+    return None
 
 def load_schema():
     schema = []
-    if os.path.exists(CONFIG_FILE):
-        with open(CONFIG_FILE, 'r') as f:
+    config_path = find_config_file()
+    if config_path:
+        print(f"Loading schema from {config_path}")
+        with open(config_path, 'r') as f:
             for line in f:
                 line = line.strip()
                 if line and not line.startswith("CONFIG:"):
@@ -27,6 +53,8 @@ def load_schema():
                         mb_id = parts[0]
                         fields = parts[1:]
                         schema.append({"id": mb_id, "fields": fields})
+    else:
+        print("Warning: stm_config.json not found in common locations.")
     return schema
 
 def generate_value(field_name, mb_id=None):
@@ -104,10 +132,24 @@ def generate_value(field_name, mb_id=None):
 
 
 def main():
-    global disconnected_mbs
+    global disconnected_mbs, SERVER_URL
     
+    print("Searching for active PV Dashboard server...")
+    port = find_active_port()
+    if port:
+        print(f"✅ Found server on port {port}")
+        SERVER_URL = f"http://localhost:{port}/api/simulate"
+    else:
+        print("⚠️ Could not find active server on ports 8000-8010.")
+        print("Using default port 8000.")
+        SERVER_URL = "http://localhost:8000/api/simulate"
+
     print("Loading schema from stm_config.json...")
     schema = load_schema()
+    if not schema:
+        print("❌ No MBs found in configuration. Please configure the system in the app first.")
+        return
+
     print(f"Found {len(schema)} MBs in configuration.")
     print(f"NaN injection probability: {NAN_INJECTION_PROBABILITY * 100}%")
     

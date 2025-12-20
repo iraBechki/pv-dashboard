@@ -8,7 +8,7 @@
  //    PA0 is used to measure voltage
 const float vRef = 3.3;
 const int sampleCount = 1500;
-const float calibrationFactor = 356.33;
+const float calibrationFactor = 368.8;  // Adjusted for accurate 239V reading
 
 int minValue = 4095;
 int maxValue = 0;

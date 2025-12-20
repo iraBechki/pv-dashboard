@@ -34,7 +34,7 @@ export function HistoricalChart({ config }) {
             { id: 'battery_power', name: 'Battery Power (W)', group: 'Calculated' },
             { id: 'consumption_power', name: 'Consumption Power (W)', group: 'Calculated' },
             { id: 'daily_energy', name: 'Daily Energy (kWh)', group: 'Calculated' },
-            
+
             // INVD Metrics
             { id: 'INVD_PV1_V', name: 'Inverter PV1 Voltage (V)', group: 'Inverter' },
             { id: 'INVD_PV1_I', name: 'Inverter PV1 Current (A)', group: 'Inverter' },
@@ -61,7 +61,7 @@ export function HistoricalChart({ config }) {
             const { start, end } = getDateRange();
 
             // Fetch from backend API
-            const response = await fetch(`http://localhost:8000/api/history/range?start=${start}&end=${end}&granularity=${granularity}`);
+            const response = await fetch(`/api/history/range?start=${start}&end=${end}&granularity=${granularity}`);
             const data = await response.json();
 
             if (data.error) {

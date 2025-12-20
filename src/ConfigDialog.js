@@ -22,7 +22,7 @@ export function ConfigDialog({ isOpen, onClose }) {
 
     if (isOpen) {
       // Fetch saved config
-      fetch("http://localhost:8000/api/config")
+      fetch("/api/config")
         .then((res) => res.json())
         .then((savedConfig) => {
           if (savedConfig && Object.keys(savedConfig).length > 0) {
@@ -32,7 +32,8 @@ export function ConfigDialog({ isOpen, onClose }) {
         })
         .catch((err) => console.error("Failed to load config:", err));
 
-      socket = new WebSocket("ws://localhost:8000/ws");
+      const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+      socket = new WebSocket(`${protocol}//${window.location.host}/ws`);
 
       socket.onopen = () => {
         console.log("ConfigDialog connected to WebSocket");

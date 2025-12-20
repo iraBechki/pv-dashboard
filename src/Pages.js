@@ -12,7 +12,7 @@ export function DashboardPage() {
 
   // Load config
   useEffect(() => {
-    fetch("http://localhost:8000/api/config")
+    fetch("/api/config")
       .then(res => res.json())
       .then(data => setConfig(data))
       .catch(err => console.error("Failed to load config:", err));
@@ -20,7 +20,8 @@ export function DashboardPage() {
 
   // WebSocket connection
   useEffect(() => {
-    const socket = new WebSocket("ws://localhost:8000/ws");
+    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+    const socket = new WebSocket(`${protocol}//${window.location.host}/ws`);
 
     socket.onopen = () => console.log("Dashboard connected to WebSocket");
 
@@ -134,7 +135,7 @@ export function HistoryPage() {
 
   // Load config
   useEffect(() => {
-    fetch("http://localhost:8000/api/config")
+    fetch("/api/config")
       .then(res => res.json())
       .then(data => setConfig(data))
       .catch(err => console.error("Failed to load config:", err));
@@ -159,7 +160,7 @@ export function AlertsPage() {
       // but for now we fetch all and filter client-side or use API params if available.
       // The current API supports severity. We'll fetch a larger limit for history.
       const limit = viewMode === 'history' ? 100 : 50;
-      const response = await fetch(`http://localhost:8000/api/alerts?limit=${limit}`);
+      const response = await fetch(`/api/alerts?limit=${limit}`);
       if (response.ok) {
         const data = await response.json();
         setAlerts(data);
@@ -177,7 +178,7 @@ export function AlertsPage() {
 
   const acknowledgeAlert = async (alertId) => {
     try {
-      await fetch(`http://localhost:8000/api/alerts/${alertId}/acknowledge`, {
+      await fetch(`/api/alerts/${alertId}/acknowledge`, {
         method: 'POST'
       });
       fetchAlerts();
@@ -189,7 +190,7 @@ export function AlertsPage() {
   const deleteAlert = async (alertId) => {
     if (!window.confirm("Are you sure you want to delete this alert?")) return;
     try {
-      await fetch(`http://localhost:8000/api/alerts/${alertId}`, {
+      await fetch(`/api/alerts/${alertId}`, {
         method: 'DELETE'
       });
       fetchAlerts();
@@ -273,7 +274,7 @@ export function SettingsPage() {
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
 
   useEffect(() => {
-    fetch('http://localhost:8000/api/diagnosis/settings')
+    fetch('/api/diagnosis/settings')
       .then(res => res.json())
       .then(data => {
         if (data) {
@@ -289,7 +290,7 @@ export function SettingsPage() {
 
   const updateSettings = async (enabled, notifications) => {
     try {
-      await fetch('http://localhost:8000/api/diagnosis/settings', {
+      await fetch('/api/diagnosis/settings', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -487,9 +488,9 @@ function MetricsCards({ data, config }) {
   useEffect(() => {
     const fetchWeather = async () => {
       try {
-        // Using coordinates for Bab Ezzouar, Algeria
-        const latitude = 36.72;
-        const longitude = 3.19;
+        // Use coordinates from config if available, otherwise default to Bab Ezzouar
+        const latitude = config?.latitude ? parseFloat(config.latitude.trim()) : 36.72;
+        const longitude = config?.longitude ? parseFloat(config.longitude.trim()) : 3.19;
 
         const response = await fetch(
           `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,weathercode,windspeed_10m,winddirection_10m&daily=sunrise,sunset&timezone=auto`
@@ -501,15 +502,22 @@ function MetricsCards({ data, config }) {
 
         const weatherData = await response.json();
 
-        // Map weather codes to conditions
+        // Map weather codes to conditions (WMO Weather interpretation codes)
         const getWeatherCondition = (code) => {
           if (code === 0) return "Clear";
-          if (code <= 3) return "Partly Cloudy";
-          if (code <= 48) return "Foggy";
-          if (code <= 67) return "Rainy";
-          if (code <= 77) return "Snowy";
-          if (code <= 82) return "Showers";
-          if (code <= 99) return "Thunderstorm";
+          if (code === 1) return "Mainly Clear";
+          if (code === 2) return "Partly Cloudy";
+          if (code === 3) return "Overcast";
+          if (code >= 45 && code <= 48) return "Foggy";
+          if (code >= 51 && code <= 55) return "Drizzle";
+          if (code >= 56 && code <= 57) return "Freezing Drizzle";
+          if (code >= 61 && code <= 65) return "Rainy";
+          if (code >= 66 && code <= 67) return "Freezing Rain";
+          if (code >= 71 && code <= 75) return "Snowy";
+          if (code === 77) return "Snow Grains";
+          if (code >= 80 && code <= 82) return "Showers";
+          if (code >= 85 && code <= 86) return "Snow Showers";
+          if (code >= 95 && code <= 99) return "Thunderstorm";
           return "Unknown";
         };
 
@@ -540,7 +548,7 @@ function MetricsCards({ data, config }) {
     const interval = setInterval(fetchWeather, 10 * 60 * 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [config]);
 
   useEffect(() => {
     if (data && data.data) {
@@ -658,11 +666,18 @@ function WeatherCard({ weather }) {
   const getWeatherIcon = (condition) => {
     switch (condition) {
       case 'Clear': return '☀️';
+      case 'Mainly Clear': return '🌤️';
       case 'Partly Cloudy': return '⛅';
+      case 'Overcast': return '☁️';
       case 'Foggy': return '🌫️';
+      case 'Drizzle': return '🌦️';
+      case 'Freezing Drizzle': return '🌨️';
       case 'Rainy': return '🌧️';
+      case 'Freezing Rain': return '🌨️';
       case 'Snowy': return '❄️';
-      case 'Showers': return '🌦️';
+      case 'Snow Grains': return '❄️';
+      case 'Showers': return '☔';
+      case 'Snow Showers': return '🌨️';
       case 'Thunderstorm': return '⛈️';
       default: return '🌤️';
     }
@@ -755,7 +770,7 @@ function StationOverview({ data, config }) {
   useEffect(() => {
     const fetchCount = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/alerts/unread');
+        const response = await fetch('/api/alerts/unread');
         if (response.ok) {
           const data = await response.json();
           setUnreadCount(data.count);
@@ -786,7 +801,7 @@ function StationOverview({ data, config }) {
   useEffect(() => {
     const fetchAlerts = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/alerts?limit=100');
+        const response = await fetch('/api/alerts?limit=100');
         const alerts = await response.json();
 
         // Filter unresolved alerts

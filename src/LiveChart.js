@@ -18,7 +18,7 @@ export function LiveChart({ latestMeasurement, config }) {
 
     // Fetch history on mount
     useEffect(() => {
-        fetch("http://localhost:8000/api/history/today")
+        fetch("/api/history/today")
             .then(res => res.json())
             .then(data => {
                 if (Array.isArray(data)) {
@@ -32,40 +32,37 @@ export function LiveChart({ latestMeasurement, config }) {
             .catch(err => console.error("Failed to load history:", err));
     }, []);
 
-    // Handle new measurement
-    useEffect(() => {
-        if (latestMeasurement) {
-            const newData = processMeasurement(latestMeasurement);
-            setChartData(prev => {
-                if (prev.length > 0 && prev[prev.length - 1].timestamp === newData.timestamp) {
-                    return prev;
-                }
-                return [...prev, newData];
-            });
-            discoverMetrics(latestMeasurement);
-        }
-    }, [latestMeasurement]);
+    // ... (existing code)
 
     const discoverMetrics = (msg) => {
         const metrics = [];
 
-        // 1. Calculations
+        // 1. Calculations (Power and Energy)
         if (msg.calculations) {
             Object.keys(msg.calculations).forEach(key => {
-                metrics.push({ id: key, name: formatMetricName(key), group: 'Calculated' });
+                // Only include power and energy related calculations
+                if (key.includes('power') || key.includes('energy')) {
+                    if (key === 'monthly_energy' || key === 'total_energy') return;
+                    metrics.push({ id: key, name: formatMetricName(key), group: 'Calculated' });
+                }
             });
         }
 
-        // 2. Raw Data
+        // 2. Raw Data (Measured Parameters)
         if (msg.data) {
             Object.entries(msg.data).forEach(([mbId, fields]) => {
                 Object.keys(fields).forEach(field => {
-                    // Filter out unwanted fields
-                    if (field === 'BattS' || field === 'Rssi' || field === 'RSSI') return;
+                    // Filter out unwanted fields (BattS, Rssi, etc.)
+                    if (['BattS', 'Rssi', 'RSSI', 'status', 'online'].includes(field)) return;
 
-                    const id = `${mbId}_${field}`;
-                    const name = getReadableName(mbId, field);
-                    metrics.push({ id, name, group: mbId });
+                    // Only include measured parameters (Voltage, Current, Temp, Irradiance, Power, Energy, Frequency)
+                    const isMeasured = field.startsWith('V') || field.startsWith('I') || field.startsWith('T') || field === 'G' || field.startsWith('P') || field.startsWith('E') || field.startsWith('F');
+
+                    if (isMeasured) {
+                        const id = `${mbId}_${field}`;
+                        const name = getReadableName(mbId, field);
+                        metrics.push({ id, name, group: mbId });
+                    }
                 });
             });
         }
@@ -108,7 +105,14 @@ export function LiveChart({ latestMeasurement, config }) {
                     // Map field type
                     let type = field;
                     if (field.startsWith('V')) type = "Voltage";
-                    if (field.startsWith('I') || field.startsWith('A')) type = "Current";
+                    if (field.startsWith('I') || field.startsWith('A')) {
+                        // Check for Array/String pattern
+                        const match = pointId.match(/arr-(\d+)-str-(\d+)/);
+                        if (match) {
+                            return `Measured PVCurrent (Array ${match[1]}, String ${match[2]})`;
+                        }
+                        type = "Current";
+                    }
                     if (field.startsWith('T')) type = "Temp";
                     if (field === 'G') type = "Irradiance";
 

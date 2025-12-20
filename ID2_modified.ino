@@ -1,10 +1,10 @@
-//------------------------------------IA1--------------------------------------------
 #include <SPI.h>
 #include <LoRa.h>
 #include <SdFat.h>
 #include <Wire.h>
+#include <Adafruit_ADS1X15.h>
 
-// PA0 is used to measure current (ADC)
+Adafruit_ADS1115 ads;
 
 // LoRa pins
 #define LORA_CS     PA4
@@ -12,7 +12,7 @@
 #define LORA_DIO0   PA2
 
 // Slave ID
-const String myID = "IA1";  // Unique ID for this slave
+const String myID = "ID2";  // Unique ID for this slave
 
 // SD card pins and SPI2 configuration
 #define SD_CS PB12
@@ -25,10 +25,9 @@ int rssiValue = 0;  // to store RSSI value
 
 void setup() {
   Serial.begin(9600);
-  analogReadResolution(12);
   LoRa.setPins(LORA_CS, LORA_RST, LORA_DIO0);
 
-  if (!LoRa.begin(433E6)) {  // Changed from 525E6 to 433E6 for maximum range
+  if (!LoRa.begin(433E6)) {  // SX1278 sweet spot
     Serial.println("LoRa init failed!");
     while (1);
   }
@@ -50,13 +49,19 @@ void setup() {
   Serial.println("SD Card initialized on SPI2.");
 
   // Write CSV header if file doesn't exist
-  if (!sd.exists("IA1.CSV")) {
-    File headerFile = sd.open("IA1.CSV", O_WRITE | O_CREAT | O_APPEND);
+  if (!sd.exists("ID2.CSV")) {
+    File headerFile = sd.open("ID2.CSV", O_WRITE | O_CREAT | O_APPEND);
     if (headerFile) {
-      headerFile.println("Timestamp,IA1");
+      headerFile.println("Timestamp,ID2");
       headerFile.close();
     }
   }
+  Wire.begin();  // STM32 I2C: SCL = B6, SDA = B7
+  if (!ads.begin()) {
+    Serial.println("Failed to initialize ADS1115.");
+    while (1);  // Stop execution if ADS fails
+  }
+  ads.setGain(GAIN_ONE);  // ±4.096V range, 125 µV/bit
 }
 
 void loop() {
@@ -66,55 +71,53 @@ void loop() {
     while (LoRa.available()) {
       incoming += (char)LoRa.read();
     }
-    incoming.trim();
 
-    // Capture RSSI from the received packet
+    incoming.trim();
+    
+    // Capture RSSI after receiving packet
     rssiValue = LoRa.packetRssi();
 
     if (incoming.startsWith("TIME:")) {
-      lastTimestamp = incoming.substring(5);
-
+      lastTimestamp = incoming.substring(5);  // Store time (without "TIME:")
     } else if (incoming == myID) {
-      // Perform the measurement only after calibration is done
-
-      // ----------- RMS Current Measurement (SCT-013-030) -----------
-      float voltage, centered, sumSq = 0;
-      const float Vref = 3.33;
-      const float sensitivity = 0.033;  // V/A for SCT-013-030
-
-      // Calculate actual ADC offset voltage dynamically
-      long rawSum = 0;
-      const int offsetSamples = 1500;
-      for (int i = 0; i < offsetSamples; i++) {
-        rawSum += analogRead(PA0);
-        delayMicroseconds(100);
+      
+      // Read current from ADS1115 with multiple samples for stability
+      const int numSamples = 20;  // Increased from 10 for better accuracy
+      float currentSamples[numSamples];
+      
+      for (int i = 0; i < numSamples; i++) {
+        int16_t rawResult = ads.readADC_Differential_0_1();  // AIN0 - AIN1
+        float voltage = rawResult * 0.125 / 1000.0;  // Convert to volts
+        currentSamples[i] = voltage * 6.0/0.66 * 1.06;  // Convert to current with calibration factor
+        delay(5);  // Reduced delay for faster sampling
       }
-      float avgRaw = rawSum / (float)offsetSamples;
-      float offsetVoltage = (avgRaw * Vref) / 4095.0;  // measured ADC offset voltage
-
-      // Calculate RMS current using offsetVoltage as center
-      const int rmsSamples =1500;
-      sumSq = 0;
-      for (int i = 0; i < rmsSamples; i++) {
-        int raw = analogRead(PA0);
-        voltage = (raw * Vref) / 4095.0;
-        centered = voltage - offsetVoltage;
-        sumSq += centered * centered;
-        delayMicroseconds(100);
+      
+      // Sort samples and take median for noise rejection
+      for (int i = 0; i < numSamples - 1; i++) {
+        for (int j = i + 1; j < numSamples; j++) {
+          if (currentSamples[i] > currentSamples[j]) {
+            float temp = currentSamples[i];
+            currentSamples[i] = currentSamples[j];
+            currentSamples[j] = temp;
+          }
+        }
       }
-      float Vrms = sqrt(sumSq / rmsSamples);
-      float IA1value = 1.77*Vrms / sensitivity  ;
-
-      // -------------------------------------------------------------
+      
+      // Average the middle 10 values (discard top 5 and bottom 5) for best stability
+      float sum = 0;
+      for (int i = 5; i < 15; i++) {  // Middle 10 of 20 samples
+        sum += currentSamples[i];
+      }
+      float ID2value = sum / 10.0;
 
       // Construct CSV line using stored timestamp
       String csvLine = lastTimestamp;
-      csvLine += "," + String(IA1value, 4);
+      csvLine += "," + String(ID2value);
 
       // Save CSV line to SD card
       bool written = false;
       for (int attempt = 1; attempt <= 3; attempt++) {
-        File dataFile = sd.open("IA1.CSV", O_WRITE | O_CREAT | O_APPEND);
+        File dataFile = sd.open("ID2.CSV", O_WRITE | O_CREAT | O_APPEND);
         if (dataFile) {
           dataFile.println(csvLine);
           dataFile.close();
@@ -123,7 +126,7 @@ void loop() {
         } else {
           Serial.print("Attempt ");
           Serial.print(attempt);
-          Serial.println(": Failed to open IA1.CSV for writing.");
+          Serial.println(": Failed to open ID2.CSV for writing.");
           delay(5);
         }
       }
@@ -132,13 +135,14 @@ void loop() {
         Serial.println("Error: All 3 attempts to write to SD card failed.");
       }
 
-      // Send data to master over LoRa: IA1value, BattS (fixed=100), and RSSI
+      // Send data to master over LoRa
+      // Format: ID2value,BattS,RSSI
       LoRa.beginPacket();
-      LoRa.print(IA1value, 4);  // send IA1value with 4 decimal places
-      LoRa.print(",");
-      LoRa.print(100);          // send BattS (fixed value = 100)
-      LoRa.print(",");
-      LoRa.print(rssiValue);    // send RSSI value
+      LoRa.print(ID2value, 4);  // send ID2value with 4 decimal places
+      LoRa.print(",");          // separator
+      LoRa.print(100);          // BattS fixed value
+      LoRa.print(",");          // separator
+      LoRa.print(rssiValue);    // RSSI value
       LoRa.endPacket();
     }
   }

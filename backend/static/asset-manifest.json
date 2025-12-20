@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/static/css/main.d7d98640.css",
+    "main.js": "/static/js/main.64039e74.js",
+    "static/js/453.126e4dd0.chunk.js": "/static/js/453.126e4dd0.chunk.js",
+    "static/media/grid.png": "/static/media/grid.e33076d4092be605766e.png",
+    "static/media/solar-panel.png": "/static/media/solar-panel.582fc3d43bc99019767c.png",
+    "static/media/house.png": "/static/media/house.667ebffbb2ef2a966146.png",
+    "static/media/inverter.png": "/static/media/inverter.14e9f65779d1fec0157b.png",
+    "static/media/battery.png": "/static/media/battery.12ede9afce0487691a98.png",
+    "index.html": "/index.html",
+    "main.d7d98640.css.map": "/static/css/main.d7d98640.css.map",
+    "main.64039e74.js.map": "/static/js/main.64039e74.js.map",
+    "453.126e4dd0.chunk.js.map": "/static/js/453.126e4dd0.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d7d98640.css",
+    "static/js/main.64039e74.js"
+  ]
+}

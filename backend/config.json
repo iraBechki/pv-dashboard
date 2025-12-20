@@ -25,7 +25,7 @@
     }
   ],
   "totalStrings": "1",
-  "stringsPerArray": "1",
+  "stringsPerArray": "2",
   "modulesPerString": "5",
   "stringVoltage": "250",
   "stringCurrent": "13",
@@ -96,7 +96,8 @@
     ],
     "sens-1764509384289": [
       "IA1",
-      "VA1"
+      "VA1",
+      "INVD"
     ],
     "sens-1764509436240": [
       "ID3",
@@ -247,6 +248,27 @@
       "Firmware version": 1,
       "config": [
         "V1A",
+        "BattS",
+        "Rssi"
+      ]
+    },
+    {
+      "id": "INVD",
+      "type": "Inverter RS480",
+      "range": null,
+      "Input pin": "PA0",
+      "online": false,
+      "Firmware version": 1,
+      "config": [
+        "PV1_V",
+        "PV1_I",
+        "PV2_V",
+        "PV2_I",
+        "Vbat",
+        "Ibat",
+        "Vout",
+        "Iout",
+        "Pout",
         "BattS",
         "Rssi"
       ]

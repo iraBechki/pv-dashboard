@@ -32,12 +32,38 @@ app.add_middleware(
 import random
 from pydantic import BaseModel
 from diagnosis import DiagnosisEngine, Alert
+from fastapi.responses import FileResponse
 
-CONFIG_FILE = "config.json"
-HISTORY_FILE = "config_history.json"
-MB_LIST_FILE = "mb_list.json"
-STM_CONFIG_FILE = "stm_config.json"
-DB_FILE = "pv_history.db"
+import sys
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import HTMLResponse
+
+# ... (imports)
+
+app = FastAPI()
+
+# ... (CORS setup)
+
+import random
+from pydantic import BaseModel
+from diagnosis import DiagnosisEngine, Alert
+
+# Determine if running as a script or frozen exe
+if getattr(sys, 'frozen', False):
+    # If frozen, use the directory of the executable for persistent files
+    BASE_DIR = os.path.dirname(sys.executable)
+    # For bundled resources (like static files), use sys._MEIPASS
+    BUNDLE_DIR = sys._MEIPASS
+else:
+    # If script, use the current directory
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    BUNDLE_DIR = BASE_DIR
+
+CONFIG_FILE = os.path.join(BASE_DIR, "config.json")
+HISTORY_FILE = os.path.join(BASE_DIR, "config_history.json")
+MB_LIST_FILE = os.path.join(BASE_DIR, "mb_list.json")
+STM_CONFIG_FILE = os.path.join(BASE_DIR, "stm_config.json")
+DB_FILE = os.path.join(BASE_DIR, "pv_history.db")
 
 # Global Connection Manager
 class ConnectionManager:
@@ -539,7 +565,7 @@ class SerialManager:
         logger.info("Starting Serial Read Loop")
     def load_measurement_schema(self):
         """Load measurement schema from stm_config.json"""
-        config_path = os.path.join(os.path.dirname(__file__), "stm_config.json")
+        config_path = STM_CONFIG_FILE
         if not os.path.exists(config_path):
             logger.warning("stm_config.json not found")
             self.measurement_schema = []
@@ -571,7 +597,7 @@ class SerialManager:
 
     def load_assignments(self):
         """Load assignments from config.json"""
-        config_path = os.path.join(os.path.dirname(__file__), "config.json")
+        config_path = CONFIG_FILE
         if os.path.exists(config_path):
             try:
                 with open(config_path, "r", encoding="utf-8") as f:
@@ -1159,7 +1185,7 @@ def get_stm_config():
 
 @app.get("/api/config")
 def get_config():
-    config_path = os.path.join(os.path.dirname(__file__), "config.json")
+    config_path = CONFIG_FILE
     if os.path.exists(config_path):
         try:
             with open(config_path, "r", encoding="utf-8") as f:
@@ -1386,9 +1412,7 @@ def get_history_range(start: str, end: str, granularity: str = 'hour'):
         logger.error(f"Error retrieving historical data: {e}")
         return {"error": str(e)}
 
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+
 # Alert Endpoints
 @app.get("/api/alerts")
 def get_alerts(limit: int = 50, severity: str = None):
@@ -1458,3 +1482,54 @@ def update_diagnosis_settings_api(settings: DiagnosisSettingsUpdate):
     except Exception as e:
         logger.error(f"Error updating diagnosis settings: {e}")
         return {"status": "error", "message": str(e)}
+
+# Serve React Static Files
+# Mount the 'static' folder from the build directory
+# We assume the build folder is renamed to 'static' and placed in BUNDLE_DIR
+static_folder = os.path.join(BUNDLE_DIR, "static")
+
+if os.path.exists(static_folder):
+    # Mount /static path for JS/CSS chunks
+    # React build puts assets in static/static/js... so we mount the inner static
+    if os.path.exists(os.path.join(static_folder, "static")):
+        app.mount("/static", StaticFiles(directory=os.path.join(static_folder, "static")), name="static")
+
+    # Catch-all route to serve index.html or other files in root of build
+    @app.get("/{full_path:path}")
+    async def serve_react_app(full_path: str):
+        file_path = os.path.join(static_folder, full_path)
+        if os.path.exists(file_path) and os.path.isfile(file_path):
+            return FileResponse(file_path)
+        
+        # Fallback to index.html for SPA routing
+        index_path = os.path.join(static_folder, "index.html")
+        if os.path.exists(index_path):
+            return FileResponse(index_path)
+        return {"error": "Frontend not found"}
+
+if __name__ == "__main__":
+    import uvicorn
+    import socket
+    
+    def find_free_port():
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            s.bind(('', 0))
+            s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+            return s.getsockname()[1]
+
+    # Try 8000 first, then random free port
+    port = 8000
+    try:
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            s.bind(("0.0.0.0", port))
+    except OSError:
+        port = find_free_port()
+
+    print(f"Starting server on port {port}...")
+
+    # Open browser automatically if frozen
+    if getattr(sys, 'frozen', False):
+        import webbrowser
+        threading.Timer(1.5, lambda: webbrowser.open(f"http://localhost:{port}")).start()
+        
+    uvicorn.run(app, host="0.0.0.0", port=port)
